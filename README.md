@@ -2,7 +2,7 @@
 
 POE AutoMate is an automated item rolling & checking tool for **Path of Exile**.
 
-It reads item data directly from the game, applies your filters (Attributes or Socket Colors), and stops when a match is detected.
+It reads item data directly from the game, applies your filters (Modifiers or Socket Colors), and stops when a match is detected.
 
 <p align="center">
   <img src="https://i.imgur.com/BdFnZkU.png" alt="POE AutoMate Interface EN">
@@ -32,13 +32,17 @@ Open **Command Prompt (cmd)** and run:
 
 ------------------------------------------------------------------------
 
-### **2️⃣ Download/Clone the Repository**
+### **2️⃣ Download the Repository**
 
     git clone https://github.com/xAlpier/POE-AutoMate.git
+
+*Note: Make sure the `data` folder is in the same directory as `main.py` for the Library to work.*
 
 ------------------------------------------------------------------------
 
 ### **3️⃣ Run the Program**
+
+In your command prompt (cmd/terminal), run:
 
     python main.py
 
@@ -47,16 +51,17 @@ Open **Command Prompt (cmd)** and run:
 ## ⚙ Usage
 
 1.  Open the program and select your **Search Mode**:
-    * **Attribute:** Search for specific stats using the **Library** or custom filters.
-    * **Color:** Search for specific socket colors (e.g., 4 Red, 2 Green).
+    * **Modifiers:** Search for specific stats using the **Library** or custom filters.
+    * **Socket Colors:** Search for specific socket colors (e.g., 4 Red, 2 Green).
 2.  Configure your filters (see examples below).
+    * *Tip: Set "Max Tries" to **0** for unlimited attempts.*
 3.  Hover your mouse over an item in PoE.
 4.  Press **Start Hotkey** (default `F2`).
 5.  Program loops (clicks -> reads -> checks).
 6.  When a match is found, it stops automatically with a sound alert.
 7.  Press **Stop Hotkey** anytime (`F3`).
 
-### 🔹 Mode 1: Attribute & Library
+### 🔹 Mode 1: Modifiers & Library
 Matches numerical values or text. You can select pre-defined mods from the **Database/Library** list or add them manually.
 
     Value: 75
@@ -64,7 +69,7 @@ Matches numerical values or text. You can select pre-defined mods from the **Dat
 
 *This matches any line containing "Fire Resistance" with a value ≥ 75.*
 
-### 🔹 Mode 2: Color Filter
+### 🔹 Mode 2: Socket Colors Filter
 Matches the count of socket colors.
 
     R (Red): 4
@@ -77,20 +82,20 @@ Matches the count of socket colors.
 
 ## 🔧 Features
 
--   **Dual Modes:** Switch between Attribute scanning and Socket Color scanning.
+-   **Dual Modes:** Switch between Modifiers scanning and Socket Color scanning.
 -   **Database Library:** Built-in library for common modifiers (Life, Resistances, etc.).
 -   **Multi-Language:** Interface supports both English (EN) and Turkish (TR).
 -   **Audio Alerts:** Sound notifications when a match is found or an error occurs.
 -   **Smart Filters:** Regex-based value checking or socket counting.
 -   **Safety First:** Stuck detection, empty read retry, and auto-stop on match.
--   **Configurable:** Custom hotkeys, safety limits, and auto-save settings.
+-   **Configurable:** Custom hotkeys, safety limits (0=Unlimited), and auto-save settings.
 
 ------------------------------------------------------------------------
 
 ## ⚠ Notes
 
--   Works only when PoE is the active window.
--   Stops immediately on unreadable items or matches.
+-   **Active Window:** Works only when PoE is the active window.
+-   **Safety:** Stops immediately on unreadable items or matches to prevent accidents.
 
 ------------------------------------------------------------------------
 
@@ -115,7 +120,7 @@ The developer **(xAlpier)** cannot be held liable for any account loss or relate
 
 POE AutoMate, **Path of Exile** için otomatik item kontrol ve orb basma aracıdır.
 
-Item verisini oyun içinden okur, belirlediğiniz filtrelere (Özellikler veya Soket Renkleri) göre kontrol eder ve eşleşme olduğunda otomatik durur.
+Item verisini oyun içinden okur, belirlediğiniz filtrelere (Modlar veya Soket Renkleri) göre kontrol eder ve eşleşme olduğunda otomatik durur.
 
 <p align="center">
   <img src="https://i.imgur.com/MbxYrNg.png" alt="POE AutoMate Arayüz TR">
@@ -149,9 +154,13 @@ Windows'ta **cmd** açın ve:
 
     git clone https://github.com/xAlpier/POE-AutoMate.git
 
+*Not: Kütüphanenin çalışması için `data` klasörünün `main.py` ile aynı yerde olduğundan emin olun.*
+
 ------------------------------------------------------------------------
 
 ### **3️⃣ Programı Çalıştırın**
+
+Komut satırınızda (cmd/terminal) programı çalıştırın:
 
     python main.py
 
@@ -160,16 +169,17 @@ Windows'ta **cmd** açın ve:
 ## ⚙ Kullanım
 
 1.  Programı açın ve **Arama Modunu** seçin:
-    * **Attribute (Özellik):** Stat aramak için (Kütüphaneden veya manuel).
-    * **Color (Renk):** Soket renklerini aramak için (örn. 4 Kırmızı, 2 Yeşil).
+    * **Modlar:** Stat/Özellik aramak için (Kütüphaneden veya manuel).
+    * **Soket Renkleri:** Soket renklerini aramak için (örn. 4 Kırmızı, 2 Yeşil).
 2.  Filtrelerinizi ayarlayın (aşağıdaki örneklere bakın).
-3.  Oyunda farenizi item üzerine getirin.
+    * *İpucu: "Deneme Sınırı"nı (Max Tries) **0** yaparsanız sınırsız döner.*
+3.  Oyunda farenizi item üzerine getirin (Shift tuşuna basmanıza gerek yok, program basar).
 4.  **Başlat** tuşuna basın (`F2`).
 5.  Program otomatik tıklar, okur ve kontrol eder.
 6.  Eşleşme bulunduğunda sesli uyarı verir ve durur.
 7.  İsterseniz **Durdur** tuşu (`F3`) ile manuel durdurabilirsiniz.
 
-### 🔹 Mod 1: Attribute (Özellik) ve Kütüphane
+### 🔹 Mod 1: Mod Filtreleri & Kütüphane
 Sayısal değer veya metin arar. **Veritabanı / Kütüphane** listesinden hazır özellikleri seçip ekleyebilirsiniz.
 
     Değer: 75
@@ -177,7 +187,7 @@ Sayısal değer veya metin arar. **Veritabanı / Kütüphane** listesinden hazı
 
 *Bu ayar, "Fire Resistance" içeren ve değeri 75 veya üzeri olan bir item geldiğinde durur.*
 
-### 🔹 Mod 2: Color (Renk) Filtresi
+### 🔹 Mod 2: Soket Renkleri Filtresi
 Soket renk sayılarına bakar.
 
     R (Kırmızı): 4
@@ -190,13 +200,13 @@ Soket renk sayılarına bakar.
 
 ## 🔧 Özellikler
 
--   **Çift Mod:** Özellik tarama ve Renk/Soket tarama arasında geçiş.
+-   **Çift Mod:** Mod tarama ve Renk/Soket tarama arasında geçiş.
 -   **Veritabanı Kütüphanesi:** Sık kullanılan özellikleri listeden seçebilme imkanı.
 -   **Çoklu Dil:** İngilizce (EN) ve Türkçe (TR) dil desteği.
 -   **Sesli Uyarı:** İşlem bittiğinde veya hata olduğunda sesli bildirim.
 -   **Akıllı Filtreler:** Regex tabanlı değer kontrolü veya soket sayma.
 -   **Güvenlik:** Takılma algılama, boş okumalarda tekrar deneme.
--   **Ayarlanabilir:** Tuş atamaları, güvenlik limitleri ve otomatik kayıt.
+-   **Ayarlanabilir:** Tuş atamaları, güvenlik limitleri (0=Sınırsız) ve otomatik kayıt.
 
 ------------------------------------------------------------------------
 
