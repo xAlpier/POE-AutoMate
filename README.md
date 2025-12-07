@@ -1,4 +1,4 @@
-# 🇺🇸 POE AutoMate (English)
+# ![United States](https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/us.png "United States") POE AutoMate (English)
 
 POE AutoMate is an automated item rolling & checking tool for **Path of
 Exile**.\
