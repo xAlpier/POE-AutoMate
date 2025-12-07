@@ -1,3 +1,5 @@
+[<img src='https://raw.githubusercontent.com/yammadev/flag-icons/refs/heads/master/png/TR%402x.png' width='21' height='15'> **Türkçe Dokümana Git**](https://github.com/xAlpier/POE-AutoMate/tree/main?tab=readme-ov-file#-poe-automate-t%C3%BCrk%C3%A7e)
+
 # <img src='https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/us.png' width='21' height='15'> POE AutoMate (English)
 
 POE AutoMate is an automated item rolling & checking tool for **Path of Exile**.
@@ -122,6 +124,8 @@ The developer **(xAlpier)** cannot be held liable for any account loss or relate
 
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
+
+[<img src='https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/us.png' width='21' height='15'> **Click for English Documentation**](https://github.com/xAlpier/POE-AutoMate/tree/main?tab=readme-ov-file#-poe-automate-english)
 
 # <img src='https://raw.githubusercontent.com/yammadev/flag-icons/refs/heads/master/png/TR%402x.png' width='21' height='15'> POE AutoMate (Türkçe)
 
