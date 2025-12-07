@@ -13,10 +13,10 @@ when a matching implicit/stat is detected.
 
 If you don't have Python installed:
 
-1.  Go to: https://www.python.org/downloads/\
-2.  Download **Python 3.9 or newer**\
-3.  During installation **check the box**:\
-    ✅ *Add Python to PATH*\
+1.  Go to: https://www.python.org/downloads/
+2.  Download **Python 3.9 or newer**
+3.  During installation **check the box**:
+    ✅ *Add Python to PATH*
 4.  Complete installation.
 
 ------------------------------------------------------------------------
@@ -43,10 +43,10 @@ Open **Command Prompt (cmd)** and run:
 
 ## ⚙ Usage
 
--   Hover your mouse over an item in PoE\
--   Press **Start Hotkey** (default `F2`)\
--   Program loops, clicks, reads, and checks item\
--   When filter matches → auto stops\
+-   Hover your mouse over an item in PoE
+-   Press **Start Hotkey** (default `F2`)
+-   Program loops, clicks, reads, and checks item
+-   When filter matches → auto stops
 -   Press **Stop Hotkey** anytime (`F3`)
 
 ### Filter Example
@@ -60,24 +60,24 @@ This matches any value ≥ 75.
 
 ## 🔧 Features
 
--   Automatic item scan\
--   Custom filters (`Value → Name`)\
--   Safe auto-click loop\
--   Stuck detection\
--   Retry on empty read\
--   Hotkey support\
--   Tkinter GUI\
--   Auto-save config\
--   Shift auto‑hold\
--   PoE window detection\
--   Right‑click remove filter\
+-   Automatic item scan
+-   Custom filters (`Value → Name`)
+-   Safe auto-click loop
+-   Stuck detection
+-   Retry on empty read
+-   Hotkey support
+-   Tkinter GUI
+-   Auto-save config
+-   Shift auto‑hold
+-   PoE window detection
+-   Right‑click remove filter
 -   Right‑click clear log
 
 ------------------------------------------------------------------------
 
 ## ⚠ Notes
 
--   Works only when PoE is active window\
+-   Works only when PoE is active window
 -   Stops on unreadable items, empty reads, or matching filter
 
 ------------------------------------------------------------------------
@@ -105,10 +105,10 @@ olduğunda otomatik durur.
 
 Bilgisayarınızda Python yoksa:
 
-1.  https://www.python.org/downloads/ adresine gidin\
-2.  **Python 3.9 veya üstü** sürümü indirin\
-3.  Kurulum sırasında şu seçeneği işaretleyin:\
-    ✅ *Add Python to PATH*\
+1.  https://www.python.org/downloads/ adresine gidin
+2.  **Python 3.9 veya üstü** sürümü indirin
+3.  Kurulum sırasında şu seçeneği işaretleyin:
+    ✅ *Add Python to PATH*
 4.  Sonraki → Sonraki → Install diyerek kurulumu tamamlayın.
 
 ------------------------------------------------------------------------
@@ -135,10 +135,10 @@ Windows'ta **cmd** açın ve:
 
 ## ⚙ Kullanım
 
--   Fareyi item üzerine getir\
--   **Başlat** tuşuna bas (`F2`)\
--   Program tıklar, okur, filtre uygular\
--   Filtre eşleşirse durur\
+-   Fareyi item üzerine getir
+-   **Başlat** tuşuna bas (`F2`)
+-   Program tıklar, okur, filtre uygular
+-   Filtre eşleşirse durur
 -   İstersen **Durdur** tuşu (`F3`) ile kapatabilirsin
 
 ### Filtre Örneği
@@ -152,25 +152,25 @@ Windows'ta **cmd** açın ve:
 
 ## 🔧 Özellikler
 
--   Otomatik item okuma\
--   Filtre sistemi (`Değer → İsim`)\
--   Güvenli otomatik tıklama döngüsü\
--   Takılma algılama sistemi\
--   Boş okumalarda akıllı tekrar\
--   Hotkey desteği\
--   Modern Tkinter arayüz\
--   Ayarlar otomatik kayıt\
--   Shift otomatik basılı tutma\
--   PoE aktif pencere kontrolü\
--   Sağ tık ile filtre silme\
+-   Otomatik item okuma
+-   Filtre sistemi (`Değer → İsim`)
+-   Güvenli otomatik tıklama döngüsü
+-   Takılma algılama sistemi
+-   Boş okumalarda akıllı tekrar
+-   Hotkey desteği
+-   Modern Tkinter arayüz
+-   Ayarlar otomatik kayıt
+-   Shift otomatik basılı tutma
+-   PoE aktif pencere kontrolü
+-   Sağ tık ile filtre silme
 -   Sağ tık ile log temizleme
 
 ------------------------------------------------------------------------
 
 ## ⚠ Uyarılar
 
--   Yalnızca PoE aktif penceredeyken çalışır\
--   Güvenlik kontrolleri istenmeyen döngüyü engeller\
+-   Yalnızca PoE aktif penceredeyken çalışır
+-   Güvenlik kontrolleri istenmeyen döngüyü engeller
 -   Okunamayan veya boş item verisinde durur
 
 ------------------------------------------------------------------------
