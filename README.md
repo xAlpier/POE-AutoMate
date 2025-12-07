@@ -67,7 +67,7 @@ Matches the **numerical values** of modifiers. You can select pre-defined mods f
 #### Basic Example
     Value: 75
     Name: Fire Resistance
-*Matches any line containing "Fire Resistance" with a value ≥ 75.*
+*Matches if a **modifier** containing "Fire Resistance" has a value ≥ 75.*
 
 #### Multi-Value Example (For # to # mods)
 For mods with multiple variables like `Adds # to # Lightning Damage`, separate the values with a comma.
@@ -192,7 +192,7 @@ Modların **sayısal değerlerini** kontrol eder. **Veritabanı / Kütüphane** 
 #### Basit Örnek
     Değer: 75
     İsim: Fire Resistance
-*Bu ayar, "Fire Resistance" içeren ve değeri 75 veya üzeri olan bir item geldiğinde durur.*
+*Bu ayar, "Fire Resistance" içeren ve değeri 75 veya üzeri olan bir **mod** bulunduğunda durur.*
 
 #### Çoklu Değer Örneği (# to # modları için)
 `Adds # to # Lightning Damage` gibi birden fazla değişken içeren modlar için, aradığınız değerleri virgülle ayırın.
