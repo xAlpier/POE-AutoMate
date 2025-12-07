@@ -64,10 +64,17 @@ In your command prompt (cmd/terminal), run:
 ### 🔹 Mode 1: Modifiers & Library
 Matches numerical values or text. You can select pre-defined mods from the **Database/Library** list or add them manually.
 
+#### Basic Example
     Value: 75
     Name: Fire Resistance
+*Matches any line containing "Fire Resistance" with a value ≥ 75.*
 
-*This matches any line containing "Fire Resistance" with a value ≥ 75.*
+#### Multi-Value Example (For # to # mods)
+For mods with multiple variables like `Adds # to # Lightning Damage`, separate the values with a comma.
+
+    Value: 2, 15
+    Name: Adds # to # Lightning Damage
+*Matches if the first number is ≥ 2 AND the second number is ≥ 15 (e.g., "Adds 3 to 20...").*
 
 ### 🔹 Mode 2: Socket Colors Filter
 Matches the count of socket colors.
@@ -182,10 +189,17 @@ Komut satırınızda (cmd/terminal) programı çalıştırın:
 ### 🔹 Mod 1: Mod Filtreleri & Kütüphane
 Sayısal değer veya metin arar. **Veritabanı / Kütüphane** listesinden hazır özellikleri seçip ekleyebilirsiniz.
 
+#### Basit Örnek
     Değer: 75
     İsim: Fire Resistance
-
 *Bu ayar, "Fire Resistance" içeren ve değeri 75 veya üzeri olan bir item geldiğinde durur.*
+
+#### Çoklu Değer Örneği (# to # modları için)
+`Adds # to # Lightning Damage` gibi birden fazla değişken içeren modlar için, aradığınız değerleri virgülle ayırın.
+
+    Değer: 2, 15
+    İsim: Adds # to # Lightning Damage
+*Bu ayar, ilk `#` değeri 2 veya üzeri VE ikinci `#` değeri 15 veya üzeri olduğunda eşleşir (örn. "Adds 3 to 20...").*
 
 ### 🔹 Mod 2: Soket Renkleri Filtresi
 Soket renk sayılarına bakar.
