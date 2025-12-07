@@ -1,4 +1,4 @@
-# <img src='https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/us.png width='21' height='15'> POE AutoMate (English)
+# <img src='https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/us.png' width='21' height='15'> POE AutoMate (English)
 
 POE AutoMate is an automated item rolling & checking tool for **Path of
 Exile**.\
