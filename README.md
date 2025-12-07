@@ -97,6 +97,8 @@ Although this program includes delays close to human reaction speed and various 
 The developer (xAlpier) cannot be held liable for any account loss or related issues.
 ------------------------------------------------------------------------
 
+------------------------------------------------------------------------
+
 # <img src='https://raw.githubusercontent.com/yammadev/flag-icons/refs/heads/master/png/TR%402x.png' width='21' height='15'> POE AutoMate (Türkçe)
 
 POE AutoMate, **Path of Exile** için otomatik item kontrol ve orb basma
