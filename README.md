@@ -115,7 +115,7 @@ The developer **(xAlpier)** cannot be held liable for any account loss or relate
 
 POE AutoMate, **Path of Exile** için otomatik item kontrol ve orb basma aracıdır.
 
-Item verisini oyun içinden okur, belirlediğiniz filtrelere (Özellik veya Renk) göre kontrol eder ve eşleşme olduğunda otomatik durur.
+Item verisini oyun içinden okur, belirlediğiniz filtrelere (Özellikler veya Soket Renkleri) göre kontrol eder ve eşleşme olduğunda otomatik durur.
 
 <p align="center">
   <img src="https://i.imgur.com/MbxYrNg.png" alt="POE AutoMate Arayüz TR">
