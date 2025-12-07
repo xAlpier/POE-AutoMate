@@ -9,11 +9,11 @@ when a matching implicit/stat is detected.
 
 ## 🔧 Features
 
--   Automatic clipboard item scan
+-   Automatic item scan
 -   Custom filters (`Value → Name`)
 -   Safe auto-click loop
 -   Stuck detection (same item read multiple times)
--   Retry on empty clipboard read
+-   Retry on empty read
 -   Hotkey support (Start/Stop)
 -   Clean GUI with Tkinter
 -   Auto-save config (`config.json`)
@@ -98,7 +98,7 @@ bulduğunda otomatik olarak durur.
 
 ## 🔧 Özellikler
 
--   Otomatik clipboard item okuma
+-   Otomatik item okuma
 -   Özel filtreler (`Değer → İsim`)
 -   Güvenli otomatik tıklama döngüsü
 -   Takılma algılama (aynı item 3 kez okunursa durur)
