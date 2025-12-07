@@ -393,7 +393,7 @@ def stop(from_found=False):
 load_config()
 
 root = tk.Tk()
-root.title("PoE Orb Tool")
+root.title("PoE AutoMate")
 root.geometry("600x600")
 root.attributes("-topmost", True)
 root.resizable(False, False)
