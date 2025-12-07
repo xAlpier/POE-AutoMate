@@ -88,6 +88,13 @@ This matches any value ≥ 75.
 
 ------------------------------------------------------------------------
 
+## ⚠️ Legal Disclaimer
+
+This software was developed for educational and hobby purposes. The Path of Exile Terms of Service may prohibit or restrict "performing multiple server-side actions with a single keypress" (macros).
+
+Although this program includes delays close to human reaction speed and various safety measures, any account restrictions or ban risks that may arise from its use are entirely the responsibility of the user.
+
+The developer (xAlpier) cannot be held liable for any account loss or related issues.
 ------------------------------------------------------------------------
 
 # <img src='https://raw.githubusercontent.com/yammadev/flag-icons/refs/heads/master/png/TR%402x.png' width='21' height='15'> POE AutoMate (Türkçe)
@@ -179,4 +186,13 @@ Windows'ta **cmd** açın ve:
 
 👉 https://github.com/xAlpier/POE-AutoMate.git
 
+------------------------------------------------------------------------
+
+## ⚠️ Yasal Uyarı (Disclaimer)
+
+Bu yazılım eğitim ve hobi amaçlı geliştirilmiştir. Path of Exile Hizmet Koşulları (Terms of Service), "tek tuşla birden fazla sunucu taraflı işlem yapmayı" (macro) yasaklayabilir veya kısıtlayabilir.
+
+Bu program, insan hızına yakın gecikmeler ve güvenlik önlemleri içerse de, kullanımdan doğabilecek hesap kısıtlamaları veya ban riskleri tamamen kullanıcının sorumluluğundadır.
+
+Geliştirici (xAlpier), oluşabilecek herhangi bir hesap kaybından sorumlu tutulamaz.
 ------------------------------------------------------------------------
