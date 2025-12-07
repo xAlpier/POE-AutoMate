@@ -1,4 +1,4 @@
-# <img src='https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/us.png' width='21' height='15'> POE AutoMate (English)
+# <img src='https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/us.png width='21' height='15'> POE AutoMate (English)
 
 POE AutoMate is an automated item rolling & checking tool for **Path of
 Exile**.\
@@ -7,59 +7,46 @@ when a matching implicit/stat is detected.
 
 ------------------------------------------------------------------------
 
-## 🔧 Features
+## 📥 Installation (For Complete Beginners)
 
--   Automatic item scan
--   Custom filters (`Value → Name`)
--   Safe auto-click loop
--   Stuck detection (same item read multiple times)
--   Retry on empty read
--   Hotkey support (Start/Stop)
--   Clean GUI with Tkinter
--   Auto-save config (`config.json`)
--   PoE window detection
--   Shift auto-hold
--   Right‑click remove filter
--   Right‑click log clear
+### **0️⃣ Install Python (Required)**
+
+If you don't have Python installed:
+
+1.  Go to: https://www.python.org/downloads/\
+2.  Download **Python 3.9 or newer**\
+3.  During installation **check the box**:\
+    ✅ *Add Python to PATH*\
+4.  Complete installation.
 
 ------------------------------------------------------------------------
 
-## 📁 Project Structure
+### **1️⃣ Install Required Python Modules**
 
-    main.py
-    config.json
+Open **Command Prompt (cmd)** and run:
 
-------------------------------------------------------------------------
-
-## 📥 Installation
-
-1.  Install Python 3.9 or newer
-2.  Install dependencies:
-
-```
     pip install keyboard pyautogui pyperclip psutil pywin32
-```
 
-3.  Clone repository:
+------------------------------------------------------------------------
 
-```
+### **2️⃣ Download/Clone the Repository**
+
     git clone https://github.com/xAlpier/POE-AutoMate.git
-```
 
-4.  Run:
+------------------------------------------------------------------------
 
-```
+### **3️⃣ Run the Program**
+
     python main.py
-```
 
 ------------------------------------------------------------------------
 
 ## ⚙ Usage
 
--   Hover your mouse over an item in PoE
--   Press **Start Hotkey** (default `F2`)
--   Program loops, clicks, reads, and checks item
--   When filter matches → auto stops
+-   Hover your mouse over an item in PoE\
+-   Press **Start Hotkey** (default `F2`)\
+-   Program loops, clicks, reads, and checks item\
+-   When filter matches → auto stops\
 -   Press **Stop Hotkey** anytime (`F3`)
 
 ### Filter Example
@@ -67,14 +54,30 @@ when a matching implicit/stat is detected.
     Value: 75
     Name: Fire Resistance
 
-This matches with value ≥ 75.
+This matches any value ≥ 75.
+
+------------------------------------------------------------------------
+
+## 🔧 Features
+
+-   Automatic item scan\
+-   Custom filters (`Value → Name`)\
+-   Safe auto-click loop\
+-   Stuck detection\
+-   Retry on empty read\
+-   Hotkey support\
+-   Tkinter GUI\
+-   Auto-save config\
+-   Shift auto‑hold\
+-   PoE window detection\
+-   Right‑click remove filter\
+-   Right‑click clear log
 
 ------------------------------------------------------------------------
 
 ## ⚠ Notes
 
--   Works only when PoE is active window
--   Safety checks prevent unwanted rolling
+-   Works only when PoE is active window\
 -   Stops on unreadable items, empty reads, or matching filter
 
 ------------------------------------------------------------------------
@@ -92,79 +95,83 @@ This matches with value ≥ 75.
 POE AutoMate, **Path of Exile** için otomatik item kontrol ve orb basma
 aracıdır.\
 Item verisini panodan okur, filtrelerle karşılaştırır ve eşleşme
-bulduğunda otomatik olarak durur.
+olduğunda otomatik durur.
 
 ------------------------------------------------------------------------
 
-## 🔧 Özellikler
+## 📥 Kurulum (Hiç Bilmeyenler İçin)
 
--   Otomatik item okuma
--   Özel filtreler (`Değer → İsim`)
--   Güvenli otomatik tıklama döngüsü
--   Takılma algılama (aynı item 3 kez okunursa durur)
--   Boş okuma durumunda akıllı tekrar
--   Başlat/Durdur hotkey desteği
--   Tkinter ile modern arayüz
--   Ayarlar otomatik kayıt (`config.json`)
--   PoE aktif pencere kontrolü
--   Shift otomatik basılı tutma
--   Filtreyi sağ tık ile silme
--   Log ekranını sağ tık ile temizleme
+### **0️⃣ Python Kurulumu (Zorunlu)**
+
+Bilgisayarınızda Python yoksa:
+
+1.  https://www.python.org/downloads/ adresine gidin\
+2.  **Python 3.9 veya üstü** sürümü indirin\
+3.  Kurulum sırasında şu seçeneği işaretleyin:\
+    ✅ *Add Python to PATH*\
+4.  Sonraki → Sonraki → Install diyerek kurulumu tamamlayın.
 
 ------------------------------------------------------------------------
 
-## 📁 Dosya Yapısı
+### **1️⃣ Gerekli Modülleri Kurun**
 
-    main.py
-    config.json
+Windows'ta **cmd** açın ve:
+
+    pip install keyboard pyautogui pyperclip psutil pywin32
 
 ------------------------------------------------------------------------
 
-## 📥 Kurulum
+### **2️⃣ Projeyi İndirin**
 
-1.  Python 3.9+ kurulu olmalı
-2.  Gerekli paketleri yükle:
+    git clone https://github.com/xAlpier/POE-AutoMate.git
 
-```
-pip install keyboard pyautogui pyperclip psutil pywin32
-```
+------------------------------------------------------------------------
 
-3.  Reponun indirilmesi:
+### **3️⃣ Programı Çalıştırın**
 
-```
-git clone https://github.com/xAlpier/POE-AutoMate.git
-```
-
-4.  Çalıştırma:
-
-```
-python main.py
-```
+    python main.py
 
 ------------------------------------------------------------------------
 
 ## ⚙ Kullanım
 
--   Fareyi item üzerine getir
--   **Başlat** tuşuna bas (`F2`)
--   Program tıklar, okur, filtre uygular
--   Eşleşen filtre bulunursa durur
--   **Durdur** tuşu ile istediğin zaman durdur (`F3`)
+-   Fareyi item üzerine getir\
+-   **Başlat** tuşuna bas (`F2`)\
+-   Program tıklar, okur, filtre uygular\
+-   Filtre eşleşirse durur\
+-   İstersen **Durdur** tuşu (`F3`) ile kapatabilirsin
 
 ### Filtre Örneği
 
     Değer: 75
     İsim: Fire Resistance
 
-Bu, 75 veya üzeri Fire Resistance gördüğünde durur.
+75 veya üzeri olduğunda durur.
+
+------------------------------------------------------------------------
+
+## 🔧 Özellikler
+
+-   Otomatik item okuma\
+-   Filtre sistemi (`Değer → İsim`)\
+-   Güvenli otomatik tıklama döngüsü\
+-   Takılma algılama sistemi\
+-   Boş okumalarda akıllı tekrar\
+-   Hotkey desteği\
+-   Modern Tkinter arayüz\
+-   Ayarlar otomatik kayıt\
+-   Shift otomatik basılı tutma\
+-   PoE aktif pencere kontrolü\
+-   Sağ tık ile filtre silme\
+-   Sağ tık ile log temizleme
 
 ------------------------------------------------------------------------
 
 ## ⚠ Uyarılar
 
--   Sadece PoE aktif pencereyken çalışır
--   Güvenlik kontrolleri istenmeyen kullanımı önler
--   Okunamayan item, boş okumalar veya eşleşme olduğunda durur
+-   Yalnızca PoE aktif penceredeyken çalışır\
+-   Güvenlik kontrolleri istenmeyen döngüyü engeller\
+-   Okunamayan veya boş item verisinde durur
 
 ------------------------------------------------------------------------
 
