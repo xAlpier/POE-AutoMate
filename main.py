@@ -9,6 +9,7 @@ import pyperclip
 import re
 import os
 import psutil
+import winsound  # Ses icin eklendi
 
 CONFIG_FILE = "config.json"
 
@@ -69,6 +70,26 @@ def is_poe_active():
     except:
         pass
     return False
+
+# ---------------- SOUND -----------------
+def play_sound(sound_type):
+    """Ses calar: 'success' veya 'error'"""
+    def _play():
+        try:
+            if sound_type == "success":
+                # Ding-Dong efekti (Ince tonlar)
+                winsound.Beep(1568, 150) # G6
+                winsound.Beep(1046, 150) # C6
+            elif sound_type == "error":
+                # Hata efekti (Kalin ton)
+                winsound.Beep(200, 400)
+        except Exception as e:
+            print(f"Sound error: {e}")
+            
+    # Sesi UI thread'ini dondurmamasi icin thread icinde calistirabiliriz, 
+    # ancak loop zaten thread icinde oldugu icin direkt cagirabiliriz.
+    # Yine de kisa sureli oldugu icin direkt cagriyoruz.
+    _play()
 
 # ---------------- SHIFT CONTROL -----------------
 def hold_shift_once():
@@ -296,6 +317,7 @@ def auto_loop():
             consecutive_same_count += 1
             if consecutive_same_count >= 3:
                 log("!!! SAME ITEM DETECTED 3 TIMES (Stuck/Mouse moved?) - STOPPING !!!")
+                play_sound("error") # Hata sesi
                 running = False
                 root.after(0, stop)
                 return
@@ -313,11 +335,13 @@ def auto_loop():
 
         if status == 'FOUND':
             log("===== MATCH FOUND - STOPPING =====")
+            play_sound("success") # Bulundu sesi
             running = False
             root.after(0, lambda: stop(from_found=True))
             return
         elif status == 'NO_IMPLICIT':
             log("!!! Mouse not over item or invalid item. STOPPING. !!!")
+            play_sound("error") # Hata sesi
             running = False
             root.after(0, stop)
             return
@@ -328,6 +352,7 @@ def auto_loop():
             consecutive_same_count += 1
             if consecutive_same_count >= 3:
                 log("!!! READ EMPTY 3 TIMES (Mouse moved away?) - STOPPING !!!")
+                play_sound("error") # Hata sesi
                 running = False
                 root.after(0, stop)
                 return
@@ -345,6 +370,7 @@ def start():
     
     if not is_poe_active():
         log("ERROR: Path of Exile is not active! Cannot start.")
+        play_sound("error")
         return
     
     log("Scanning item before starting loop...")
@@ -353,15 +379,18 @@ def start():
     
     if status == 'FOUND':
         log(">>> SAFETY STOP: Item ALREADY MATCHES the filter! Not starting.")
+        play_sound("success") # Zaten dogru item ise basarili sesi cal
         root.after(0, lambda: status_label.config(text="● FOUND", fg="#ffaa00", bg="#1a1a1a"))
         return
         
     elif status == 'NO_IMPLICIT':
         log(">>> SAFETY STOP: No implicit found (Mouse not over item?). Not starting.")
+        play_sound("error")
         return
         
     elif status == 'EMPTY':
         log(">>> SAFETY STOP: Could not read item data. Not starting.")
+        play_sound("error")
         return
     
     log("Item check passed (No match). STARTING LOOP.")
@@ -393,7 +422,7 @@ def stop(from_found=False):
 load_config()
 
 root = tk.Tk()
-root.title("PoE AutoMate")
+root.title("PoE Orb Tool")
 root.geometry("600x600")
 root.attributes("-topmost", True)
 root.resizable(False, False)
