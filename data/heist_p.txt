@@ -1,0 +1,67 @@
+# seconds to Lockdown Timer
+# to # added Cold Damage
+# to # added Fire Damage
+# to # added Lightning Damage
+# to # added Physical Damage
+# to Character Level
+#% chance to Avoid being Interrupted
+#% increased Agility Experience gained
+#% increased Agility speed
+#% increased Brute Force Experience gained
+#% increased Brute Force speed
+#% increased Counter-Thaumaturgy Experience gained
+#% increased Counter-Thaumaturgy speed
+#% increased Damage
+#% increased Damage while area is not in Lockdown
+#% increased Damage with Hits against Enemies on Full Life
+#% increased Deception Experience gained
+#% increased Deception speed
+#% increased Demolition Experience gained
+#% increased Demolition speed
+#% increased Engineering Experience gained
+#% increased Engineering speed
+#% increased Job Experience gain
+#% increased Job speed
+#% increased Lockpicking Experience gained
+#% increased Lockpicking speed
+#% increased Melee Damage
+#% increased Movement Speed while area is not in Lockdown
+#% increased Perception Experience gained
+#% increased Perception speed
+#% increased Projectile Attack Damage
+#% increased Quantity of Items dropped in Heists
+#% increased Rarity of Items dropped in Heists
+#% increased Rogue's Marker value of primary Heist Target
+#% increased Spell Damage
+#% increased Trap Disarmament Experience gained
+#% increased Trap Disarmament speed
+#% increased time before Lockdown
++ 1 to Agility Level for Heists
++ 1 to Brute Force Level for Heists
++ 1 to Counter-Thaumaturgy Level for Heists
++ 1 to Deception Level for Heists
++ 1 to Demolition Level for Heists
++ 1 to Engineering Level for Heists
++ 1 to Level of all Jobs for Heists
++ 1 to Lockpicking Level for Heists
++ 1 to Perception Level for Heists
++ 1 to Trap Disarmament Level for Heists
++# seconds to Lockdown Timer
++# to Character Level
++1 to Agility Level for Heists
++1 to Brute Force Level for Heists
++1 to Counter-Thaumaturgy Level for Heists
++1 to Deception Level for Heists
++1 to Demolition Level for Heists
++1 to Engineering Level for Heists
++1 to Level of all Jobs for Heists
++1 to Lockpicking Level for Heists
++1 to Perception Level for Heists
++1 to Trap Disarmament Level for Heists
+Players and their Minions have # to # added Cold Damage
+Players and their Minions have # to # added Fire Damage
+Players and their Minions have # to # added Lightning Damage
+Players and their Minions have # to # added Physical Damage
+Players deal #% increased Damage while area is not in Lockdown
+Players deal #% increased Damage with Hits against Enemies on Full Life
+Players have #% increased Movement Speed while area is not in Lockdown

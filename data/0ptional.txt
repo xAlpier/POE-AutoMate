@@ -1,0 +1,9 @@
+~Open prefix~
+~Open suffix~
+Ward: # (augmented)
+Quality: +#% (augmented)
+Physical Damage: #-# (augmented)
+Armour: # (augmented)
+Evasion Rating: # (augmented)
+Energy Shield: # (augmented)
+

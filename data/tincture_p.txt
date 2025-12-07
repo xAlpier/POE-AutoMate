@@ -1,0 +1,5 @@
+#% increased Cooldown Recovery Rate
+#% increased Mana Burn rate
+#% increased effect
+#% reduced Mana Burn rate
+#% reduced effect

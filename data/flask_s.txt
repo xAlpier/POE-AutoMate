@@ -1,0 +1,57 @@
+## chance to Avoid being Frozen during Effect
+#% Chance to Avoid being Stunned during Effect
+#% additional Elemental Resistances during Effect
+#% chance to Avoid being Chilled during Effect
+#% chance to Avoid being Frozen during Effect
+#% chance to Avoid being Ignited during Effect
+#% chance to Avoid being Shocked during Effect
+#% chance to Freeze, Shock and Ignite during Effect
+#% increased Armour during Effect
+#% increased Attack Speed during Effect
+#% increased Block and Stun Recovery during Effect
+#% increased Cast Speed during Effect
+#% increased Critical Strike Chance during Effect
+#% increased Evasion Rating during Effect
+#% increased Movement Speed during Effect
+#% increased Ward during Effect
+#% less Duration
+#% of Attack Damage Leeched as Life during Effect
+#% of Spell Damage Leeched as Energy Shield during Effect
+#% reduced Effect of Chill on you during Effect
+#% reduced Effect of Curses on you during Effect
+#% reduced Effect of Shock on you during Effect
+#% reduced Freeze Duration on you during Effect
+#% reduced Freeze Duration on you during EffectGrants
+#% of Life Recovery to Minions
+#% reduced Mana Cost of Skills during Effect
+0.4% of Attack Damage Leeched as Life during Effect
+0.4% of Physical Attack Damage Leeched as Life during Effect
+0.4% of Physical Attack Damage Leeched as Mana during Effect
+0.4% of Spell Damage Leeched as Energy Shield during Effect
+2% of Physical Attack Damage Leeched as Life during Effect
+Adds Knockback to Melee Attacks during Effect
+Grants #% of Life Recovery to Minions
+Grants Immunity to Bleeding for # seconds if used while Bleeding
+Grants Immunity to Chill for # seconds if used while Chilled
+Grants Immunity to Corrupted Blood for # seconds if used while affected by Corrupted Blood
+Grants Immunity to Freeze for # seconds if used while Frozen
+Grants Immunity to Hinder for # seconds if used while Hindered
+Grants Immunity to Ignite for # seconds if used while Ignited
+Grants Immunity to Maim for # seconds if used while Maimed
+Grants Immunity to Poison for # seconds if used while Poisoned
+Grants Immunity to Shock for # seconds if used while Shocked
+Hinders nearby Enemies with #% reduced Movement Speed if used while not on Full Life
+Hinders nearby Enemies with #% reduced Movement Speed if used while not on Full Mana
+Immunity to Bleeding and Corrupted Blood during Effect
+Immunity to Freeze and Chill during Effect
+Immunity to Ignite during Effect
+Immunity to Poison during Effect
+Immunity to Shock during Effect
+Recover an additional #% of Flask's Life Recovery Amount over # seconds if used while not on Full Life
+Removes Bleeding and Corrupted Blood on use
+Removes Burning on use
+Removes Curses on use
+Removes Freeze and Chill on use
+Removes Poison on use
+Removes Shock on use
+Removes all Burning when used

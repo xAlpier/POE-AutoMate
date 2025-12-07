@@ -1,0 +1,91 @@
+#% additional Physical Damage Reduction against Abyssal Monsters
+#% additional Physical Damage Reduction if you weren't Damaged by a Hit Recently
+#% chance to Avoid Bleeding
+#% chance to Avoid Elemental Ailments while you have Elusive
+#% chance to Avoid being Frozen
+#% chance to Avoid being Ignited
+#% chance to Avoid being Poisoned
+#% chance to Avoid being Shocked
+#% chance to Avoid being Stunned
+#% chance to Blind Enemies on Hit with Attacks
+#% chance to Gain Unholy Might for # seconds on Melee Kill
+#% chance to Gain Unholy Might for 4 seconds on Melee Kill
+#% chance to Hinder Enemies on Hit with Spells
+#% chance to Taunt Enemies on Hit with Attacks
+#% chance to gain Phasing for # seconds on Kill
+#% chance to gain Phasing for 4 seconds on Kill
+#% increased Armour if you haven't Killed Recently
+#% increased Attack Speed
+#% increased Attack Speed if you've dealt a Critical Strike Recently
+#% increased Cast Speed
+#% increased Cast Speed if a Minion has been Killed Recently
+#% increased Cast Speed if you've dealt a Critical Strike Recently
+#% increased Critical Strike Chance if you haven't dealt a Critical Strike Recently
+#% increased Damage if you've Killed Recently
+#% increased Damage with Hits and Ailments against Abyssal Monsters
+#% increased Effect of Cold Ailments
+#% increased Effect of Lightning Ailments
+#% increased Evasion Rating while moving
+#% increased Global Critical Strike Chance
+#% increased Mana Regeneration Rate while moving
+#% increased Movement Speed if you haven't taken Damage Recently
+#% increased Movement Speed if you've Killed Recently
+#% reduced Effect of Curses on you while on Consecrated Ground
++# to Accuracy Rating
++# to Dexterity
++# to Dexterity and Intelligence
++# to Intelligence
++# to Strength
++# to Strength and Dexterity
++# to Strength and Intelligence
++# to all Attributes
++#% Chance to Block Attack Damage if you were Damaged by a Hit Recently
++#% Chance to Block Spell Damage if you were Damaged by a Hit Recently
++#% to Chaos Resistance
++#% to Cold Resistance
++#% to Cold and Lightning Resistances
++#% to Critical Strike Multiplier if you've Killed Recently
++#% to Fire Resistance
++#% to Fire and Cold Resistances
++#% to Fire and Lightning Resistances
++#% to Global Critical Strike Multiplier
++#% to Lightning Resistance
++#% to all Elemental Resistances
+2 % additional Physical Damage Reduction if you weren't Damaged by a Hit Recently
+Adds # to # Chaos Damage to Attacks
+Adds # to # Chaos Damage to Spells
+Adds # to # Cold Damage to Attacks
+Adds # to # Cold Damage to Spells
+Adds # to # Fire Damage to Attacks
+Adds # to # Fire Damage to Spells
+Adds # to # Lightning Damage to Attacks
+Adds # to # Lightning Damage to Spells
+Adds # to # Physical Damage to Attacks
+Adds # to # Physical Damage to Spells
+Damage Penetrates #% Elemental Resistances if you haven't Killed Recently
+Damage Penetrates 2 % Elemental Resistances if you haven't Killed Recently
+Enemies Blinded by you have #% reduced Critical Strike Chance
+Enemies Hindered by you have #% reduced Life Regeneration rate
+Enemies Intimidated by you have #% increased duration of stuns against them
+Enemies Maimed by you take #% increased Damage Over Time
+Enemies Withered by you have #% to all Resistances
+Gain #% of Physical Damage as Extra Fire Damage if you've dealt a Critical Strike Recently
+Minions Leech #% of Damage as Life
+Minions Regenerate #% of Life per second
+Minions deal #% increased Damage if you've used a Minion Skill Recently
+Minions deal #% increased Damage with Hits and Ailments against Abyssal Monsters
+Minions have # to Accuracy Rating
+Minions have #% chance to Blind on Hit with Attacks
+Minions have #% chance to Hinder Enemies on Hit with Spells
+Minions have #% chance to Ignite
+Minions have #% chance to Poison Enemies on Hit
+Minions have #% chance to Taunt on Hit with Attacks
+Minions have #% chance to cause Bleeding with Attacks
+Minions have #% increased Attack Speed
+Minions have #% increased Cast Speed
+Minions have #% increased Movement Speed
+Minions have #% increased maximum Life
+Minions have +# to Accuracy Rating
+Minions have +#% to Chaos Resistance
+Minions have +#% to all Elemental Resistances
+Regenerate #% of Life per second while moving

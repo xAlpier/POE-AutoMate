@@ -1,0 +1,172 @@
+#% increased effect
+#% increased Duration
+#% increased Charge Recovery
+#% reduced Charges per use
++# to Maximum Charges
+Used when an adjacent Flask is used
+Reused at the end of this Flask's effect
+Used when Charges reach full
+Used when you Use a Guard Skill
+Used when you Use a Travel Skill
+Used when you lose a Guard Skill Buff
+Used when you Hit a Rare or Unique Enemy, if not already in effect
+Used when you become Frozen
+Used when you become Chilled
+Used when you become Shocked
+Used when you become Ignited
+Used when you start Bleeding
+Used when you become Poisoned
+Used when you Block
+Used when you take a Savage Hit
+Used when you use a Life Flask
+#% increased Action Speed
++#% to Fire Resistance
++#% to Cold Resistance
++#% to Lightning Resistance
++#% to Chaos Resistance
+#% increased Damage per Endurance Charge
++1% to maximum Fire Resistance
+#% increased Totem Placement speed
+#% increased Brand Attachment range
+#% increased Effect of Spirit Offering
+#% chance to Avoid being Ignited
+#% chance to Avoid being Frozen
+#% chance to Avoid being Shocked
+#% chance to Avoid being Stunned
+#% increased Effect of Onslaught on you
+#% increased Effect of the Buff granted by your Carrion Golems
+Drops Sapped Ground while moving, lasting # seconds
+#% increased Life Regeneration rate
+#% increased Armour from Equipped Helmet and Gloves
+Bleeding you inflict deals Damage #% faster
+Gain #% of Physical Damage as Extra Fire Damage
+Gain #% of Physical Damage as Extra Cold Damage
+Gain #% of Physical Damage as Extra Lightning Damage
+Gain #% of Physical Damage as Extra Chaos Damage
+Regenerate #% of Life per second per Endurance Charge
+#% increased Stun Threshold
+#% increased Cooldown Recovery Rate
+#% increased Warcry Speed
+General's Cry has #% increased Cooldown Recovery Rate
+#% chance to Avoid Elemental Ailments
+#% chance to Avoid Bleeding
+#% chance to Avoid being Poisoned
+#% increased Elusive Effect
+#% increased Attack Speed
+#% increased Critical Strike Chance for Attacks
+Adds # to # Physical Damage to Attacks
+Adds # to # Fire Damage to Attacks
+Adds # to # Cold Damage to Attacks
+Adds # to # Lightning Damage to Attacks
+Adds # to # Chaos Damage to Attacks
++#% to Chaos Damage over Time Multiplier
+Herald of Agony has #% increased Buff Effect
+Ignites you inflict spread to other Enemies within # metres
+Freezes you inflict spread to other Enemies within # metres
+Shocks you inflict spread to other Enemies within # metres
+#% reduced Enemy Stun Threshold
+Minions deal #% increased Damage
+#% increased Trap Throwing Speed
+#% increased Mine Throwing Speed
+#% chance to Extinguish Enemies on Hit
++#% to maximum Cold Resistance
+#% increased Damage per Frenzy Charge
+Non-Vaal Strike Skills target # additional nearby Enemy
+Gain # Rage on Hit with Attacks, no more than once every 1.2 seconds
+#% chance to Intimidate Enemies for # seconds on Hit
+#% chance to Unnerve Enemies for # seconds on Hit
++#% chance to Suppress Spell Damage
+#% increased Evasion Rating from Equipped Helmet and Boots
+Inflict Lightning Exposure on Hit, applying -#% to Lightning Resistance
+Overwhelm #% Physical Damage Reduction
+Withered you Inflict expires #% slower
+#% of Physical Damage Converted to Fire Damage
+#% of Physical Damage Converted to Cold Damage
+#% of Physical Damage Converted to Lightning Damage
+#% of Physical Damage Converted to Chaos Damage
+#% of Fire Damage Leeched as Life
+#% of Cold Damage Leeched as Life
+#% of Lightning Damage Leeched as Life
+#% of Physical Damage Leeched as Life
+#% of Chaos Damage Leeched as Life
+#% increased Damage per # Intelligence
+#% increased Blind Effect
+Exerted Attacks deal #% increased Damage
+Attacks have #% chance to Maim on Hit
+#% chance to Hinder Enemies on Hit with Spells
+#% increased Global Accuracy Rating
+#% increased Effect of your Marks
++# to Accuracy Rating per Frenzy Charge
+Projectiles Pierce an additional Target
+#% chance to Poison on Hit
+Attacks have #% chance to cause Bleeding
+#% chance to Impale Enemies on Hit with Attacks
++#% to Critical Strike Multiplier for Attack Damage
+#% increased Fire Damage
+#% increased Cold Damage
+#% increased Lightning Damage
+#% increased Chaos Damage
+#% increased Global Physical Damage
+#% increased Arctic Armour Buff Effect
+Flesh and Stone has #% increased Area of Effect
+Tempest Shield has #% increased Buff Effect
+#% increased Effect of Buffs granted by your Golems
+#% increased effect of Non-Curse Auras from your Skills
+#% increased Effect of your Curses
+#% increased effect of Offerings
+#% increased Warcry Buff Effect
+Flasks applied to you have #% increased Effect
+#% of Damage taken Recouped as Life
+Flasks gain a Charge every 3 seconds
++#% to maximum Chaos Resistance
+Gain an Endurance Charge every 15 seconds
+Gain a Frenzy Charge every 15 seconds
+Gain a Power Charge every 15 seconds
+#% Chance to Block Attack Damage
+#% Chance to Block Spell Damage
+#% increased Armour
+#% increased Evasion Rating
+#% increased maximum Energy Shield
+Minions take #% reduced Reflected Damage
+Purity of Lightning has #% increased Aura Effect
+Melee Hits have #% chance to Fortify
++#% to all Elemental Resistances
+#% increased Life Recovery rate
+#% increased Mana Recovery rate
+#% increased Energy Shield Recovery rate
+#% less Damage Taken per 230 Intelligence
+#% increased Cast Speed
+#% increased Critical Strike Chance for Spells
+Adds # to # Lightning Damage to Spells
+Adds # to # Physical Damage to Spells
+Adds # to # Chaos Damage to Spells
+#% of Physical Damage taken Recouped as Life
+#% increased Punishment Curse Effect
+#% reduced Mana Cost of Attacks
++#% to maximum Lightning Resistance
+#% increased Damage per Power Charge
+Minions have #% increased maximum Life
+Minions have #% increased Movement Speed
+#% increased Area of Effect
+#% increased Energy Shield Recharge Rate
+#% increased Maximum Energy Shield from Equipped Gloves and Boots
+Damage Penetrates #% Fire Resistance
+Damage Penetrates #% Cold Resistance
+Damage Penetrates #% Lightning Resistance
+#% increased Duration of Ailments on Enemies
+#% increased Effect of Non-Damaging Ailments
+#% of Physical Damage from Hits taken as Chaos Damage
+#% increased Mana Reservation Efficiency of Skills
+#% chance to Ignite
+#% chance to Freeze
+#% chance to Shock
+#% reduced Ignite Duration on you
+#% reduced Freeze Duration on you
+#% reduced Effect of Shock on you
+#% increased Mana Regeneration Rate
+Enemies you've Hit Recently have #% reduced Life Regeneration rate
+#% increased Mana Regeneration Rate per Power Charge
+#% increased Attack Damage
+#% increased Spell Damage
+#% increased Effect of Arcane Surge on you
++#% to all maximum Resistances

@@ -1,0 +1,71 @@
+#% chance on completing a Heist to generate an additional Reveal with Whakano
+#% chance on opening a Chest to not generate Alert Level
+#% chance to not Activate Lockdown in Grand Heists
+#% chance to not generate Alert Level on opening a Chest using Agility
+#% chance to not generate Alert Level on opening a Chest using Brute Force
+#% chance to not generate Alert Level on opening a Chest using Counter-Thaumaturgy
+#% chance to not generate Alert Level on opening a Chest using Deception
+#% chance to not generate Alert Level on opening a Chest using Demolition
+#% chance to not generate Alert Level on opening a Chest using Engineering
+#% chance to not generate Alert Level on opening a Chest using Lockpicking
+#% chance to not generate Alert Level on opening a Chest using Perception
+#% chance to not generate Alert Level on opening a Chest using Trap Disarmament
+#% increased Critical Strike Chance
+#% increased Critical Strike Chance while area is not in Lockdown
+#% reduced Hiring Fee
+#% reduced Hiring Fee for Agility Jobs
+#% reduced Hiring Fee for Brute Force Jobs
+#% reduced Hiring Fee for Counter-Thaumaturgy Jobs
+#% reduced Hiring Fee for Deception Jobs
+#% reduced Hiring Fee for Demolition Jobs
+#% reduced Hiring Fee for Engineering Jobs
+#% reduced Hiring Fee for Lockpicking Jobs
+#% reduced Hiring Fee for Perception Jobs
+#% reduced Hiring Fee for Trap Disarmament Jobs
+#% reduced Travel Fee
+#% reduced raising of Alert Level from opening Chests
+#% to Critical Strike Multiplier while area is not in Lockdown
+Grants Level # Anger Skill
+Grants Level # Determination Skill
+Grants Level # Discipline Skill
+Grants Level # Grace Skill
+Grants Level # Haste Skill
+Grants Level # Hatred Skill
+Grants Level # Malevolence Skill
+Grants Level # Pride Skill
+Grants Level # Purity of Fire Skill
+Grants Level # Purity of Ice Skill
+Grants Level # Purity of Lightning Skill
+Grants Level # Wrath Skill
+Grants Level # Zealotry Skill
+Heist Chests have a #% chance to Duplicate contained Basic Currency
+Heist Chests have a #% chance to Duplicate contained Blighted Maps and Catalysts
+Heist Chests have a #% chance to Duplicate contained Breach Splinters
+Heist Chests have a #% chance to Duplicate contained Catalysts
+Heist Chests have a #% chance to Duplicate contained Delirium Orbs and Splinters
+Heist Chests have a #% chance to Duplicate contained Divination Cards
+Heist Chests have a #% chance to Duplicate contained Essences
+Heist Chests have a #% chance to Duplicate contained Jewels
+Heist Chests have a #% chance to Duplicate contained Legion Splinters
+Heist Chests have a #% chance to Duplicate contained Map Fragments
+Heist Chests have a #% chance to Duplicate contained Maps
+Heist Chests have a #% chance to Duplicate contained Oils
+Heist Chests have a #% chance to Duplicate contained Scarabs
+Heist Chests have a #% chance to Duplicate contained Sextants
+Performing Agility during Lockdown doesn't take additional time
+Performing Brute Force during Lockdown doesn't take additional time
+Performing Counter-Thaumaturgy during Lockdown doesn't take additional time
+Performing Deception during Lockdown doesn't take additional time
+Performing Demolition during Lockdown doesn't take additional time
+Performing Engineering during Lockdown doesn't take additional time
+Performing Lockpicking during Lockdown doesn't take additional time
+Performing Perception during Lockdown doesn't take additional time
+Performing Trap Disarmament during Lockdown doesn't take additional time
+Players and their Minions Regenerate #% of Life per second
+Players and their Minions have #% increased Mana Regeneration Rate
+Players have #% increased Critical Strike Chance while area is not in Lockdown
+Players have #% increased Flask Charges gained
+Players have #% to Critical Strike Multiplier while area is not in Lockdown
+Players have +#% to Critical Strike Multiplier while area is not in Lockdown
+#% reduced Hiring Fee
+The Ring's Cut reduced by #%

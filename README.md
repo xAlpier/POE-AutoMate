@@ -2,10 +2,10 @@
 
 POE AutoMate is an automated item rolling & checking tool for **Path of Exile**.
 
-It reads item data from the clipboard, applies your filters (Attributes or Socket Colors), and stops when a match is detected.
+It reads item data directly from the game, applies your filters (Attributes or Socket Colors), and stops when a match is detected.
 
 <p align="center">
-  <img src="https://i.imgur.com/EvFfWGI.png" alt="POE AutoMate Interface">
+  <img src="https://i.imgur.com/BdFnZkU.png" alt="POE AutoMate Interface EN">
 </p>
 
 ------------------------------------------------------------------------
@@ -47,24 +47,24 @@ Open **Command Prompt (cmd)** and run:
 ## ⚙ Usage
 
 1.  Open the program and select your **Search Mode**:
-    * **Attribute:** Search for specific stats (e.g., Life, Resistances).
+    * **Attribute:** Search for specific stats using the **Library** or custom filters.
     * **Color:** Search for specific socket colors (e.g., 4 Red, 2 Green).
 2.  Configure your filters (see examples below).
 3.  Hover your mouse over an item in PoE.
 4.  Press **Start Hotkey** (default `F2`).
-5.  Program loops (clicks -> copies -> checks).
-6.  When a match is found, it stops automatically.
+5.  Program loops (clicks -> reads -> checks).
+6.  When a match is found, it stops automatically with a sound alert.
 7.  Press **Stop Hotkey** anytime (`F3`).
 
-### 🔹 Mode 1: Attribute Filter Example
-Matches numerical values or text.
+### 🔹 Mode 1: Attribute & Library
+Matches numerical values or text. You can select pre-defined mods from the **Database/Library** list or add them manually.
 
     Value: 75
     Name: Fire Resistance
 
 *This matches any line containing "Fire Resistance" with a value ≥ 75.*
 
-### 🔹 Mode 2: Color Filter Example
+### 🔹 Mode 2: Color Filter
 Matches the count of socket colors.
 
     R (Red): 4
@@ -78,19 +78,18 @@ Matches the count of socket colors.
 ## 🔧 Features
 
 -   **Dual Modes:** Switch between Attribute scanning and Socket Color scanning.
--   **Automatic Scanning:** Fast and safe auto-click loop.
--   **Smart Filters:** regex-based value checking or socket counting.
+-   **Database Library:** Built-in library for common modifiers (Life, Resistances, etc.).
+-   **Multi-Language:** Interface supports both English (EN) and Turkish (TR).
+-   **Audio Alerts:** Sound notifications when a match is found or an error occurs.
+-   **Smart Filters:** Regex-based value checking or socket counting.
 -   **Safety First:** Stuck detection, empty read retry, and auto-stop on match.
 -   **Configurable:** Custom hotkeys, safety limits, and auto-save settings.
--   **GUI:** Modern dark-themed Tkinter interface.
--   **PoE Detection:** Only works when Path of Exile is active.
 
 ------------------------------------------------------------------------
 
 ## ⚠ Notes
 
 -   Works only when PoE is the active window.
--   Make sure your clipboard is not locked by another app.
 -   Stops immediately on unreadable items or matches.
 
 ------------------------------------------------------------------------
@@ -116,10 +115,10 @@ The developer **(xAlpier)** cannot be held liable for any account loss or relate
 
 POE AutoMate, **Path of Exile** için otomatik item kontrol ve orb basma aracıdır.
 
-Item verisini panodan okur, belirlediğiniz filtrelere (Özellik veya Renk) göre kontrol eder ve eşleşme olduğunda otomatik durur.
+Item verisini oyun içinden okur, belirlediğiniz filtrelere (Özellik veya Renk) göre kontrol eder ve eşleşme olduğunda otomatik durur.
 
 <p align="center">
-  <img src="https://i.imgur.com/EvFfWGI.png" alt="POE AutoMate Arayüz">
+  <img src="https://i.imgur.com/MbxYrNg.png" alt="POE AutoMate Arayüz TR">
 </p>
 
 ------------------------------------------------------------------------
@@ -161,24 +160,24 @@ Windows'ta **cmd** açın ve:
 ## ⚙ Kullanım
 
 1.  Programı açın ve **Arama Modunu** seçin:
-    * **Attribute (Özellik):** Stat aramak için (örn. Can, Direnç).
+    * **Attribute (Özellik):** Stat aramak için (Kütüphaneden veya manuel).
     * **Color (Renk):** Soket renklerini aramak için (örn. 4 Kırmızı, 2 Yeşil).
 2.  Filtrelerinizi ayarlayın (aşağıdaki örneklere bakın).
 3.  Oyunda farenizi item üzerine getirin.
 4.  **Başlat** tuşuna basın (`F2`).
 5.  Program otomatik tıklar, okur ve kontrol eder.
-6.  Eşleşme bulunduğunda otomatik durur.
+6.  Eşleşme bulunduğunda sesli uyarı verir ve durur.
 7.  İsterseniz **Durdur** tuşu (`F3`) ile manuel durdurabilirsiniz.
 
-### 🔹 Mod 1: Attribute (Özellik) Filtre Örneği
-Sayısal değer veya metin arar.
+### 🔹 Mod 1: Attribute (Özellik) ve Kütüphane
+Sayısal değer veya metin arar. **Veritabanı / Kütüphane** listesinden hazır özellikleri seçip ekleyebilirsiniz.
 
     Değer: 75
     İsim: Fire Resistance
 
 *Bu ayar, "Fire Resistance" içeren ve değeri 75 veya üzeri olan bir item geldiğinde durur.*
 
-### 🔹 Mod 2: Color (Renk) Filtre Örneği
+### 🔹 Mod 2: Color (Renk) Filtresi
 Soket renk sayılarına bakar.
 
     R (Kırmızı): 4
@@ -192,19 +191,18 @@ Soket renk sayılarına bakar.
 ## 🔧 Özellikler
 
 -   **Çift Mod:** Özellik tarama ve Renk/Soket tarama arasında geçiş.
--   **Otomatik Tarama:** Hızlı ve güvenli tıklama döngüsü.
+-   **Veritabanı Kütüphanesi:** Sık kullanılan özellikleri listeden seçebilme imkanı.
+-   **Çoklu Dil:** İngilizce (EN) ve Türkçe (TR) dil desteği.
+-   **Sesli Uyarı:** İşlem bittiğinde veya hata olduğunda sesli bildirim.
 -   **Akıllı Filtreler:** Regex tabanlı değer kontrolü veya soket sayma.
 -   **Güvenlik:** Takılma algılama, boş okumalarda tekrar deneme.
 -   **Ayarlanabilir:** Tuş atamaları, güvenlik limitleri ve otomatik kayıt.
--   **Arayüz:** Modern, karanlık temalı arayüz.
--   **PoE Algılama:** Sadece oyun penceresi aktifken çalışır.
 
 ------------------------------------------------------------------------
 
 ## ⚠ Uyarılar
 
 -   Yalnızca PoE aktif penceredeyken çalışır.
--   Panonuzun (clipboard) başka bir uygulama tarafından kilitlenmediğinden emin olun.
 -   Okunamayan veya boş item verisinde güvenlik için durur.
 
 ------------------------------------------------------------------------

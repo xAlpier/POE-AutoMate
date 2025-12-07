@@ -1,0 +1,78 @@
+#% chance to Freeze
+#% chance to Ignite
+#% chance to Impale Enemies on Hit with Attacks
+#% chance to Knock Enemies Back on hit
+#% chance to Poison on Hit
+#% chance to Shock
+#% increased Area Damage
+#% increased Attack Speed
+#% increased Attack and Cast Speed
+#% increased Bleeding Duration
+#% increased Burning Damage
+#% increased Cast Speed
+#% increased Critical Strike Chance for Spells
+#% increased Critical Strike Chance with Elemental Skills
+#% increased Damage
+#% increased Damage over Time
+#% increased Damage with Bleeding
+#% increased Damage with Poison
+#% increased Freeze Duration on Enemies
+#% increased Global Accuracy Rating
+#% increased Global Critical Strike Chance
+#% increased Ignite Duration on Enemies
+#% increased Melee Critical Strike Chance
+#% increased Melee Damage
+#% increased Minion Accuracy Rating
+#% increased Poison Duration
+#% increased Projectile Damage
+#% increased Projectile Speed
+#% increased Rarity of Items found
+#% increased Shock Duration on Enemies
+#% increased Spell Critical Strike Chance
+#% increased Spell Damage
+#% increased Stun Duration on Enemies
+#% increased Stun and Block Recovery
+#% of Damage taken Recouped as Life
+#% reduced Bleed Duration on you
+#% reduced Effect of Chill on you
+#% reduced Effect of Curses on you
+#% reduced Effect of Shock on you
+#% reduced Ignite Duration on you
+#% reduced Mana Cost of Skills
+#% reduced Poison Duration on you
++# Energy Shield gained for each Enemy hit by your Attacks
++# Life gained for each Enemy hit by your Attacks
++# Mana gained for each Enemy hit by your Attacks
++# to Dexterity
++# to Dexterity and Intelligence
++# to Intelligence
++# to Strength
++# to Strength and Dexterity
++# to Strength and Intelligence
++# to all Attributes
++#% to Chaos Damage over Time Multiplier
++#% to Chaos Resistance
++#% to Cold Damage over Time Multiplier
++#% to Cold Resistance
++#% to Cold and Lightning Resistances
++#% to Critical Strike Multiplier for Spell Damage
++#% to Critical Strike Multiplier with Elemental Skills
++#% to Damage over Time Multiplier
++#% to Fire Damage over Time Multiplier
++#% to Fire Resistance
++#% to Fire and Cold Resistances
++#% to Fire and Lightning Resistances
++#% to Global Critical Strike Multiplier
++#% to Lightning Resistance
++#% to Melee Critical Strike Multiplier
++#% to Physical Damage over Time Multiplier
++#% to all Elemental Resistances
++#% to maximum Cold Resistance
++#% to maximum Fire Resistance
++#% to maximum Lightning Resistance
+Attacks have #% chance to cause Bleeding
+Gain # Energy Shield per Enemy Hit with Attacks
+Gain # Life per Enemy Hit with Attacks
+Gain # Mana per Enemy Hit with Attacks
+Minions have +#% to all Elemental Resistances
+Totems gain +#% to all Elemental Resistances

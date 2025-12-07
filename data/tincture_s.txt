@@ -1,0 +1,16 @@
+#% increased Duration of Elemental Ailments from Melee Weapon Attacks
+#% increased Flask Charges gained from Kills with Melee Weapons
+#% increased Melee Weapon Attack Speed
+#% increased Melee Weapon Damage against Enemies that are on Low Life
+#% to Damage over Time Multiplier with Melee Weapon Attacks
+#% to Melee Weapon Critical Strike Multiplier
++#% to Damage over Time Multiplier with Melee Weapon Attacks
++#% to Melee Weapon Critical Strike Multiplier
+Gain # Life per Enemy Hit with Melee Weapons
+Gain # Life per Enemy Killed with Melee Weapons
+Gain # Mana per Enemy Hit with Melee Weapons
+Gain # Mana per Enemy Killed with Melee Weapons
+Melee Weapon Damage Penetrates #% Elemental Resistances
+Melee Weapon Hits have #% chance to ignore Enemy Physical Damage Reduction
+Melee Weapon Hits have #% chance to ignore Enemy Physical Damage Reduction
+#% increased Duration of Elemental Ailments from Melee Weapon Attacks

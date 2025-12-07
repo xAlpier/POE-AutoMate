@@ -1,0 +1,80 @@
+#% faster start of Energy Shield Recharge
+#% increased Armour
+#% increased Attack Critical Strike Chance while Dual Wielding
+#% increased Attack Damage while Dual Wielding
+#% increased Attack Damage while holding a Shield
+#% increased Attack Speed while Dual Wielding
+#% increased Attack Speed while holding a Shield
+#% increased Attack Speed with Axes
+#% increased Attack Speed with Bows
+#% increased Attack Speed with Claws
+#% increased Attack Speed with Daggers
+#% increased Attack Speed with Maces or Sceptres
+#% increased Attack Speed with One Handed Melee Weapons
+#% increased Attack Speed with Staves
+#% increased Attack Speed with Swords
+#% increased Attack Speed with Two Handed Melee Weapons
+#% increased Attack Speed with Wands
+#% increased Cast Speed while Dual Wielding
+#% increased Cast Speed while holding a Shield
+#% increased Cast Speed while wielding a Staff
+#% increased Cast Speed with Cold Skills
+#% increased Cast Speed with Fire Skills
+#% increased Cast Speed with Lightning Skills
+#% increased Chaos Damage
+#% increased Cold Damage
+#% increased Critical Strike Chance with Cold Skills
+#% increased Critical Strike Chance with Fire Skills
+#% increased Critical Strike Chance with Lightning Skills
+#% increased Critical Strike Chance with One Handed Melee Weapons
+#% increased Critical Strike Chance with Two Handed Melee Weapons
+#% increased Damage with Axes
+#% increased Damage with Bows
+#% increased Damage with Claws
+#% increased Damage with Daggers
+#% increased Damage with Maces or Sceptres
+#% increased Damage with One Handed Weapons
+#% increased Damage with Staves
+#% increased Damage with Swords
+#% increased Damage with Two Handed Weapons
+#% increased Damage with Wands
+#% increased Energy Shield Recharge Rate
+#% increased Evasion Rating
+#% increased Fire Damage
+#% increased Flask Effect Duration
+#% increased Global Physical Damage
+#% increased Lightning Damage
+#% increased Mana Regeneration Rate
+#% increased Mana Reservation Efficiency of Skills
+#% increased Mine Damage
+#% increased Mine Throwing Speed
+#% increased Spell Damage while Dual Wielding
+#% increased Spell Damage while holding a Shield
+#% increased Spell Damage while wielding a Staff
+#% increased Totem Damage
+#% increased Totem Life
+#% increased Trap Damage
+#% increased Trap Throwing Speed
+#% increased maximum Energy Shield
+#% increased maximum Life
+#% increased maximum Mana
+#% of Physical Attack Damage Leeched as Life
+#% of Physical Attack Damage Leeched as Mana
+#% to maximum Cold Resistance
+#% to maximum Fire Resistance
+#% to maximum Lightning Resistance
++#% Chance to Block Attack Damage while Dual Wielding
++#% Chance to Block Attack Damage while holding a Shield
++#% Chance to Block Attack Damage while wielding a Staff
++#% Chance to Block Spell Damage while Dual Wielding
++#% Chance to Block Spell Damage while holding a Shield
++#% Chance to Block Spell Damage while wielding a Staff
++#% to Critical Strike Multiplier while Dual Wielding
++#% to Critical Strike Multiplier with Cold Skills
++#% to Critical Strike Multiplier with Fire Skills
++#% to Critical Strike Multiplier with Lightning Skills
++#% to Critical Strike Multiplier with One Handed Melee Weapons
++#% to Critical Strike Multiplier with Two Handed Melee Weapons
+Damaging Ailments deal damage #% faster
+Minions deal #% increased Damage
+Minions have #% increased maximum Life

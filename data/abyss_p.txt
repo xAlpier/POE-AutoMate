@@ -1,0 +1,70 @@
+# to # Added Chaos Damage with Bow Attacks
+# to # Added Chaos Damage with Claw Attacks
+# to # Added Chaos Damage with Dagger Attacks
+# to # Added Cold Damage with Axe Attacks
+# to # Added Cold Damage with Bow Attacks
+# to # Added Cold Damage with Claw Attacks
+# to # Added Cold Damage with Dagger Attacks
+# to # Added Cold Damage with Mace or Sceptre Attacks
+# to # Added Cold Damage with Staff Attacks
+# to # Added Cold Damage with Sword Attacks
+# to # Added Cold Damage with Wand Attacks
+# to # Added Fire Damage with Axe Attacks
+# to # Added Fire Damage with Bow Attacks
+# to # Added Fire Damage with Claw Attacks
+# to # Added Fire Damage with Dagger Attacks
+# to # Added Fire Damage with Mace or Sceptre Attacks
+# to # Added Fire Damage with Staff Attacks
+# to # Added Fire Damage with Sword Attacks
+# to # Added Fire Damage with Wand Attacks
+# to # Added Lightning Damage with Axe Attacks
+# to # Added Lightning Damage with Bow Attacks
+# to # Added Lightning Damage with Claw Attacks
+# to # Added Lightning Damage with Dagger Attacks
+# to # Added Lightning Damage with Mace or Sceptre Attacks
+# to # Added Lightning Damage with Staff Attacks
+# to # Added Lightning Damage with Sword Attacks
+# to # Added Lightning Damage with Wand Attacks
+# to # Added Physical Damage with Axe Attacks
+# to # Added Physical Damage with Bow Attacks
+# to # Added Physical Damage with Claw Attacks
+# to # Added Physical Damage with Dagger Attacks
+# to # Added Physical Damage with Mace or Sceptre Attacks
+# to # Added Physical Damage with Staff Attacks
+# to # Added Physical Damage with Sword Attacks
+# to # Added Physical Damage with Wand Attacks
+# to # Added Spell Chaos Damage while Dual Wielding
+# to # Added Spell Chaos Damage while holding a Shield
+# to # Added Spell Chaos Damage while wielding a Two Handed Weapon
+# to # Added Spell Cold Damage while Dual Wielding
+# to # Added Spell Cold Damage while holding a Shield
+# to # Added Spell Cold Damage while wielding a Two Handed Weapon
+# to # Added Spell Fire Damage while Dual Wielding
+# to # Added Spell Fire Damage while holding a Shield
+# to # Added Spell Fire Damage while wielding a Two Handed Weapon
+# to # Added Spell Lightning Damage while Dual Wielding
+# to # Added Spell Lightning Damage while holding a Shield
+# to # Added Spell Lightning Damage while wielding a Two Handed Weapon
+# to # Added Spell Physical Damage while Dual Wielding
+# to # Added Spell Physical Damage while holding a Shield
+# to # Added Spell Physical Damage while wielding a Two Handed Weapon
+#% increased Cooldown Recovery Rate
+#% increased Damage over Time while Dual Wielding
+#% increased Damage over Time while holding a Shield
+#% increased Damage over Time while wielding a Two Handed Weapon
+#% increased Impale Effect
+#% of Damage taken Recouped as Mana
++# to Armour
++# to Evasion Rating
++# to maximum Energy Shield
++# to maximum Life
++# to maximum Mana
+Minions Regenerate # Life per second
+Minions deal # to # additional Chaos Damage
+Minions deal # to # additional Cold Damage
+Minions deal # to # additional Fire Damage
+Minions deal # to # additional Lightning Damage
+Minions deal # to # additional Physical Damage
+Regenerate # Energy Shield per second
+Regenerate # Life per second
+Regenerate # Mana per second

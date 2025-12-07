@@ -9,9 +9,154 @@ import pyperclip
 import re
 import os
 import psutil
-import winsound  # Ses icin eklendi
+import winsound
 
 CONFIG_FILE = "config.json"
+DATA_DIR = "data"  # Txt dosyalarinin aranacagi klasor
+
+# Dosya eslesmeleri (Kategori Adi: [Dosya Listesi])
+ITEM_DATABASE_MAP = {
+    "Abyss Jewel": ["abyss_p.txt", "abyss_s.txt"],
+    "Cluster Jewel": ["cluster_p.txt", "cluster_s.txt"],
+    "Flask": ["flask_p.txt", "flask_s.txt"],
+    "Heist": ["heist_p.txt", "heist_s.txt"],
+    "Implicit": ["implicit.txt"],
+    "Item (General)": ["item_p.txt", "item_s.txt"],
+    "Jewel (Regular)": ["jewel_p.txt", "jewel_s.txt"],
+    "Map": ["map.txt"],
+    "Sextant": ["sextant.txt"],
+    "Tincture": ["tincture_p.txt", "tincture_s.txt"],
+    "Optional/General": ["0ptional.txt"]
+}
+
+# --- DIL KUTUPHANESI (TRANSLATIONS) ---
+TRANSLATIONS = {
+    "TR": {
+        "status_stopped": "● DURDU",
+        "status_running": "● ÇALIŞIYOR",
+        "status_found": "● BULUNDU",
+        "control_panel": "Kontrol Paneli",
+        "settings": "Ayarlar",
+        "max_tries": "Deneme Sınırı:",
+        "mode": "| Mod:",
+        "attribute": "Özellik",
+        "color": "Renk",
+        "start": "Başlat:",
+        "stop": "Durdur:",
+        "attr_filters_library": "Özellik Filtreleri & Kütüphane",
+        "color_filters": "Renk Filtreleri",
+        "database_library": "Veritabanı / Kütüphane",
+        "type": "Tip:",
+        "search_lib": "Kütüphanede Ara:",
+        "active_filters": "Aktif Filtreler",
+        "value_min": "Değer (Min)",
+        "modifier_name": "Özellik İsmi",
+        "add_filter": "Filtre Ekle",
+        "delete_selected": "Seçileni Sil",
+        "system_log": "Sistem Günlüğü",
+        "red": "Kırmızı:",
+        "green": "Yeşil:",
+        "blue": "Mavi:",
+        "lang": "Dil:",
+        "log_limit_unlimited": "Sınırsız deneme aktif.",
+        "log_limit_set": "Limit {} deneme olarak ayarlandı.",
+        "log_hotkey_error": "Hata: '{}' zaten {} için ayarlı!",
+        "log_hotkey_cancel": "Tuş ayarlama iptal edildi.",
+        "log_poe_active": "PoE aktif değil - duraklatılıyor...",
+        "log_poe_not_active_start": "HATA: Path of Exile aktif değil! Başlatılamaz.",
+        "log_scanning": "Başlamadan önce eşya taranıyor...",
+        "log_already_match": ">>> GÜVENLİK DURUŞU: Eşya ZATEN filtreye uyuyor! Başlatılmadı.",
+        "log_no_implicit": ">>> GÜVENLİK DURUŞU: Implicit bulunamadı (Mouse eşyada değil?). Başlatılmadı.",
+        "log_read_fail": ">>> GÜVENLİK DURUŞU: Eşya verisi okunamadı. Başlatılmadı.",
+        "log_start_loop": "Eşya kontrol edildi. DÖNGÜ BAŞLIYOR.",
+        "log_stopping": "Durduruluyor...",
+        "log_stop_key_loop": "Durdurma tuşuna basıldı (döngü başı).",
+        "log_stop_key_read": "Durdurma tuşuna basıldı (okuma sonrası).",
+        "log_same_item": "!!! AYNI EŞYA 3 KEZ ALGILANDI (Takıldı/Mouse kaydı?) - DURDURULUYOR !!!",
+        "log_match_found": "===== EŞLEŞME BULUNDU - DURDURULUYOR =====",
+        "log_invalid_item": "!!! Mouse eşya üzerinde değil veya geçersiz. DURDURULUYOR. !!!",
+        "log_read_retry": "Okuma hatası. Tekrar deneniyor...",
+        "log_read_empty_3": "!!! OKUMA 3 KEZ BOŞ (Mouse uzaklaştı mı?) - DURDURULUYOR !!!",
+        "log_attempt": "--- Deneme {}/{} ---",
+        "log_retry_click": "--- Okuma Tekrarı (Deneme {}) ---",
+        "log_checking": "---- EŞYA KONTROL EDİLİYOR ----",
+        "log_color_match": "RENK EŞLEŞTİ: {}",
+        "log_color_fail": "Renk kontrolü başarısız veya eşleşme yok.",
+        "log_matched": "Eşleşti: {} -> {} ({})",
+        "log_saw": "Görüldü: {}",
+        "log_no_socket": "Soket satırı bulunamadı",
+        "log_no_req": "Renk gereksinimi yok",
+        "log_socket_match_detail": "Soketler eşleşti: Bulunan(R:{}, G:{}, B:{})",
+        # Guncellenen log mesaji:
+        "log_match_simplified": "\nMod bulundu;\nAranan: '{}'\nBulunan: '{}'",
+        "log_substring_match": "Alt metin eşleşmesi '{}'",
+        "log_thresh_match": "Eşik eşleşmesi: {} >= {} -> '{}' için",
+        "log_hotkeys_reg": "Kısayollar kaydedildi: {} (Başlat) / {} (Durdur)",
+        "log_hotkey_reg_err": "Kısayol kayıt hatası: {}"
+    },
+    "EN": {
+        "status_stopped": "● STOPPED",
+        "status_running": "● RUNNING",
+        "status_found": "● FOUND",
+        "control_panel": "Control Panel",
+        "settings": "Settings",
+        "max_tries": "Max Tries:",
+        "mode": "| Mode:",
+        "attribute": "Attribute",
+        "color": "Color",
+        "start": "Start:",
+        "stop": "Stop:",
+        "attr_filters_library": "Attribute Filters & Library",
+        "color_filters": "Color Filters",
+        "database_library": "Database / Library",
+        "type": "Type:",
+        "search_lib": "Search in Library:",
+        "active_filters": "Active Filters",
+        "value_min": "Value (Min)",
+        "modifier_name": "Modifier Name",
+        "add_filter": "Add Filter",
+        "delete_selected": "Delete Selected",
+        "system_log": "System Log",
+        "red": "Red:",
+        "green": "Green:",
+        "blue": "Blue:",
+        "lang": "Lang:",
+        "log_limit_unlimited": "Unlimited attempts active.",
+        "log_limit_set": "Limit set to {} attempts.",
+        "log_hotkey_error": "Error: '{}' is already set for {}!",
+        "log_hotkey_cancel": "Hotkey setup cancelled.",
+        "log_poe_active": "PoE not active - pausing...",
+        "log_poe_not_active_start": "ERROR: Path of Exile is not active! Cannot start.",
+        "log_scanning": "Scanning item before starting loop...",
+        "log_already_match": ">>> SAFETY STOP: Item ALREADY MATCHES the filter! Not starting.",
+        "log_no_implicit": ">>> SAFETY STOP: No implicit found (Mouse not over item?). Not starting.",
+        "log_read_fail": ">>> SAFETY STOP: Could not read item data. Not starting.",
+        "log_start_loop": "Item checked. STARTING LOOP.",
+        "log_stopping": "Stopping...",
+        "log_stop_key_loop": "Stop key pressed (loop start).",
+        "log_stop_key_read": "Stop key pressed (after read).",
+        "log_same_item": "!!! SAME ITEM DETECTED 3 TIMES (Stuck/Mouse moved?) - STOPPING !!!",
+        "log_match_found": "===== MATCH FOUND - STOPPING =====",
+        "log_invalid_item": "!!! Mouse not over item or invalid item. STOPPING. !!!",
+        "log_read_retry": "Read failed. Retrying...",
+        "log_read_empty_3": "!!! READ EMPTY 3 TIMES (Mouse moved away?) - STOPPING !!!",
+        "log_attempt": "--- Attempt {}/{} ---",
+        "log_retry_click": "--- Retry Read (Attempt {}) ---",
+        "log_checking": "---- CHECKING ITEM ----",
+        "log_color_match": "COLOR MATCH: {}",
+        "log_color_fail": "Color check failed or no match.",
+        "log_matched": "Matched: {} -> {} ({})",
+        "log_saw": "Saw: {}",
+        "log_no_socket": "No Sockets line found",
+        "log_no_req": "No color requirements set",
+        "log_socket_match_detail": "Sockets matched: Found(R:{}, G:{}, B:{})",
+        "log_match_simplified": "\nModifier found;\nSearched: ‘{}’\nFound: ‘{}’",
+        "log_substring_match": "Substring match '{}'",
+        "log_thresh_match": "Threshold match: {} >= {} for '{}'",
+        "log_hotkeys_reg": "Hotkeys registered: {} (Start) / {} (Stop)",
+        "log_hotkey_reg_err": "Hotkey registration error: {}"
+    }
+}
 
 running = False
 # Config variables
@@ -19,12 +164,45 @@ filters = []
 safety_limit = 40
 hotkey_start = "F2"
 hotkey_stop = "F3"
-search_mode = "attribute" # 'attribute' or 'color'
+search_mode = "attribute"
 color_targets = {"R": 0, "G": 0, "B": 0}
+last_category = "" 
+current_language = "TR"
+
+# Hotkey dinleme durumu
+listening_key = {"active": False, "type": None, "hook": None}
+
+# Loglama zamanlayicisi (Debounce icin)
+limit_log_timer = None
+last_logged_limit = 40 
+
+# ---------------- DATA LOADER -----------------
+def load_library_data(category):
+    if not os.path.exists(DATA_DIR):
+        try: os.makedirs(DATA_DIR)
+        except: pass
+        return ["'data' klasörü bulunamadı!"]
+
+    files_to_read = ITEM_DATABASE_MAP.get(category, [])
+    combined_lines = set()
+
+    for filename in files_to_read:
+        filepath = os.path.join(DATA_DIR, filename)
+        if os.path.exists(filepath):
+            try:
+                with open(filepath, "r", encoding="utf-8") as f:
+                    for line in f:
+                        clean_line = line.strip()
+                        if clean_line and not clean_line.startswith("//"):
+                            combined_lines.add(clean_line)
+            except Exception as e:
+                print(f"Error reading {filename}: {e}")
+    
+    return sorted(list(combined_lines))
 
 # ---------------- CONFIG LOAD / SAVE -----------------
 def load_config():
-    global filters, safety_limit, hotkey_start, hotkey_stop, search_mode, color_targets
+    global filters, safety_limit, hotkey_start, hotkey_stop, search_mode, color_targets, last_category, last_logged_limit, current_language
     if os.path.exists(CONFIG_FILE):
         try:
             with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -35,6 +213,10 @@ def load_config():
                 hotkey_stop = data.get("hotkey_stop", "f3").lower()
                 search_mode = data.get("search_mode", "attribute")
                 color_targets = data.get("color_targets", {"R": 0, "G": 0, "B": 0})
+                last_category = data.get("last_category", "")
+                current_language = data.get("language", "TR")
+                
+                last_logged_limit = safety_limit
         except Exception as e:
             print("Config load error:", e)
 
@@ -47,14 +229,26 @@ def save_config():
                 "hotkey_start": hotkey_start,
                 "hotkey_stop": hotkey_stop,
                 "search_mode": search_mode,
-                "color_targets": color_targets
+                "color_targets": color_targets,
+                "last_category": last_category,
+                "language": current_language
             }, f, indent=2, ensure_ascii=False)
     except Exception as e:
         print("Config save error:", e)
 
+# ---------------- HELPER: GET TEXT -----------------
+def get_text(key, *args):
+    lang_dict = TRANSLATIONS.get(current_language, TRANSLATIONS["TR"])
+    text = lang_dict.get(key, key)
+    if args:
+        try:
+            return text.format(*args)
+        except:
+            return text
+    return text
+
 # ---------------- PROCESS CHECK -----------------
 def is_poe_active():
-    """Path of Exile (Steam) aktif mi kontrol eder"""
     try:
         import win32gui
         import win32process
@@ -73,36 +267,25 @@ def is_poe_active():
 
 # ---------------- SOUND -----------------
 def play_sound(sound_type):
-    """Ses calar: 'success' veya 'error'"""
     def _play():
         try:
             if sound_type == "success":
-                # Ding-Dong efekti (Ince tonlar)
-                winsound.Beep(1568, 150) # G6
-                winsound.Beep(1046, 150) # C6
+                winsound.Beep(1568, 150)
+                winsound.Beep(1046, 150)
             elif sound_type == "error":
-                # Hata efekti (Kalin ton)
                 winsound.Beep(200, 400)
         except Exception as e:
             print(f"Sound error: {e}")
-            
-    # Sesi UI thread'ini dondurmamasi icin thread icinde calistirabiliriz, 
-    # ancak loop zaten thread icinde oldugu icin direkt cagirabiliriz.
-    # Yine de kisa sureli oldugu icin direkt cagriyoruz.
     _play()
 
 # ---------------- SHIFT CONTROL -----------------
 def hold_shift_once():
-    try:
-        pyautogui.keyDown('shift')
-    except Exception:
-        pass
+    try: pyautogui.keyDown('shift')
+    except: pass
 
 def release_shift_once():
-    try:
-        pyautogui.keyUp('shift')
-    except Exception:
-        pass
+    try: pyautogui.keyUp('shift')
+    except: pass
 
 # ---------------- LOG -----------------
 def log(text):
@@ -117,164 +300,161 @@ def log(text):
 
 # ---------------- READ CLIPBOARD -----------------
 def read_clipboard_after_copy():
-    try:
-        pyperclip.copy("")
-    except:
-        pass
-
-    try:
-        pyautogui.hotkey('ctrl', 'c')
-    except Exception:
-        keyboard.send('ctrl+c')
+    try: pyperclip.copy("")
+    except: pass
+    try: pyautogui.hotkey('ctrl', 'c')
+    except: keyboard.send('ctrl+c')
     time.sleep(0.06)
-    try:
-        return pyperclip.paste() or ""
-    except Exception:
-        return ""
+    try: return pyperclip.paste() or ""
+    except: return ""
 
-# ---------------- MATCHING LOGIC (ATTRIBUTE) -----------------
+# ---------------- MATCHING LOGIC -----------------
 def filter_matches_item(filt, item_text):
     name = (filt.get("name") or "").strip()
-    val = (filt.get("value") or "").strip()
+    val_str = (filt.get("value") or "").strip()
 
-    if not val:
-        return False, None
-
+    if not val_str: return False, None
     txt = item_text
 
-    m_num = re.match(r'^([+-]?\d+)%?$', val)
-    if m_num and name:
-        thresh = int(m_num.group(1))
-        lines = txt.split('\n')
-        for line in lines:
-            if name.lower() in line.lower():
-                nums = re.findall(r'([+-]?\d+)', line)
-                for numstr in nums:
-                    try:
-                        val_num = int(numstr)
-                    except:
-                        continue
-                    if val_num >= thresh:
-                        reason = f"threshold match: {val_num} >= {thresh} for '{name}' in line: {line.strip()}"
-                        return True, reason
+    try:
+        target_values = [int(x.strip()) for x in val_str.split(',') if x.strip()]
+    except:
+        if val_str.lower() in txt.lower():
+            return True, get_text("log_substring_match", val_str)
         return False, None
 
-    if val.lower() in txt.lower():
-        reason = f"substring match '{val}'"
-        return True, reason
+    if not target_values: return False, None
+    lines = txt.split('\n')
 
+    if "#" in name:
+        parts = name.split('#')
+        escaped_parts = [re.escape(p) for p in parts]
+        pattern_str = r'([+-]?\d+)'.join(escaped_parts)
+        
+        for line in lines:
+            match = re.search(pattern_str, line, re.IGNORECASE)
+            if match:
+                found_groups = match.groups()
+                check_count = min(len(found_groups), len(target_values))
+                if check_count == 0: continue
+
+                all_conditions_met = True
+                
+                for i in range(check_count):
+                    try:
+                        f_val = int(found_groups[i])
+                        t_val = target_values[i]
+                        if f_val < t_val:
+                            all_conditions_met = False
+                            break
+                    except:
+                        all_conditions_met = False
+                        break
+                if all_conditions_met:
+                    # Eslesti, simdi log icin duzgun format olusturalim
+                    # 1. Filtre ismindeki # isaretlerini aranan degerlerle doldur
+                    display_name = name
+                    for i in range(check_count):
+                        display_name = display_name.replace("#", str(target_values[i]), 1)
+                    
+                    # 2. Return olarak (Tuple) dondur ki analyze_item bunu anlasin
+                    return True, (display_name, line.strip())
+        return False, None
+
+    thresh = target_values[0]
+    for line in lines:
+        if name.lower() in line.lower():
+            nums = re.findall(r'([+-]?\d+)', line)
+            for numstr in nums:
+                try:
+                    val_num = int(numstr)
+                except:
+                    continue
+                if val_num >= thresh:
+                    reason = get_text("log_thresh_match", val_num, thresh, name)
+                    return True, reason
     return False, None
 
-# ---------------- MATCHING LOGIC (COLOR) -----------------
 def check_color_match(item_text):
-    # Sockets satirini bul
-    # Ornek: "Sockets: R-B-B-R-B-G"
     socket_line = None
-    lines = item_text.splitlines()
-    for line in lines:
+    for line in item_text.splitlines():
         if line.strip().startswith("Sockets:"):
             socket_line = line.strip()
             break
-    
-    if not socket_line:
-        return False, "No Sockets line found"
+    if not socket_line: return False, get_text("log_no_socket")
 
-    # Soket harflerini say
-    # Sadece R, G, B harflerine bakalim.
-    
-    # "Sockets: " kismini atalim
     sockets_str = socket_line.replace("Sockets:", "").strip()
-    
     count_r = sockets_str.count('R')
     count_g = sockets_str.count('G')
     count_b = sockets_str.count('B')
+    req_r, req_g, req_b = color_targets.get("R", 0), color_targets.get("G", 0), color_targets.get("B", 0)
 
-    req_r = color_targets.get("R", 0)
-    req_g = color_targets.get("G", 0)
-    req_b = color_targets.get("B", 0)
-
-    # Kosul: Itemdeki sayi >= Istenen sayi
-    # Eger req_X = 0 ise, count_X >= 0 her zaman dogrudur (Yani o rengi yok sayar/onemsemez)
     if count_r >= req_r and count_g >= req_g and count_b >= req_b:
-        # Hepsi 0 ise (filtre yoksa) eslesme sayma
-        if req_r == 0 and req_g == 0 and req_b == 0:
-             return False, "No color requirements set"
-             
-        reason = f"Sockets matched: Found(R:{count_r}, G:{count_g}, B:{count_b}) >= Req(R:{req_r}, G:{req_g}, B:{req_b})"
-        return True, reason
-
+        if req_r == 0 and req_g == 0 and req_b == 0: return False, get_text("log_no_req")
+        return True, get_text("log_socket_match_detail", count_r, count_g, count_b)
     return False, None
 
-# ---------------- ITEM ANALYSIS -----------------
 def analyze_item(item_text):
     cleaned = item_text.strip()
-    if not cleaned:
-        return 'EMPTY'
-
-    log("---- CHECKING ITEM ----")
+    if not cleaned: return 'EMPTY'
+    log(get_text("log_checking"))
     
     if search_mode == "color":
-        # --- COLOR SEARCH MODE ---
         ok, reason = check_color_match(cleaned)
         if ok:
-            log(f"COLOR MATCH: {reason}")
+            log(get_text("log_color_match", reason))
             log("-----------------------")
             return 'FOUND'
         else:
-            log("Color check failed or no match.")
-            # Log socket line for debug
+            log(get_text("log_color_fail"))
             for line in cleaned.splitlines():
                 if "Sockets:" in line:
-                    log(f"Saw: {line.strip()}")
+                    log(get_text("log_saw", line.strip()))
             log("-----------------------")
-            return 'CONTINUE' # Match olmadigi surece devam
-
+            return 'CONTINUE'
     else:
-        # --- ATTRIBUTE SEARCH MODE (Legacy) ---
         lines = cleaned.splitlines()
         start_index = None
-        
-        # 1. Oncelik: (implicit) aramasi
         for i, line in enumerate(lines):
             if "(implicit)" in line:
                 start_index = i + 1
                 break
-                
-        # 2. Eger implicit yoksa: Item Level aramasi
         if start_index is None:
             for i, line in enumerate(lines):
                 if "Item Level:" in line:
                     start_index = i + 1
                     break
-
         if start_index is not None:
-            # Bulunan noktadan sonrasini analiz et
             for line in lines[start_index:]:
                 if line.strip() == "" or "--------" in line:
                     continue
                 log(line)
-            
-            # Filtre kontrolu
+
             search_text = "\n".join(lines[start_index:])
             if search_text.strip():
                 for f in filters:
-                    ok, reason = filter_matches_item(f, search_text)
+                    ok, result = filter_matches_item(f, search_text)
                     if ok:
-                        log(f"Matched filter: {f.get('name','?')} -> {f.get('value')}; reason: {reason}")
+                        # Eger sonuc bir tuple ise (yani wildcard eslesmesi ise)
+                        if isinstance(result, tuple):
+                            req_text, found_text = result
+                            log(get_text("log_match_simplified", req_text, found_text))
+                        else:
+                            # Standart string donusu (Eski tip eslesmeler icin)
+                            log(get_text("log_matched", f.get('name','?'), f.get('value'), result))
+                        
                         log("-----------------------")
                         return 'FOUND'
         else:
-            log("(No implicit or Item Level found)")
+            log(get_text("log_no_implicit"))
             log("-----------------------")
             return 'NO_IMPLICIT'
-
     log("-----------------------")
     return 'CONTINUE'
 
 # ---------------- AUTO LOOP -----------------
 def auto_loop():
     global running, safety_limit
-
     attempt = 0
     prev_item_text = ""
     consecutive_same_count = 0
@@ -282,15 +462,14 @@ def auto_loop():
 
     while running and (safety_limit == 0 or attempt < safety_limit):
         
+        # 1. KONTROL: Döngü başında kontrol
         if keyboard.is_pressed(hotkey_stop):
-            log("Stop key pressed (detected in loop).")
-            running = False 
+            log(get_text("log_stop_key_loop"))
             root.after(0, stop)
             return
 
         if not is_poe_active():
-            log("PoE not active - pausing...")
-            running = False
+            log(get_text("log_poe_active"))
             root.after(0, stop)
             return
         
@@ -300,25 +479,27 @@ def auto_loop():
         if not running: break
         
         if not skip_click:
-            log(f"--- Attempt {attempt}/{limit_display} ---")
-            try:
-                pyautogui.click()
-            except Exception as e:
-                log(f"Click error: {e}")
+            log(get_text("log_attempt", attempt, limit_display))
+            try: pyautogui.click()
+            except Exception as e: log(f"Click error: {e}")
         else:
-            log(f"--- Retry Read (Attempt {attempt}) ---")
-            log("Skipping click to retry reading...")
+            log(get_text("log_retry_click", attempt))
             skip_click = False
 
         if not running: break
         item_text = read_clipboard_after_copy()
         
+        # 2. KONTROL: Kopyalama bittikten hemen sonra
+        if keyboard.is_pressed(hotkey_stop):
+            log(get_text("log_stop_key_read"))
+            root.after(0, stop)
+            return
+        
         if item_text and item_text == prev_item_text and item_text.strip() != "":
             consecutive_same_count += 1
             if consecutive_same_count >= 3:
-                log("!!! SAME ITEM DETECTED 3 TIMES (Stuck/Mouse moved?) - STOPPING !!!")
-                play_sound("error") # Hata sesi
-                running = False
+                log(get_text("log_same_item"))
+                play_sound("error")
                 root.after(0, stop)
                 return
         else:
@@ -326,79 +507,73 @@ def auto_loop():
                 consecutive_same_count = 0
                 prev_item_text = item_text
         
-        if keyboard.is_pressed(hotkey_stop):
-            running = False
-            root.after(0, stop)
-            return
-
         status = analyze_item(item_text)
 
         if status == 'FOUND':
-            log("===== MATCH FOUND - STOPPING =====")
-            play_sound("success") # Bulundu sesi
-            running = False
+            log(get_text("log_match_found"))
+            play_sound("success")
             root.after(0, lambda: stop(from_found=True))
             return
         elif status == 'NO_IMPLICIT':
-            log("!!! Mouse not over item or invalid item. STOPPING. !!!")
-            play_sound("error") # Hata sesi
-            running = False
+            log(get_text("log_invalid_item"))
+            play_sound("error")
             root.after(0, stop)
             return
         elif status == 'EMPTY':
-            log("Read failed (Empty). Retrying read next loop without clicking...")
+            log(get_text("log_read_retry"))
             skip_click = True
             
             consecutive_same_count += 1
             if consecutive_same_count >= 3:
-                log("!!! READ EMPTY 3 TIMES (Mouse moved away?) - STOPPING !!!")
-                play_sound("error") # Hata sesi
-                running = False
+                log(get_text("log_read_empty_3"))
+                play_sound("error")
                 root.after(0, stop)
                 return
         
         time.sleep(0.12)
 
-    running = False
     root.after(0, stop)
 
 # ---------------- START / STOP -----------------
 def start():
     global running
+    # Tuş ayarlama modundaysak başlatma
+    if listening_key["active"]:
+        return
     if running:
         return
     
     if not is_poe_active():
-        log("ERROR: Path of Exile is not active! Cannot start.")
+        log(get_text("log_poe_not_active_start"))
         play_sound("error")
         return
     
-    log("Scanning item before starting loop...")
+    log(get_text("log_scanning"))
     item_text = read_clipboard_after_copy()
     status = analyze_item(item_text)
     
     if status == 'FOUND':
-        log(">>> SAFETY STOP: Item ALREADY MATCHES the filter! Not starting.")
-        play_sound("success") # Zaten dogru item ise basarili sesi cal
-        root.after(0, lambda: status_label.config(text="● FOUND", fg="#ffaa00", bg="#1a1a1a"))
+        log(get_text("log_already_match"))
+        play_sound("success")
+        root.after(0, lambda: status_label.config(text=get_text("status_found"), fg="#ffaa00", bg="#1a1a1a"))
         return
         
     elif status == 'NO_IMPLICIT':
-        log(">>> SAFETY STOP: No implicit found (Mouse not over item?). Not starting.")
+        log(get_text("log_no_implicit"))
         play_sound("error")
         return
         
     elif status == 'EMPTY':
-        log(">>> SAFETY STOP: Could not read item data. Not starting.")
+        log(get_text("log_read_fail"))
         play_sound("error")
         return
     
-    log("Item check passed (No match). STARTING LOOP.")
+    log(get_text("log_start_loop"))
     
     running = True
     
     def _update_ui():
-        status_label.config(text="● RUNNING", fg="#00ff88", bg="#1a1a1a")
+        status_label.config(text=get_text("status_running"), fg="#00ff88", bg="#1a1a1a")
     root.after(0, _update_ui)
     
     hold_shift_once()
@@ -406,14 +581,20 @@ def start():
 
 def stop(from_found=False):
     global running
+    if listening_key["active"]:
+        return
+
+    if not running and not from_found:
+        return
+
     running = False 
-    log("Stopping...")
+    log(get_text("log_stopping"))
     
     def _update_ui():
         if from_found:
-            status_label.config(text="● FOUND", fg="#ffaa00", bg="#1a1a1a")
+            status_label.config(text=get_text("status_found"), fg="#ffaa00", bg="#1a1a1a")
         else:
-            status_label.config(text="● STOPPED", fg="#ff4444", bg="#1a1a1a")
+            status_label.config(text=get_text("status_stopped"), fg="#ff4444", bg="#1a1a1a")
             
     root.after(0, _update_ui)
     release_shift_once()
@@ -422,8 +603,8 @@ def stop(from_found=False):
 load_config()
 
 root = tk.Tk()
-root.title("PoE Orb Tool")
-root.geometry("600x600")
+root.title("PoE Orb Tool - Advanced")
+root.geometry("900x700")
 root.attributes("-topmost", True)
 root.resizable(False, False)
 
@@ -437,17 +618,12 @@ style.configure("TLabel", background="#2b2b2b", foreground="#ffffff")
 style.configure("TButton", padding=6)
 style.configure("TFrame", background="#2b2b2b")
 
-# --- RADIO BUTTON STYLE FIX ---
-# Focus ring'i kaldir
 style.layout('Custom.TRadiobutton', [
     ('Radiobutton.padding', {'sticky': 'nswe', 'children': [
         ('Radiobutton.indicator', {'side': 'left', 'sticky': ''}),
         ('Radiobutton.label', {'side': 'left', 'sticky': ''})
     ]})
 ])
-
-# indicatorforeground: Nokta (secim) rengi -> Beyaz (#ffffff)
-# indicatorbackground: Yuvarlak ic arka plan rengi -> Koyu (#2b2b2b)
 style.configure("Custom.TRadiobutton", 
     background="#2b2b2b", 
     foreground="#ffffff", 
@@ -455,38 +631,61 @@ style.configure("Custom.TRadiobutton",
     indicatorbackground="#2b2b2b", 
     indicatorforeground="#ffffff" 
 )
-
-# Haritalamada selected oldugunda noktayi beyaz yap
 style.map("Custom.TRadiobutton",
-    background=[('active', '#2b2b2b'), ('!disabled', '#2b2b2b')],
+    background=[('active', '#2b2b2b'), ('!disabled', '#2b2b2b'), ('focus', '#2b2b2b'), ('hover', '#2b2b2b')],
     foreground=[('active', '#ffffff'), ('!disabled', '#ffffff')],
-    indicatorbackground=[('active', '#2b2b2b'), ('!disabled', '#2b2b2b')], # Arkaplan hep koyu
-    indicatorforeground=[('selected', '#ffffff'), ('pressed', '#ffffff'), ('active', '#ffffff')] # Nokta beyaz
+    indicatorbackground=[('active', '#2b2b2b'), ('!disabled', '#2b2b2b')],
+    indicatorforeground=[('selected', '#ffffff'), ('pressed', '#ffffff'), ('active', '#ffffff')]
 )
 
-# --- VALIDATION ---
-def validate_number_input(P):
-    if P == "": return True
-    return P.isdigit()
-
-vcmd = (root.register(validate_number_input), '%P')
-
-# --- GLOBAL FOCUS CLICK HANDLER ---
+# --- GLOBAL CLICK HANDLER ---
 def on_global_click(event):
-    widget = event.widget
-    if isinstance(widget, (ttk.Entry, tk.Entry, tk.Text, tk.Listbox, ttk.Button, tk.Button, tk.Scrollbar, ttk.Scrollbar, ttk.Radiobutton)):
+    if listening_key["active"]:
+        listening_key["active"] = False
+        k_type = listening_key["type"]
+        original = hotkey_start if k_type == "start" else hotkey_stop
+        target_btn = start_key_btn if k_type == "start" else stop_key_btn
+        target_btn.config(text=original.upper())
+        if listening_key["hook"]:
+            keyboard.unhook(listening_key["hook"])
+            listening_key["hook"] = None
+        log(get_text("log_hotkey_cancel"))
         return
-    root.focus()
-    try:
-        filters_list.selection_clear(0, tk.END)
-    except:
-        pass
+
+    widget = event.widget
+    if not isinstance(widget, (ttk.Entry, tk.Entry, tk.Text, tk.Listbox, ttk.Button, tk.Button, ttk.Combobox)):
+        root.focus()
+        try: filters_list.selection_clear(0, tk.END)
+        except: pass
 
 root.bind("<Button-1>", on_global_click)
 
+# --- VALIDATION FUNCTIONS ---
+def validate_number_list_input(P):
+    if P == "": return True
+    return all(char.isdigit() or char == ',' for char in P)
+
+def validate_single_digit_input(P):
+    if P == "": return True
+    return P.isdigit() and len(P) <= 1
+
+vcmd_multi = (root.register(validate_number_list_input), '%P')
+vcmd_single = (root.register(validate_single_digit_input), '%P')
+
+# --- SELECT ALL ON FOCUS HELPER ---
+def select_all(event):
+    event.widget.after(10, lambda: event.widget.select_range(0, tk.END))
+
+# --- OVERWRITE BEHAVIOR FOR COLORS ---
+def on_color_keypress_overwrite(event):
+    if event.keysym in ("BackSpace", "Delete", "Left", "Right", "Tab"):
+        return
+    if event.char.isdigit():
+        event.widget.delete(0, tk.END)
+
 # ---------------- CONTROL PANEL -----------------
 status_frame = ttk.LabelFrame(root, text="Control Panel", padding=10)
-status_frame.pack(fill="x", padx=10, pady=10)
+status_frame.pack(fill="x", padx=10, pady=5)
 
 control_row = ttk.Frame(status_frame)
 control_row.pack(fill="x")
@@ -495,59 +694,62 @@ status_label = tk.Label(control_row, text="● STOPPED", font=("Arial", 14, "bol
                         fg="#ff4444", bg="#1a1a1a", padx=15, pady=6, relief="sunken")
 status_label.pack(side="left", padx=(0, 20))
 
-hotkey_frame = ttk.Frame(control_row)
-hotkey_frame.pack(side="right")
-
-ttk.Label(hotkey_frame, text="Start:", font=("Arial", 9)).pack(side="left", padx=5)
-start_key_btn = ttk.Button(hotkey_frame, text=hotkey_start.upper(), width=8)
-start_key_btn.pack(side="left", padx=5)
-
-ttk.Label(hotkey_frame, text="Stop:", font=("Arial", 9)).pack(side="left", padx=5)
-stop_key_btn = ttk.Button(hotkey_frame, text=hotkey_stop.upper(), width=8)
-stop_key_btn.pack(side="left", padx=5)
-
-# ---------------- SETTINGS -----------------
-frame_settings = ttk.LabelFrame(root, text="Settings", padding=8)
-frame_settings.pack(fill="x", padx=10, pady=8)
-
-settings_row = ttk.Frame(frame_settings)
-settings_row.pack(fill="x", padx=5, pady=5)
-
-# Limit
-ttk.Label(settings_row, text="Attempt Limit (0 = Unlimited):", font=("Arial", 10, "bold")).pack(side="left", padx=(0, 10))
-
+# Max Tries
+lbl_max_tries = ttk.Label(control_row, text="Max Tries:", font=("Arial", 9))
+lbl_max_tries.pack(side="left", padx=5)
 limit_var = tk.StringVar(value=str(safety_limit))
 
+# --- DEBOUNCED LIMIT LOGGING ---
+def log_limit_change():
+    global limit_log_timer, last_logged_limit
+    val_str = limit_var.get()
+    
+    if val_str == "" or not val_str.isdigit():
+        current_val = 0
+    else:
+        current_val = int(val_str)
+        
+    if current_val != last_logged_limit:
+        if current_val == 0:
+            log(get_text("log_limit_unlimited"))
+        else:
+            log(get_text("log_limit_set", current_val))
+        
+        last_logged_limit = current_val
+    
+    limit_log_timer = None
+
 def on_limit_change(*args):
-    global safety_limit
+    global safety_limit, limit_log_timer
     val = limit_var.get()
+    
     if val.isdigit():
         safety_limit = int(val)
         save_config()
     elif val == "":
         safety_limit = 0
         save_config()
+    
+    if limit_log_timer:
+        root.after_cancel(limit_log_timer)
+    
+    limit_log_timer = root.after(800, log_limit_change)
 
+limit_var.trace_add("write", on_limit_change)
+entry_limit = tk.Entry(control_row, textvariable=limit_var, width=5, 
+                       font=("Consolas", 11), justify="center", bg="white", fg="black")
 def on_limit_focus_out(event):
     if limit_var.get() == "":
         limit_var.set("0")
-
-limit_var.trace_add("write", on_limit_change)
-
-# STYLE UPDATE: Tk.Entry kullanildi ki stil color inputlara benzesin
-entry_limit = tk.Entry(settings_row, textvariable=limit_var, width=6, 
-                       font=("Consolas", 12, "bold"), # Benzer font
-                       justify="center",             # Ortali
-                       bg="white", fg="black")       # Beyaz arkaplan, siyah yazi
-# Validation manuel event ile yapilabilir veya vcmd Entry ile de calisir ama tk.Entry icin config gerekir
-entry_limit.config(validate="key", validatecommand=vcmd)
-
-entry_limit.pack(side="left", padx=5)
 entry_limit.bind("<FocusOut>", on_limit_focus_out)
+entry_limit.bind("<FocusIn>", select_all, add="+") 
 
-# --- MODE SELECTION ---
-ttk.Label(settings_row, text="| Mode:", font=("Arial", 10, "bold")).pack(side="left", padx=(20, 5))
+entry_limit.config(validate="key", validatecommand=(root.register(lambda P: P.isdigit() or P == ""), '%P'))
+entry_limit.pack(side="left")
 
+# Mode Selection
+lbl_mode = ttk.Label(control_row, text="| Mode:", font=("Arial", 9, "bold"))
+lbl_mode.pack(side="left", padx=(15, 5))
 mode_var = tk.StringVar(value=search_mode)
 
 def update_ui_for_mode():
@@ -555,281 +757,341 @@ def update_ui_for_mode():
     search_mode = mode_var.get()
     save_config()
     
+    # Text guncellemeleri
     if search_mode == "attribute":
-        frame_filters.config(text="Attribute Filters")
+        frame_filters.config(text=get_text("attr_filters_library"))
         frame_color_contents.pack_forget()
         frame_attr_contents.pack(fill="both", expand=True)
+        
+        frame_filters.pack_configure(fill="both", expand=True)
+        frame_log.pack_configure(fill="x", expand=False)
+        
     else:
-        frame_filters.config(text="Color Filters")
+        frame_filters.config(text=get_text("color_filters"))
         frame_attr_contents.pack_forget()
         frame_color_contents.pack(fill="x", pady=10)
+        
+        frame_filters.pack_configure(fill="x", expand=False)
+        frame_log.pack_configure(fill="both", expand=True)
 
-def on_mode_change():
-    update_ui_for_mode()
+rb_attr = ttk.Radiobutton(control_row, text="Attribute", variable=mode_var, value="attribute", 
+                          command=update_ui_for_mode, style="Custom.TRadiobutton")
+rb_attr.pack(side="left", padx=2)
+rb_color = ttk.Radiobutton(control_row, text="Color", variable=mode_var, value="color", 
+                           command=update_ui_for_mode, style="Custom.TRadiobutton")
+rb_color.pack(side="left", padx=2)
 
-rb_attr = ttk.Radiobutton(settings_row, text="Attribute", variable=mode_var, value="attribute", 
-                          command=on_mode_change, style="Custom.TRadiobutton")
-rb_attr.pack(side="left", padx=5)
+# Hotkeys Frame
+hotkey_frame = ttk.Frame(control_row)
+hotkey_frame.pack(side="right")
 
-rb_color = ttk.Radiobutton(settings_row, text="Color", variable=mode_var, value="color", 
-                           command=on_mode_change, style="Custom.TRadiobutton")
-rb_color.pack(side="left", padx=5)
+# --- LANGUAGE SELECT ---
+lbl_lang = ttk.Label(hotkey_frame, text="Lang:")
+lbl_lang.pack(side="left", padx=(5, 2))
 
-# ---------------- FILTERS CONTAINER -----------------
-frame_filters = ttk.LabelFrame(root, text="Attribute Filters", padding=8)
-frame_filters.pack(fill="x", padx=10, pady=8)
+lang_var = tk.StringVar(value=current_language)
+lang_combo = ttk.Combobox(hotkey_frame, textvariable=lang_var, state="readonly", values=["TR", "EN"], width=3)
+lang_combo.pack(side="left", padx=(0, 10))
 
-# --- 1. ATTRIBUTE FILTER UI ---
+start_label = ttk.Label(hotkey_frame, text="Start:")
+start_label.pack(side="left", padx=(5, 2))
+start_key_btn = ttk.Button(hotkey_frame, text=hotkey_start.upper(), width=6, takefocus=False)
+start_key_btn.pack(side="left", padx=2)
+
+stop_label = ttk.Label(hotkey_frame, text="Stop:")
+stop_label.pack(side="left", padx=(10, 2))
+stop_key_btn = ttk.Button(hotkey_frame, text=hotkey_stop.upper(), width=6, takefocus=False)
+stop_key_btn.pack(side="left", padx=2)
+
+# ---------------- MAIN CONTENT AREA -----------------
+frame_filters = ttk.LabelFrame(root, text="Attribute Filters & Library", padding=5)
+frame_filters.pack(fill="both", expand=True, padx=10, pady=5)
+
+# --- 1. ATTRIBUTE & LIBRARY UI ---
 frame_attr_contents = ttk.Frame(frame_filters)
 
-attr_list_frame = ttk.Frame(frame_attr_contents)
-attr_list_frame.pack(fill="both", padx=5, pady=5)
+# LEFT COLUMN: LIBRARY
+library_frame = ttk.LabelFrame(frame_attr_contents, text="Database / Library", padding=5)
+library_frame.pack(side="left", fill="both", expand=True, padx=(0, 5))
 
-filters_scrollbar = ttk.Scrollbar(attr_list_frame, orient="vertical")
-filters_list = tk.Listbox(attr_list_frame, height=5, font=("Consolas", 9), bg="#1a1a1a", 
-                         fg="#00ff88", 
-                         selectbackground="#4a4a4a", 
-                         selectforeground="#ffffff", 
-                         yscrollcommand=filters_scrollbar.set)
-filters_scrollbar.config(command=filters_list.yview)
+# Category Selector
+lib_top_frame = ttk.Frame(library_frame)
+lib_top_frame.pack(fill="x", pady=2)
+lbl_type = ttk.Label(lib_top_frame, text="Type:")
+lbl_type.pack(side="left")
 
+category_var = tk.StringVar()
+category_combo = ttk.Combobox(lib_top_frame, textvariable=category_var, state="readonly", values=list(ITEM_DATABASE_MAP.keys()))
+category_combo.pack(side="left", fill="x", expand=True, padx=5)
+
+# Init logic moved to bottom
+
+# Library List & Logic
+lib_list_frame = ttk.Frame(library_frame)
+lib_list_frame.pack(fill="both", expand=True, pady=5)
+
+lib_scrollbar = ttk.Scrollbar(lib_list_frame, orient="vertical")
+lib_listbox = tk.Listbox(lib_list_frame, font=("Consolas", 9), bg="#222", fg="#ddd",
+                         selectbackground="#555", yscrollcommand=lib_scrollbar.set)
+lib_scrollbar.config(command=lib_listbox.yview)
+lib_listbox.pack(side="left", fill="both", expand=True)
+lib_scrollbar.pack(side="right", fill="y")
+
+current_lib_data = []
+
+def update_library_list(search_text=""):
+    lib_listbox.delete(0, tk.END)
+    search_lower = search_text.lower()
+    for item in current_lib_data:
+        if search_lower in item.lower():
+            lib_listbox.insert(tk.END, item)
+
+def on_category_change(event):
+    global current_lib_data, last_category
+    cat = category_var.get()
+    last_category = cat 
+    save_config() 
+    
+    current_lib_data = load_library_data(cat)
+    search_var.set("")
+    update_library_list("")
+    
+    # YENI: Secim sonrasi odak ve secimi temizle
+    if event:
+        event.widget.selection_clear()
+    root.focus()
+
+category_combo.bind("<<ComboboxSelected>>", on_category_change)
+
+# Library Search
+lbl_search = ttk.Label(library_frame, text="Search in Library:")
+lbl_search.pack(anchor="w")
+search_var = tk.StringVar()
+search_entry = ttk.Entry(library_frame, textvariable=search_var)
+search_entry.pack(fill="x", pady=(0, 5))
+
+def on_search_change(*args):
+    update_library_list(search_var.get())
+search_var.trace_add("write", on_search_change)
+
+# RIGHT COLUMN: ACTIVE FILTERS
+active_filter_frame = ttk.LabelFrame(frame_attr_contents, text="Active Filters", padding=5)
+active_filter_frame.pack(side="right", fill="both", expand=True, padx=(5, 0))
+
+# Filter List
+af_list_frame = ttk.Frame(active_filter_frame)
+af_list_frame.pack(fill="both", expand=True)
+
+af_scrollbar = ttk.Scrollbar(af_list_frame, orient="vertical")
+filters_list = tk.Listbox(af_list_frame, font=("Consolas", 9), bg="#1a1a1a", fg="#00ff88",
+                          selectbackground="#4a4a4a", yscrollcommand=af_scrollbar.set)
+af_scrollbar.config(command=filters_list.yview)
 filters_list.pack(side="left", fill="both", expand=True)
-filters_scrollbar.pack(side="right", fill="y")
+af_scrollbar.pack(side="right", fill="y")
 
 for f in filters:
     filters_list.insert(tk.END, f"{f.get('value','')} → {f.get('name','')}")
 
-def on_right_click(event):
-    sel = filters_list.curselection()
-    if not sel:
-        index = filters_list.nearest(event.y)
-        filters_list.selection_clear(0, tk.END)
-        filters_list.selection_set(index)
-        filters_list.activate(index)
-        sel = (index,)
-    
-    if sel:
-        idx = sel[0]
-        f = filters[idx]
-        value_var.set(f.get('value', ''))
-        name_var.set(f.get('name', ''))
-        filters.pop(idx)
-        filters_list.delete(idx)
-        save_config()
+# Edit Controls
+edit_frame = ttk.Frame(active_filter_frame)
+edit_frame.pack(fill="x", pady=5)
 
-filters_list.bind("<Button-3>", on_right_click)
+header_frame = ttk.Frame(edit_frame)
+header_frame.pack(fill="x")
+lbl_header_value = ttk.Label(header_frame, text="Value (Min)", width=10)
+lbl_header_value.pack(side="left")
+lbl_header_name = ttk.Label(header_frame, text="Modifier Name")
+lbl_header_name.pack(side="left", padx=5)
 
-# Attribute Inputs
-filter_input_frame = ttk.Frame(frame_attr_contents)
-filter_input_frame.pack(fill="x", padx=5, pady=5)
+input_frame = ttk.Frame(edit_frame)
+input_frame.pack(fill="x", pady=2)
 
-ttk.Label(filter_input_frame, text="Value:", font=("Arial", 9)).grid(row=0, column=0, sticky="w", padx=2)
 value_var = tk.StringVar()
+entry_value = tk.Entry(input_frame, textvariable=value_var, width=12, 
+                       font=("Consolas", 11, "bold"), justify="center", bg="white", fg="black")
+entry_value.config(validate="key", validatecommand=vcmd_multi)
+entry_value.pack(side="left")
 
-# STYLE UPDATE: Value inputu da benzetildi
-entry_value = tk.Entry(filter_input_frame, textvariable=value_var, width=6, 
-                       font=("Consolas", 12, "bold"), 
-                       justify="center",
-                       bg="white", fg="black")
-entry_value.config(validate="key", validatecommand=vcmd)
-entry_value.grid(row=0, column=1, padx=2)
+# --- INPUT SAG TIK TEMIZLEME ---
+def on_input_right_click(event):
+    event.widget.delete(0, tk.END)
 
-ttk.Label(filter_input_frame, text="Name:", font=("Arial", 9)).grid(row=0, column=2, sticky="w", padx=2)
+entry_value.bind("<Button-3>", on_input_right_click) # Value kutusuna bagla
+
 name_var = tk.StringVar()
-entry_name = ttk.Entry(filter_input_frame, textvariable=name_var, font=("Consolas", 9))
-entry_name.grid(row=0, column=3, sticky="ew", padx=2)
+entry_name = tk.Entry(input_frame, textvariable=name_var, font=("Consolas", 10), bg="white", fg="black")
+entry_name.pack(side="left", fill="x", expand=True, padx=5)
 
-filter_input_frame.columnconfigure(3, weight=1)
+entry_name.bind("<Button-3>", on_input_right_click) # Name kutusuna bagla
 
-def add_filter():
+def add_filter(event=None):
     name = name_var.get().strip()
     value = value_var.get().strip()
-    if not name or not value:
-        return
+    if not name or not value: return
     f = {"name": name, "value": value}
     filters.append(f)
     filters_list.insert(tk.END, f"{value} → {name}")
     save_config()
-    name_var.set("")
+    name_var.set("") 
     value_var.set("")
     entry_value.focus()
 
 def del_filter():
     sel = filters_list.curselection()
-    if not sel:
-        return
+    if not sel: return
     idx = sel[0]
     filters.pop(idx)
     filters_list.delete(idx)
     save_config()
 
-btn_frame = ttk.Frame(frame_attr_contents)
-btn_frame.pack(fill="x", padx=5, pady=2)
-ttk.Button(btn_frame, text="Add", command=add_filter).pack(side="left", padx=2)
-ttk.Button(btn_frame, text="Delete", command=del_filter).pack(side="left", padx=2)
+# Right click to edit
+def on_active_filter_right_click(event):
+    index = filters_list.nearest(event.y)
+    if index < 0 or index >= len(filters): return
+    filters_list.selection_clear(0, tk.END)
+    filters_list.selection_set(index)
+    filters_list.activate(index)
+    f = filters[index]
+    name_var.set(f.get("name", ""))
+    value_var.set(f.get("value", ""))
+    filters.pop(index)
+    filters_list.delete(index)
+    save_config()
+    entry_value.focus()
 
-entry_name.bind("<Return>", lambda e: add_filter())
-entry_value.bind("<Return>", lambda e: entry_name.focus())
+filters_list.bind("<Button-3>", on_active_filter_right_click)
 
+btn_frame = ttk.Frame(active_filter_frame)
+btn_frame.pack(fill="x")
+btn_add = ttk.Button(btn_frame, text="Add Filter", command=add_filter)
+btn_add.pack(side="left", fill="x", expand=True, padx=(0,2))
+btn_del = ttk.Button(btn_frame, text="Delete Selected", command=del_filter)
+btn_del.pack(side="left", fill="x", expand=True, padx=(2,0))
+
+entry_value.bind("<Return>", add_filter)
+entry_name.bind("<Return>", lambda e: entry_value.focus())
+
+def on_lib_double_click(event):
+    sel = lib_listbox.curselection()
+    if not sel: return
+    text = lib_listbox.get(sel[0])
+    name_var.set(text)
+    value_var.set("")
+    entry_value.focus()
+lib_listbox.bind("<Double-Button-1>", on_lib_double_click)
 
 # --- 2. COLOR FILTER UI ---
 frame_color_contents = ttk.Frame(frame_filters)
-
 color_input_frame = ttk.Frame(frame_color_contents)
 color_input_frame.pack(anchor="center")
 
-def on_color_keypress(event):
-    # Overwrite behavior: Rakam basildiginda mevcut icerigi sil
-    if event.char and event.char.isdigit():
-        event.widget.delete(0, tk.END)
-    # Harf girisini engellemek icin break
-    elif event.char and not event.char.isdigit() and event.keysym not in ("BackSpace", "Delete", "Left", "Right"):
-        return "break"
-
-def on_color_keyrelease(event, key):
-    widget = event.widget
-    val = widget.get()
+def setup_color_input(parent, key, color_hex, lbl_color, label_widget_ref):
+    f = ttk.Frame(parent)
+    f.pack(side="left", padx=10)
     
-    digits = "".join([c for c in val if c.isdigit()])
+    l = tk.Label(f, text="", fg=lbl_color, bg="#2b2b2b", font=("Arial", 12, "bold"))
+    l.pack(side="left")
+    label_widget_ref[key] = l 
     
-    if len(digits) > 1:
-        digits = digits[-1]
-        
-    if val != digits:
-        widget.delete(0, tk.END)
-        widget.insert(0, digits)
-        val = digits
+    e = tk.Entry(f, width=2, font=("Consolas", 14, "bold"), bg=color_hex, fg="white", justify="center")
+    e.config(validate="key", validatecommand=vcmd_single)
     
-    save_val = int(val) if val else 0
-    color_targets[key] = save_val
-    save_config()
-
-def on_color_focus_out(event):
-    widget = event.widget
-    if widget.get() == "":
-        widget.insert(0, "0")
-
-# Red Input
-lbl_r = tk.Label(color_input_frame, text="Red:", bg="#2b2b2b", fg="#ff5555", font=("Arial", 10, "bold"))
-lbl_r.pack(side="left", padx=(0,5))
-
-entry_r = tk.Entry(color_input_frame, width=3, font=("Consolas", 14, "bold"),
-                   bg="#550000", fg="white", insertbackground="white", justify="center")
-entry_r.insert(0, str(color_targets.get("R", 0)))
-entry_r.pack(side="left", padx=(0, 20))
-entry_r.bind("<KeyPress>", on_color_keypress)
-entry_r.bind("<KeyRelease>", lambda e: on_color_keyrelease(e, "R"))
-entry_r.bind("<FocusOut>", on_color_focus_out)
-
-# Green Input
-lbl_g = tk.Label(color_input_frame, text="Green:", bg="#2b2b2b", fg="#55ff55", font=("Arial", 10, "bold"))
-lbl_g.pack(side="left", padx=(0,5))
-
-entry_g = tk.Entry(color_input_frame, width=3, font=("Consolas", 14, "bold"),
-                   bg="#004400", fg="white", insertbackground="white", justify="center")
-entry_g.insert(0, str(color_targets.get("G", 0)))
-entry_g.pack(side="left", padx=(0, 20))
-entry_g.bind("<KeyPress>", on_color_keypress)
-entry_g.bind("<KeyRelease>", lambda e: on_color_keyrelease(e, "G"))
-entry_g.bind("<FocusOut>", on_color_focus_out)
-
-# Blue Input
-lbl_b = tk.Label(color_input_frame, text="Blue:", bg="#2b2b2b", fg="#5555ff", font=("Arial", 10, "bold"))
-lbl_b.pack(side="left", padx=(0,5))
-
-entry_b = tk.Entry(color_input_frame, width=3, font=("Consolas", 14, "bold"),
-                   bg="#000055", fg="white", insertbackground="white", justify="center")
-entry_b.insert(0, str(color_targets.get("B", 0)))
-entry_b.pack(side="left", padx=(0, 0))
-entry_b.bind("<KeyPress>", on_color_keypress)
-entry_b.bind("<KeyRelease>", lambda e: on_color_keyrelease(e, "B"))
-entry_b.bind("<FocusOut>", on_color_focus_out)
-
-
-# ---------------- LOG -----------------
-frame_log = ttk.LabelFrame(root, text="Log", padding=5)
-frame_log.pack(fill="both", expand=True, padx=10, pady=8)
-
-log_container = ttk.Frame(frame_log)
-log_container.pack(fill="both", expand=True, padx=5, pady=5)
-
-log_scrollbar = ttk.Scrollbar(log_container, orient="vertical")
-log_box = tk.Text(log_container, height=12, wrap="word", font=("Consolas", 9), 
-                 bg="#1a1a1a", fg="#00ff88", insertbackground="#00d4ff",
-                 yscrollcommand=log_scrollbar.set)
-log_scrollbar.config(command=log_box.yview)
-
-def on_log_right_click(event):
-    log_box.delete("1.0", tk.END)
-
-log_box.bind("<Button-3>", on_log_right_click)
-
-log_box.pack(side="left", fill="both", expand=True)
-log_scrollbar.pack(side="right", fill="y")
-
-# ---------------- HOTKEYS -----------------
-listening_key = {"active": False, "type": None, "hook": None}
-
-def listen_for_key(key_type):
-    if listening_key["active"]:
-        return
+    e.insert(0, str(color_targets.get(key, 0)))
+    e.pack(side="left", padx=5)
     
-    listening_key["active"] = True
-    listening_key["type"] = key_type
+    e.bind("<KeyPress>", on_color_keypress_overwrite)
     
-    original_key = hotkey_start if key_type == "start" else hotkey_stop
-    
-    if key_type == "start":
-        start_key_btn.config(text="...", state="disabled")
-    else:
-        stop_key_btn.config(text="...", state="disabled")
-    
-    def on_key_event(e):
-        if not listening_key["active"]:
-            return
+    def on_release(ev):
+        val = "".join([c for c in e.get() if c.isdigit()])
+        if not val: val = "0"
+        if len(val) > 1: val = val[-1]
         
-        global hotkey_start, hotkey_stop
-        key_name = e.name
-        
-        if key_name == original_key:
-            listening_key["active"] = False
-            if listening_key["hook"]:
-                keyboard.unhook(listening_key["hook"])
-            
-            if listening_key["type"] == "start":
-                start_key_btn.config(text=original_key.upper(), state="normal")
-            else:
-                stop_key_btn.config(text=original_key.upper(), state="normal")
-            return
-        
-        try:
-            keyboard.remove_hotkey(hotkey_start)
-        except:
-            pass
-        try:
-            keyboard.remove_hotkey(hotkey_stop)
-        except:
-            pass
-        
-        if listening_key["type"] == "start":
-            hotkey_start = key_name.lower()
-            start_key_btn.config(text=key_name.upper(), state="normal")
-        else:
-            hotkey_stop = key_name.lower()
-            stop_key_btn.config(text=key_name.upper(), state="normal")
-        
-        try:
-            keyboard.add_hotkey(hotkey_start, start, suppress=True)
-            keyboard.add_hotkey(hotkey_stop, stop, suppress=True)
-        except:
-            pass
-        
+        if val != e.get():
+            e.delete(0, tk.END); e.insert(0, val)
+        color_targets[key] = int(val)
         save_config()
-        listening_key["active"] = False
-        if listening_key["hook"]:
-            keyboard.unhook(listening_key["hook"])
+        
+    e.bind("<KeyRelease>", on_release)
+
+# Renk etiketleri icin global referanslar
+lbl_r, lbl_g, lbl_b = None, None, None
+color_labels = {}
+
+setup_color_input(color_input_frame, "R", "#880000", "#ff5555", color_labels)
+setup_color_input(color_input_frame, "G", "#006600", "#55ff55", color_labels)
+setup_color_input(color_input_frame, "B", "#000088", "#5555ff", color_labels)
+
+lbl_r = color_labels["R"]
+lbl_g = color_labels["G"]
+lbl_b = color_labels["B"]
+
+# ---------------- LOG AREA -----------------
+frame_log = ttk.LabelFrame(root, text="System Log", padding=5)
+# Fill x yerine both yapildi ki buyuyebilsin
+frame_log.pack(fill="x", padx=10, pady=(5, 10))
+
+log_box = tk.Text(frame_log, height=13, font=("Consolas", 8), bg="#1a1a1a", fg="#00ff88")
+log_box.pack(fill="both", expand=True)
+
+def on_log_clear(event):
+    log_box.delete("1.0", tk.END)
+log_box.bind("<Button-3>", on_log_clear)
+
+# ---------------- INITIALIZATION -----------------
+def listen_for_key(k_type):
+    if listening_key["active"]: return
+    listening_key["active"] = True
+    listening_key["type"] = k_type
+    target_btn = start_key_btn if k_type == "start" else stop_key_btn
+    target_btn.config(text="...")
     
-    listening_key["hook"] = keyboard.on_press(on_key_event, suppress=False)
+    def hook(e):
+        global hotkey_start, hotkey_stop
+        if not listening_key["active"]: return
+        
+        if e.event_type == 'down':
+            key_name = e.name.lower()
+            
+            # 1. KONTROL: Diger tus ile cakisma var mi?
+            other_key = hotkey_stop if k_type == "start" else hotkey_start
+            other_action = "Stop" if k_type == "start" else "Start"
+            
+            if key_name == other_key:
+                log(get_text("log_hotkey_error", key_name.upper(), other_action))
+                return 
+
+            # 2. IPTAL: Kendisi ile ayni tusa basilirsa iptal et
+            current_key = hotkey_start if k_type == "start" else hotkey_stop
+            if key_name == current_key:
+                listening_key["active"] = False
+                target_btn.config(text=e.name.upper())
+                keyboard.unhook(listening_key["hook"])
+                listening_key["hook"] = None
+                return
+
+            try: keyboard.remove_hotkey(hotkey_start)
+            except: pass
+            try: keyboard.remove_hotkey(hotkey_stop)
+            except: pass
+
+            if k_type == "start": hotkey_start = key_name
+            else: hotkey_stop = key_name
+            
+            target_btn.config(text=key_name.upper(), state="normal")
+            save_config()
+            
+            try:
+                keyboard.add_hotkey(hotkey_start, start, suppress=True)
+                keyboard.add_hotkey(hotkey_stop, stop, suppress=True)
+                log(get_text("log_hotkeys_reg", hotkey_start.upper(), hotkey_stop.upper()))
+            except Exception as ex: 
+                log(get_text("log_hotkey_reg_err", ex))
+            
+            listening_key["active"] = False
+            keyboard.unhook(listening_key["hook"])
+            listening_key["hook"] = None
+
+    listening_key["hook"] = keyboard.on_press(hook, suppress=False)
 
 start_key_btn.config(command=lambda: listen_for_key("start"))
 stop_key_btn.config(command=lambda: listen_for_key("stop"))
@@ -837,10 +1099,76 @@ stop_key_btn.config(command=lambda: listen_for_key("stop"))
 try:
     keyboard.add_hotkey(hotkey_start, start, suppress=True)
     keyboard.add_hotkey(hotkey_stop, stop, suppress=True)
-    log(f"Hotkeys registered: {hotkey_start.upper()} (Start) / {hotkey_stop.upper()} (Stop)")
+    log(get_text("log_hotkeys_reg", hotkey_start.upper(), hotkey_stop.upper()))
 except Exception as e:
-    log(f"Hotkey registration error: {e}")
+    log(get_text("log_hotkey_reg_err", e))
 
+# --- UPDATE UI LANGUAGE DEFINITION ---
+def update_ui_language():
+    status_frame.config(text=get_text("control_panel"))
+    # frame_settings.config(text=get_text("settings")) # frame_settings'in varligi belirsiz, hata verirse kapat
+    lbl_max_tries.config(text=get_text("max_tries"))
+    lbl_mode.config(text=get_text("mode"))
+    rb_attr.config(text=get_text("attribute"))
+    rb_color.config(text=get_text("color"))
+    
+    start_label.config(text=get_text("start"))
+    stop_label.config(text=get_text("stop"))
+    
+    if search_mode == "attribute":
+        frame_filters.config(text=get_text("attr_filters_library"))
+    else:
+        frame_filters.config(text=get_text("color_filters"))
+        
+    library_frame.config(text=get_text("database_library"))
+    lbl_type.config(text=get_text("type"))
+    lbl_search.config(text=get_text("search_lib"))
+    
+    active_filter_frame.config(text=get_text("active_filters"))
+    lbl_header_value.config(text=get_text("value_min"))
+    lbl_header_name.config(text=get_text("modifier_name"))
+    
+    btn_add.config(text=get_text("add_filter"))
+    btn_del.config(text=get_text("delete_selected"))
+    
+    frame_log.config(text=get_text("system_log"))
+    
+    lbl_r.config(text=get_text("red"))
+    lbl_g.config(text=get_text("green"))
+    lbl_b.config(text=get_text("blue"))
+    lbl_lang.config(text=get_text("lang"))
+    
+    if running:
+        status_label.config(text=get_text("status_running"))
+    else:
+        current_text = status_label.cget("text")
+        if "FOUND" in current_text or "BULUNDU" in current_text:
+             status_label.config(text=get_text("status_found"))
+        else:
+             status_label.config(text=get_text("status_stopped"))
+
+def on_language_change(event):
+    global current_language
+    current_language = lang_var.get()
+    save_config()
+    update_ui_language()
+    
+    if event:
+        event.widget.selection_clear()
+    root.focus()
+
+lang_combo.bind("<<ComboboxSelected>>", on_language_change)
+
+# Initial Load
 update_ui_for_mode()
+update_ui_language() 
+
+if list(ITEM_DATABASE_MAP.keys()):
+    if last_category and last_category in ITEM_DATABASE_MAP:
+        category_combo.set(last_category)
+    else:
+        category_combo.current(0)
+    
+    on_category_change(None)
 
 root.mainloop()

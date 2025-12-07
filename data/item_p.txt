@@ -1,0 +1,431 @@
+# Added Cold Damage per Frenzy Charge
+# Fire Damage per Endurance Charge
+# Lightning Damage per Power Charge
+# added Fire Damage against Burning Enemies
+# to # Added Cold Damage per Frenzy Charge
+# to # Fire Damage per Endurance Charge
+# to # Lightning Damage per Power Charge
+# to # added Fire Damage against Burning Enemies
+# to Level of Socketed Skill Gems
+# to Maximum Endurance Charges
+# to Maximum Frenzy Charges
+# to Maximum Power Charges
+# to maximum number of Raised Zombies
+# to maximum number of Skeletons
+#% Chance to Block Spell Damage
+#% chance for Flasks you use to not consume Charges
+#% chance to Avoid Bleeding
+#% chance to Avoid being Poisoned
+#% chance to Defend with #% of Armour
+#% chance to Defend with 200% of Armour
+#% chance to Defend with Double Armour
+#% chance to Dodge Attack Hits
+#% chance to Dodge Spell Hits
+#% chance to Freeze
+#% chance to Ignite
+#% chance to Impale Enemies on Hit with Attacks
+#% chance to Intimidate Enemies for # seconds on Hit
+#% chance to Intimidate Enemies for 4 seconds on Hit
+#% chance to Shock
+#% chance to Unnerve Enemies for # seconds on Hit
+#% chance to Unnerve Enemies for 4 seconds on Hit
+#% chance to gain Elusive on Critical Strike
+#% chance to gain Fortify when you Stun an Enemy with Melee Damage
+#% chance to gain a Frenzy Charge on Kill
+#% chance to gain a Power Charge on Kill
+#% chance to gain an Endurance Charge on Kill
+#% faster start of Energy Shield Recharge
+#% increased Area Damage
+#% increased Area of Effect
+#% increased Armour
+#% increased Armour and Energy Shield
+#% increased Armour and Evasion
+#% increased Armour, Evasion and Energy Shield
+#% increased Attack Damage
+#% increased Attack Speed
+#% increased Burning Damage
+#% increased Chance to Block
+#% increased Chaos Damage
+#% increased Chaos Damage over Time
+#% increased Cold Damage
+#% increased Cooldown Recovery Rate
+#% increased Cooldown Recovery Rate of Travel Skills
+#% increased Critical Strike Chance
+#% increased Critical Strike Chance against Shocked Enemies
+#% increased Critical Strike Chance with Spells which remove the maximum number of Seals
+#% increased Damage
+#% increased Damage during any Flask Effect
+#% increased Damage over Time
+#% increased Damage per # Dexterity
+#% increased Damage per # Intelligence
+#% increased Damage per Endurance Charge
+#% increased Damage per Frenzy Charge
+#% increased Damage per Power Charge
+#% increased Damage with Bow Skills
+#% increased Damage with Hits against Chilled Enemies
+#% increased Duration of Ailments on Enemies
+#% increased Effect of Non-Damaging Ailments
+#% increased Elemental Damage
+#% increased Elemental Damage with Attack Skills
+#% increased Elusive Effect
+#% increased Energy Shield
+#% increased Energy Shield from Body Armour
+#% increased Energy Shield from Equipped Body Armour
+#% increased Evasion Rating
+#% increased Evasion and Energy Shield
+#% increased Experience gain
+#% increased Fire Damage
+#% increased Fishing Line Strength
+#% increased Flask Life Recovery rate
+#% increased Flask Mana Recovery rate
+#% increased Global Physical Damage
+#% increased Job speed
+#% increased Lightning Damage
+#% increased Mana Reservation Efficiency of Skills
+#% increased Maximum total Energy Shield Recovery per second from Leech
+#% increased Maximum total Life Recovery per second from Leech
+#% increased Maximum total Mana Recovery per second from Leech
+#% increased Melee Damage
+#% increased Mine Damage
+#% increased Movement Speed
+#% increased Physical Damage
+#% increased Physical Damage over Time
+#% increased Projectile Attack Damage
+#% increased Projectile Damage
+#% increased Projectile Speed
+#% increased Quantity of Items dropped in Heists
+#% increased Rarity of Items found
+#% increased Recovery per second from Life Leech
+#% increased Spell Damage
+#% increased Stun and Block Recovery
+#% increased Trap Damage
+#% increased Ward
+#% increased maximum Energy Shield
+#% increased maximum Life
+#% increased maximum Mana
+#% increased total Recovery per second from Life Leech
+#% of Chaos Damage Leeched as Life
+#% of Cold Damage Leeched as Energy Shield
+#% of Cold Damage Leeched as Life
+#% of Cold Damage taken Recouped as Life
+#% of Damage is taken from Mana before Life
+#% of Fire Damage Leeched as Energy Shield
+#% of Fire Damage Leeched as Life
+#% of Fire Damage taken Recouped as Life
+#% of Lightning Damage Leeched as Energy Shield
+#% of Lightning Damage Leeched as Life
+#% of Lightning Damage taken Recouped as Life
+#% of Physical Attack Damage Leeched as Life
+#% of Physical Attack Damage Leeched as Mana
+#% of Physical Damage Converted to Cold Damage
+#% of Physical Damage Converted to Fire Damage
+#% of Physical Damage Converted to Lightning Damage
+#% of Physical Damage Leeched as Life
+#% of Physical Damage from Hits taken as Chaos Damage
+#% of Physical Damage from Hits taken as Cold Damage
+#% of Physical Damage from Hits taken as Fire Damage
+#% of Physical Damage from Hits taken as Lightning Damage
+#% reduced Elemental Damage taken
+#% reduced Enemy Stun Threshold
+#% reduced Fishing Pool Consumption
+#% reduced Mana Reservation of Skills
+#% reduced Physical Damage taken
++# Armour if you've Blocked Recently
++# Life gained for each Enemy hit by your Attacks
++# Life gained for each Enemy hit by your Spells
++# Mana gained for each Enemy Hit by your Spells
++# Mana gained for each Enemy hit by your Attacks
++# to Accuracy Rating
++# to Armour
++# to Character Level
++# to Evasion Rating
++# to Level of Socketed Active Skill Gems
++# to Level of Socketed Bow Gems
++# to Level of Socketed Chaos Gems
++# to Level of Socketed Cold Gems
++# to Level of Socketed Fire Gems
++# to Level of Socketed Gems
++# to Level of Socketed Lightning Gems
++# to Level of Socketed Melee Gems
++# to Level of Socketed Minion Gems
++# to Level of Socketed Spell Gems
++# to Level of Socketed Support Gems
++# to Level of all Chaos Skill Gems
++# to Level of all Chaos Spell Skill Gems
++# to Level of all Cold Skill Gems
++# to Level of all Cold Spell Skill Gems
++# to Level of all Dexterity Skill Gems
++# to Level of all Fire Skill Gems
++# to Level of all Fire Spell Skill Gems
++# to Level of all Intelligence Skill Gems
++# to Level of all Lightning Skill Gems
++# to Level of all Lightning Spell Skill Gems
++# to Level of all Minion Skill Gems
++# to Level of all Physical Skill Gems
++# to Level of all Physical Spell Skill Gems
++# to Level of all Skill Gems
++# to Level of all Spell Skill Gems
++# to Level of all Strength Skill Gems
++# to Ward
++# to maximum Energy Shield
++# to maximum Life
++# to maximum Mana
++#% to Chaos Damage over Time Multiplier
++#% to Cold Damage over Time Multiplier
++#% to Damage over Time Multiplier for Bleeding from Hits with this Weapon
++#% to Damage over Time Multiplier for Poison inflicted with this Weapon
++#% to Fire Damage over Time Multiplier
++#% to Global Critical Strike Multiplier
++#% to Physical Damage over Time Multiplier
++#% to Quality of Socketed Active Skill Gems
++#% to Quality of Socketed Chaos Gems
++#% to Quality of Socketed Cold Gems
++#% to Quality of Socketed Fire Gems
++#% to Quality of Socketed Lightning Gems
++#% to Quality of Socketed Support Gems
++#% to all maximum Resistances
++#% to maximum Chaos Resistance
++#% to maximum Cold Resistance
++#% to maximum Fire Resistance
++#% to maximum Lightning Resistance
++1 to Level of Socketed Gems
++1 to Level of all Skill Gems
++1 to Level of all Spell Skill Gems
++1 to Maximum Endurance Charges
++1 to Maximum Frenzy Charges
++1 to Maximum Power Charges
++1 to maximum number of Raised Zombies
++1 to maximum number of Skeletons
++1 to maximum number of Summoned Totems
++1% to all maximum Resistances
++1% to maximum Chaos Resistance
++1% to maximum Cold Resistance
++1% to maximum Fire Resistance
++1% to maximum Lightning Resistance
++2 to Level of Socketed Bow Gems
++2 to Level of Socketed Chaos Gems
++2 to Level of Socketed Cold Gems
++2 to Level of Socketed Fire Gems
++2 to Level of Socketed Gems
++2 to Level of Socketed Lightning Gems
++2 to Level of Socketed Melee Gems
++2 to Level of Socketed Minion Gems
++2 to Level of Socketed Trap Gems
++2 to Level of Socketed Trap or Mine Gems
++2% Chance to Block
++3% Chance to Block
+-# to Total Mana Cost of Skills
+0.6% of Physical Attack Damage Leeched as Life
+1 % increased Damage per 1% Chance to Block Attack Damage
+1 % increased Damage per 15 Dexterity
+1 % increased Damage per 15 Intelligence
+1 % increased Damage per 15 Strength
+1 % increased Spell Damage per 10 Intelligence
+1 % increased Spell Damage per 10 Strength
+1 % increased Spell Damage per 16 Dexterity
+1 % increased Spell Damage per 16 Intelligence
+1 % increased Spell Damage per 16 Strength
+1 to # Lightning Damage per Power Charge
+1% increased Damage per 1% Chance to Block Attack Damage
+1% increased Damage per 15 Dexterity
+1% increased Damage per 15 Intelligence
+1% increased Damage per 15 Strength
+1% increased Spell Damage per 10 Intelligence
+1% increased Spell Damage per 10 Strength
+1% increased Spell Damage per 16 Dexterity
+1% increased Spell Damage per 16 Intelligence
+1% increased Spell Damage per 16 Strength
+10% chance that if you would gain Endurance Charges, you instead gain up to maximum Endurance Charges
+10% chance that if you would gain Frenzy Charges, you instead gain up to your maximum number of Frenzy Charges
+10% chance that if you would gain Power Charges, you instead gain up to
+10% increased Maximum total Energy Shield Recovery per second from Leech
+10% increased Maximum total Life Recovery per second from Leech
+10% increased Movement Speed
+10% of Maximum Life Converted to Energy Shield
+10% of Physical Damage from Hits taken as Fire Damage
+10% reduced Reservation of Curse Aura Skills
+100% increased Global Defences
+15% increased Maximum total Energy Shield Recovery per second from Leech
+15% increased Movement Speed
+15% increased Warcry Buff Effect
+2% increased maximum Life
+20% increased Mana Reservation Efficiency of Curse Aura Skills
+20% increased Maximum total Energy Shield Recovery per second from Leech
+20% increased Maximum total Life Recovery per second from Leech
+20% increased Movement Speed
+25% chance to cause Bleeding on Hit
+25% increased Movement Speed
+25% of Physical Damage Converted to Cold Damage
+25% of Physical Damage Converted to Fire Damage
+25% of Physical Damage Converted to Lightning Damage
+3 to 6 Added Cold Damage per Frenzy Charge
+3% increased maximum Energy Shield
+30% increased Maximum total Energy Shield Recovery per second from Leech
+30% increased Movement Speed
+30% increased Rarity of Items found during any Flask Effect
+35% increased Movement Speed
+5% increased Movement Speed if you haven't been Hit Recently
+50% increased Endurance Charge Duration
+50% increased Frenzy Charge Duration
+50% increased Power Charge Duration
+60% chance for Bleeding inflicted with this Weapon to deal 100% more Damage
+60% chance for Poisons inflicted with this Weapon to deal 100% more Damage
+7% increased maximum Energy Shield (implicit)
+8 to 12 Added Cold Damage per Frenzy Charge
+Adds # to # Chaos Damage
+Adds # to # Chaos Damage to Attacks
+Adds # to # Chaos Damage to Spells
+Adds # to # Cold Damage
+Adds # to # Cold Damage against Chilled or Frozen Enemies
+Adds # to # Cold Damage if you've dealt a Critical Strike Recently
+Adds # to # Cold Damage to Attacks
+Adds # to # Cold Damage to Attacks with this Weapon per 10 Dexterity
+Adds # to # Cold Damage to Spells
+Adds # to # Fire Damage
+Adds # to # Fire Damage against Ignited Enemies
+Adds # to # Fire Damage if you've dealt a Critical Strike Recently
+Adds # to # Fire Damage to Attacks
+Adds # to # Fire Damage to Attacks with this Weapon per 10 Strength
+Adds # to # Fire Damage to Spells
+Adds # to # Lightning Damage
+Adds # to # Lightning Damage against Shocked Enemies
+Adds # to # Lightning Damage if you've dealt a Critical Strike Recently
+Adds # to # Lightning Damage to Attacks
+Adds # to # Lightning Damage to Spells
+Adds # to # Physical Damage
+Adds # to # Physical Damage if you've dealt a Critical Strike Recently
+Adds # to # Physical Damage to Attacks
+Adds # to # Physical Damage to Spells
+Adds 1 to # Lightning Damage to Attacks with this Weapon per 10 Intelligence
+Attacks with this Weapon Penetrate #% Chaos Resistance
+Attacks with this Weapon Penetrate #% Cold Resistance
+Attacks with this Weapon Penetrate #% Elemental Resistances
+Attacks with this Weapon Penetrate #% Fire Resistance
+Attacks with this Weapon Penetrate #% Lightning Resistance
+Bow Attacks fire an additional Arrow
+Cannot be Blinded
+Cannot be Frozen
+Chaos Damage does not bypass Energy Shield while not on Low Life or Low Mana
+Chaos Damage taken does not bypass Energy Shield while not on Low Life
+Cover Enemies in Ash when they Hit you
+Damage Penetrates #% Cold Resistance
+Damage Penetrates #% Elemental Resistances
+Damage Penetrates #% Fire Resistance
+Damage Penetrates #% Lightning Resistance
+Damage Penetrates #% of Enemy Elemental Resistances
+Effects of Consecrated Ground you create Linger for 1 second
+Enemies you Kill Explode, dealing 3% of their Life as Physical Damage
+Enemies you Kill Explode, dealing 5% of their Life as Physical Damage
+Enemies you Kill have a #% chance to Explode, dealing a tenth of their maximum Life as Physical Damage
+Evasion Rating is increased by Overcapped Cold Resistance
+Evasion Rating is increased by Uncapped Cold Resistance
+Every # seconds, Regenerate #% of Life over one second
+Every 4 seconds, Regenerate 15% of Life over one second
+Every 4 seconds, Regenerate 25% of Life over one second
+Exerted Attacks deal #% increased Damage
+Flasks applied to you have #% increased Effect
+Gain # Life per Enemy Hit with Attacks
+Gain # Life per Enemy Hit with Spells
+Gain # Mana per Enemy Hit with Attacks
+Gain # Mana per Enemy Hit with Spells
+Gain #% of Cold Damage as Extra Chaos Damage
+Gain #% of Elemental Damage as Extra Chaos Damage
+Gain #% of Fire Damage as Extra Chaos Damage
+Gain #% of Lightning Damage as Extra Chaos Damage
+Gain #% of Non-Chaos Damage as extra Chaos Damage
+Gain #% of Physical Damage as Extra Chaos Damage
+Gain #% of Physical Damage as Extra Cold Damage
+Gain #% of Physical Damage as Extra Fire Damage
+Gain #% of Physical Damage as Extra Lightning Damage
+Gain 10% of Cold Damage as Extra Chaos Damage
+Gain 10% of Fire Damage as Extra Chaos Damage
+Gain 10% of Lightning Damage as Extra Chaos Damage
+Gain 5% of Non-Chaos Damage as extra Chaos Damage
+Gain a Flask Charge when you deal a Critical Strike
+Grants Level # Enduring Cry Skill
+Grants Level # Rallying Cry Skill
+Grants Level 15 Envy Skill
+Grants Level 22 Enduring Cry Skill
+Grants Level 22 Intimidating Cry Skill
+Grants Level 22 Rallying Cry Skill
+Hits can't be Evaded
+Intimidate Enemies for 4 seconds on Hit
+Magic Utility Flasks applied to you have #% increased Effect
+Melee Hits which Stun have #% chance to Fortify
+Minions deal #% increased Damage
+Minions have #% increased maximum Life
+Minions have 5% chance to deal Double Damage
+Nearby Enemies are Blinded
+Non-Channelling Skills have -# to Total Mana Cost
+Non-Vaal Strike Skills target # additional nearby Enemy
+Permanently Intimidate Enemies on Block
+Projectiles Pierce # additional Targets
+Projectiles Pierce 2 additional Targets
+Projectiles Pierce an additional Target
+Reflects # Physical Damage to Melee Attackers
+Regenerate # Mana per second
+Regenerate 0.4% of Energy Shield per second
+Rhoa Feather Lure
+Skills supported by Unleash have # to maximum number of Seals
+Skills supported by Unleash have +1 to maximum number of Seals
+Socketed Gems are Supported by Level # Added Fire Damage
+Socketed Gems are Supported by Level # Arcane Surge
+Socketed Gems are Supported by Level # Brutality
+Socketed Gems are Supported by Level # Cast On Melee Kill
+Socketed Gems are Supported by Level # Cast While Channelling
+Socketed Gems are Supported by Level # Cold Penetration
+Socketed Gems are Supported by Level # Concentrated Effect
+Socketed Gems are Supported by Level # Controlled Destruction
+Socketed Gems are Supported by Level # Efficacy
+Socketed Gems are Supported by Level # Elemental Focus
+Socketed Gems are Supported by Level # Endurance Charge on Melee Stun
+Socketed Gems are Supported by Level # Fire Penetration
+Socketed Gems are Supported by Level # Fortify
+Socketed Gems are Supported by Level # Increased Area of Effect
+Socketed Gems are Supported by Level # Inspiration
+Socketed Gems are Supported by Level # Iron Grip
+Socketed Gems are Supported by Level # Less Duration
+Socketed Gems are Supported by Level # Lightning Penetration
+Socketed Gems are Supported by Level # Mana Leech
+Socketed Gems are Supported by Level # Melee Physical Damage
+Socketed Gems are Supported by Level # Minion Damage
+Socketed Gems are Supported by Level # Minion Life
+Socketed Gems are Supported by Level # Momentum
+Socketed Gems are Supported by Level # Onslaught
+Socketed Gems are Supported by Level # Power Charge On Critical Strike
+Socketed Gems are Supported by Level # Ruthless
+Socketed Gems are Supported by Level # Slower Projectiles
+Socketed Gems are Supported by Level # Vicious Projectiles
+Socketed Gems are Supported by Level 10 Momentum
+Socketed Gems are supported by Level # Cast On Critical Strike
+Socketed Gems are supported by Level # Elemental Damage with Attacks
+Socketed Gems are supported by Level # Faster Projectiles
+Socketed Gems are supported by Level # Life Leech
+Socketed Skills deal #% more Attack Damage
+Socketed Skills deal #% more Spell Damage
+Socketed Skills deal 20 % more Attack Damage
+Socketed Skills deal 20 % more Spell Damage
+Socketed Skills deal 40 % more Attack Damage
+Socketed Skills deal 40 % more Spell Damage
+Socketed Triggered Skills deal Double Damage
+Strike Skills target 1 additional nearby Enemy
+Strike Skills target 2 additional nearby Enemies
+Transfiguration of Mind
+Unaffected by Burning Ground
+Unaffected by Chill
+Unaffected by Chilled Ground
+Unaffected by Desecrated Ground
+Unaffected by Ignite
+Unaffected by Poison
+Unaffected by Shock
+Unaffected by Shocked Ground
+Unnerve Enemies for 4 seconds on Hit
+Warcry Skills have #% increased Area of Effect
+You and your Minions take #% reduced Reflected Elemental Damage
+You and your Minions take #% reduced Reflected Physical Damage
+You and your Minions take 100% reduced Reflected Elemental Damage
+You and your Minions take 100% reduced Reflected Physical Damage
+You can apply an additional Curse
+You have Consecrated Ground around you while stationary
+You take #% reduced Extra Damage from Critical Strikes
+your maximum number of Power Charges
