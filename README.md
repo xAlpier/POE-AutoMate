@@ -67,7 +67,7 @@ when a matching implicit/stat is detected.
     Value: 75
     Name: Fire Resistance
 
-This matches any implicit line with value ≥ 75.
+This matches with value ≥ 75.
 
 ------------------------------------------------------------------------
 
@@ -156,7 +156,7 @@ python main.py
     Değer: 75
     İsim: Fire Resistance
 
-Bu, 75 veya üzeri Fire Resistance implicit gördüğünde durur.
+Bu, 75 veya üzeri Fire Resistance gördüğünde durur.
 
 ------------------------------------------------------------------------
 
