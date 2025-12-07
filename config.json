@@ -1,31 +1,19 @@
 {
   "filters": [
     {
-      "name": "to Level of all Spell Skill Gems",
-      "value": "1"
-    },
-    {
       "name": "to Damage over Time Multiplier",
       "value": "25"
     },
     {
-      "name": "to Level of all Fire Spell Skill Gems",
+      "name": "to Level of all Spell Skill Gems",
       "value": "1"
     },
     {
-      "name": "to Dexterity",
-      "value": "20"
-    },
-    {
-      "name": "to Intelligence",
-      "value": "20"
-    },
-    {
-      "name": "to Strength",
-      "value": "20"
+      "name": "to Level of all Fire Spell Skill Gems",
+      "value": "1"
     }
   ],
-  "safety_limit": 10,
-  "hotkey_start": "F2",
-  "hotkey_stop": "F3"
+  "safety_limit": 0,
+  "hotkey_start": "f2",
+  "hotkey_stop": "f3"
 }
