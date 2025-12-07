@@ -40,7 +40,7 @@ TRANSLATIONS = {
         "max_tries": "Deneme Sınırı:",
         "mode": "| Mod:",
         "attribute": "Özellik",
-        "color": "Renk",
+        "color": "Soket Renkleri",
         "start": "Başlat:",
         "stop": "Durdur:",
         "attr_filters_library": "Özellik Filtreleri & Kütüphane",
@@ -87,7 +87,6 @@ TRANSLATIONS = {
         "log_no_socket": "Soket satırı bulunamadı",
         "log_no_req": "Renk gereksinimi yok",
         "log_socket_match_detail": "Soketler eşleşti: Bulunan(R:{}, G:{}, B:{})",
-        # Guncellenen log mesaji:
         "log_match_simplified": "\nMod bulundu;\nAranan: '{}'\nBulunan: '{}'",
         "log_substring_match": "Alt metin eşleşmesi '{}'",
         "log_thresh_match": "Eşik eşleşmesi: {} >= {} -> '{}' için",
@@ -103,7 +102,7 @@ TRANSLATIONS = {
         "max_tries": "Max Tries:",
         "mode": "| Mode:",
         "attribute": "Attribute",
-        "color": "Color",
+        "color": "Socket Colors",
         "start": "Start:",
         "stop": "Stop:",
         "attr_filters_library": "Attribute Filters & Library",
@@ -150,7 +149,7 @@ TRANSLATIONS = {
         "log_no_socket": "No Sockets line found",
         "log_no_req": "No color requirements set",
         "log_socket_match_detail": "Sockets matched: Found(R:{}, G:{}, B:{})",
-        "log_match_simplified": "\nModifier found;\nSearched: ‘{}’\nFound: ‘{}’",
+        "log_match_simplified": "\nModifier found;\nSearched: '{}'\nFound: '{}'",
         "log_substring_match": "Substring match '{}'",
         "log_thresh_match": "Threshold match: {} >= {} for '{}'",
         "log_hotkeys_reg": "Hotkeys registered: {} (Start) / {} (Stop)",
@@ -435,12 +434,10 @@ def analyze_item(item_text):
                 for f in filters:
                     ok, result = filter_matches_item(f, search_text)
                     if ok:
-                        # Eger sonuc bir tuple ise (yani wildcard eslesmesi ise)
                         if isinstance(result, tuple):
                             req_text, found_text = result
                             log(get_text("log_match_simplified", req_text, found_text))
                         else:
-                            # Standart string donusu (Eski tip eslesmeler icin)
                             log(get_text("log_matched", f.get('name','?'), f.get('value'), result))
                         
                         log("-----------------------")
@@ -462,7 +459,6 @@ def auto_loop():
 
     while running and (safety_limit == 0 or attempt < safety_limit):
         
-        # 1. KONTROL: Döngü başında kontrol
         if keyboard.is_pressed(hotkey_stop):
             log(get_text("log_stop_key_loop"))
             root.after(0, stop)
@@ -489,7 +485,6 @@ def auto_loop():
         if not running: break
         item_text = read_clipboard_after_copy()
         
-        # 2. KONTROL: Kopyalama bittikten hemen sonra
         if keyboard.is_pressed(hotkey_stop):
             log(get_text("log_stop_key_read"))
             root.after(0, stop)
@@ -537,7 +532,6 @@ def auto_loop():
 # ---------------- START / STOP -----------------
 def start():
     global running
-    # Tuş ayarlama modundaysak başlatma
     if listening_key["active"]:
         return
     if running:
@@ -856,7 +850,6 @@ def on_category_change(event):
     search_var.set("")
     update_library_list("")
     
-    # YENI: Secim sonrasi odak ve secimi temizle
     if event:
         event.widget.selection_clear()
     root.focus()
@@ -916,13 +909,13 @@ entry_value.pack(side="left")
 def on_input_right_click(event):
     event.widget.delete(0, tk.END)
 
-entry_value.bind("<Button-3>", on_input_right_click) # Value kutusuna bagla
+entry_value.bind("<Button-3>", on_input_right_click)
 
 name_var = tk.StringVar()
 entry_name = tk.Entry(input_frame, textvariable=name_var, font=("Consolas", 10), bg="white", fg="black")
 entry_name.pack(side="left", fill="x", expand=True, padx=5)
 
-entry_name.bind("<Button-3>", on_input_right_click) # Name kutusuna bagla
+entry_name.bind("<Button-3>", on_input_right_click)
 
 def add_filter(event=None):
     name = name_var.get().strip()
@@ -1106,7 +1099,6 @@ except Exception as e:
 # --- UPDATE UI LANGUAGE DEFINITION ---
 def update_ui_language():
     status_frame.config(text=get_text("control_panel"))
-    # frame_settings.config(text=get_text("settings")) # frame_settings'in varligi belirsiz, hata verirse kapat
     lbl_max_tries.config(text=get_text("max_tries"))
     lbl_mode.config(text=get_text("mode"))
     rb_attr.config(text=get_text("attribute"))
