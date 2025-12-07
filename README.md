@@ -1,4 +1,4 @@
-# ![United States](https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/us.png "United States") POE AutoMate (English)
+# <img src='https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/us.png' width='21' height='15'> POE AutoMate (English)
 
 POE AutoMate is an automated item rolling & checking tool for **Path of
 Exile**.\
@@ -37,23 +37,20 @@ when a matching implicit/stat is detected.
 2.  Install dependencies:
 
 ```{=html}
-<!-- -->
-```
     pip install keyboard pyautogui pyperclip psutil pywin32
+```
 
 3.  Clone repository:
 
 ```{=html}
-<!-- -->
-```
     git clone https://github.com/xAlpier/POE-AutoMate.git
+```
 
 4.  Run:
 
 ```{=html}
-<!-- -->
-```
     python main.py
+```
 
 ------------------------------------------------------------------------
 
@@ -90,7 +87,7 @@ This matches any implicit line with value ≥ 75.
 
 ------------------------------------------------------------------------
 
-# 🇹🇷 POE AutoMate (Türkçe)
+# <img src='https://raw.githubusercontent.com/yammadev/flag-icons/refs/heads/master/png/TR%402x.png' width='21' height='15'> POE AutoMate (Türkçe)
 
 POE AutoMate, **Path of Exile** için otomatik item kontrol ve orb basma
 aracıdır.\
@@ -129,23 +126,20 @@ bulduğunda otomatik olarak durur.
 2.  Gerekli paketleri yükle:
 
 ```{=html}
-<!-- -->
+pip install keyboard pyautogui pyperclip psutil pywin32
 ```
-    pip install keyboard pyautogui pyperclip psutil pywin32
 
 3.  Reponun indirilmesi:
 
 ```{=html}
-<!-- -->
+git clone https://github.com/xAlpier/POE-AutoMate.git
 ```
-    git clone https://github.com/xAlpier/POE-AutoMate.git
 
 4.  Çalıştırma:
 
 ```{=html}
-<!-- -->
+python main.py
 ```
-    python main.py
 
 ------------------------------------------------------------------------
 
