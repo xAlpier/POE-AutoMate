@@ -62,7 +62,7 @@ In your command prompt (cmd/terminal), run:
 7.  Press **Stop Hotkey** anytime (`F3`).
 
 ### 🔹 Mode 1: Modifiers & Library
-Matches numerical values or text. You can select pre-defined mods from the **Database/Library** list or add them manually.
+Matches the **numerical values** of modifiers. You can select pre-defined mods from the **Database/Library** list or add them manually.
 
 #### Basic Example
     Value: 75
@@ -187,7 +187,7 @@ Komut satırınızda (cmd/terminal) programı çalıştırın:
 7.  İsterseniz **Durdur** tuşu (`F3`) ile manuel durdurabilirsiniz.
 
 ### 🔹 Mod 1: Mod Filtreleri & Kütüphane
-Sayısal değer veya metin arar. **Veritabanı / Kütüphane** listesinden hazır özellikleri seçip ekleyebilirsiniz.
+Modların **sayısal değerlerini** kontrol eder. **Veritabanı / Kütüphane** listesinden hazır özellikleri seçip ekleyebilirsiniz.
 
 #### Basit Örnek
     Değer: 75
