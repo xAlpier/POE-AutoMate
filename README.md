@@ -107,7 +107,7 @@ This software was developed for educational and hobby purposes. The Path of Exil
 
 Although this program includes delays close to human reaction speed and various safety measures, any account restrictions or ban risks that may arise from its use are entirely the responsibility of the user.
 
-The developer (xAlpier) cannot be held liable for any account loss or related issues.
+The developer **(xAlpier)** cannot be held liable for any account loss or related issues.
 
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
@@ -217,8 +217,8 @@ Soket renk sayılarına bakar.
 
 ## ⚠️ Yasal Uyarı (Disclaimer)
 
--   Bu yazılım eğitim ve hobi amaçlı geliştirilmiştir. Path of Exile Hizmet Koşulları (Terms of Service), "tek tuşla birden fazla sunucu taraflı işlem yapmayı" (macro) yasaklayabilir veya kısıtlayabilir.
+Bu yazılım eğitim ve hobi amaçlı geliştirilmiştir. Path of Exile Hizmet Koşulları (Terms of Service), "tek tuşla birden fazla sunucu taraflı işlem yapmayı" (macro) yasaklayabilir veya kısıtlayabilir.
 
--   Bu program, insan hızına yakın gecikmeler ve güvenlik önlemleri içerse de, kullanımdan doğabilecek hesap kısıtlamaları veya ban riskleri tamamen kullanıcının sorumluluğundadır.
+Bu program, insan hızına yakın gecikmeler ve güvenlik önlemleri içerse de, kullanımdan doğabilecek hesap kısıtlamaları veya ban riskleri tamamen kullanıcının sorumluluğundadır.
 
--   Geliştirici (xAlpier), oluşabilecek herhangi bir hesap kaybından sorumlu tutulamaz.
+Geliştirici **(xAlpier)**, oluşabilecek herhangi bir hesap kaybından sorumlu tutulamaz.
