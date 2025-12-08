@@ -39,7 +39,7 @@ TRANSLATIONS = {
         "control_panel": "Kontrol Paneli",
         "settings": "Ayarlar",
         "max_tries": "Deneme Sınırı:",
-        "mode": "| Mod:",
+        "mode": "Mod:",
         "attribute": "Modlar",
         "color": "Soket Renkleri",
         "start": "Başlat:",
@@ -96,7 +96,17 @@ TRANSLATIONS = {
         "log_filter_toggled": "Filtre durumu değiştirildi: {} -> {}",
         "passive_tag": "[PASİF]",
         "status_active": "Aktif",
-        "status_passive": "Pasif"
+        "status_passive": "Pasif",
+        "btn_minimal": "Minimal Mod",
+        "btn_normal": "Normal Mod",
+        "btn_settings": "⚙️ Ayarlar",
+        "win_settings_title": "Ayarlar",
+        "lbl_always_on_top": "Pencere Sürekli Üstte",
+        "lbl_sound_enabled": "Ses Efektleri",
+        "grp_hotkeys": "Kısayol Tuşları",
+        "grp_general": "Genel Ayarlar",
+        "lbl_keys_info": "Tuş atamak için butona tıklayıp yeni tuşa basın.",
+        "log_welcome": "PoE AutoMate'e Hoşgeldiniz! Başlat: {} / Durdur: {}"
     },
     "EN": {
         "status_stopped": "● STOPPED",
@@ -105,7 +115,7 @@ TRANSLATIONS = {
         "control_panel": "Control Panel",
         "settings": "Settings",
         "max_tries": "Max Tries:",
-        "mode": "| Mode:",
+        "mode": "Mode:",
         "attribute": "Modifiers",
         "color": "Socket Colors",
         "start": "Start:",
@@ -162,7 +172,17 @@ TRANSLATIONS = {
         "log_filter_toggled": "Filter status toggled: {} -> {}",
         "passive_tag": "[PASSIVE]",
         "status_active": "Active",
-        "status_passive": "Passive"
+        "status_passive": "Passive",
+        "btn_minimal": "Minimal Mode",
+        "btn_normal": "Normal Mode",
+        "btn_settings": "⚙️ Settings",
+        "win_settings_title": "Settings",
+        "lbl_always_on_top": "Always on Top",
+        "lbl_sound_enabled": "Sound Effects",
+        "grp_hotkeys": "Hotkeys",
+        "grp_general": "General Settings",
+        "lbl_keys_info": "Click button then press key to rebind.",
+        "log_welcome": "Welcome to PoE AutoMate! Start: {} / Stop: {}"
     }
 }
 
@@ -176,6 +196,9 @@ search_mode = "attribute"
 color_targets = {"R": 0, "G": 0, "B": 0}
 last_category = "" 
 current_language = "TR"
+is_minimal_mode = False 
+always_on_top = True 
+sound_enabled = True # YENI: Ses ayari degiskeni
 
 # Hotkey dinleme durumu
 listening_key = {"active": False, "type": None, "hook": None}
@@ -183,6 +206,9 @@ listening_key = {"active": False, "type": None, "hook": None}
 # Loglama zamanlayicisi (Debounce icin)
 limit_log_timer = None
 last_logged_limit = 40 
+
+# Ayarlar penceresi referansi
+settings_window_ref = None
 
 # ---------------- DATA LOADER -----------------
 def load_library_data(category):
@@ -210,14 +236,13 @@ def load_library_data(category):
 
 # ---------------- CONFIG LOAD / SAVE -----------------
 def load_config():
-    global filters, safety_limit, hotkey_start, hotkey_stop, search_mode, color_targets, last_category, last_logged_limit, current_language
+    global filters, safety_limit, hotkey_start, hotkey_stop, search_mode, color_targets, last_category, last_logged_limit, current_language, always_on_top, sound_enabled
     if os.path.exists(CONFIG_FILE):
         try:
             with open(CONFIG_FILE, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 filters[:] = data.get("filters", [])
                 
-                # Eski config dosyalari icin 'active' anahtarini varsayilan olarak True yap
                 for f_item in filters:
                     if "active" not in f_item:
                         f_item["active"] = True
@@ -229,6 +254,8 @@ def load_config():
                 color_targets = data.get("color_targets", {"R": 0, "G": 0, "B": 0})
                 last_category = data.get("last_category", "")
                 current_language = data.get("language", "TR")
+                always_on_top = data.get("always_on_top", True)
+                sound_enabled = data.get("sound_enabled", True)
                 
                 last_logged_limit = safety_limit
         except Exception as e:
@@ -245,7 +272,9 @@ def save_config():
                 "search_mode": search_mode,
                 "color_targets": color_targets,
                 "last_category": last_category,
-                "language": current_language
+                "language": current_language,
+                "always_on_top": always_on_top,
+                "sound_enabled": sound_enabled 
             }, f, indent=2, ensure_ascii=False)
     except Exception as e:
         print("Config save error:", e)
@@ -281,6 +310,8 @@ def is_poe_active():
 
 # ---------------- SOUND -----------------
 def play_sound(sound_type):
+    if not sound_enabled: return 
+    
     def _play():
         try:
             if sound_type == "success":
@@ -616,9 +647,9 @@ def stop(from_found=False):
 load_config()
 
 root = tk.Tk()
-root.title("PoE Orb Tool - Advanced")
+root.title("PoE AutoMate - Advanced")
 root.geometry("900x700")
-root.attributes("-topmost", True)
+root.attributes("-topmost", always_on_top)
 root.resizable(False, False)
 
 style = ttk.Style()
@@ -696,6 +727,165 @@ def on_color_keypress_overwrite(event):
     if event.char.isdigit():
         event.widget.delete(0, tk.END)
 
+# ---------------- SETTINGS WINDOW LOGIC -----------------
+def listen_for_key(k_type, btn_widget):
+    if listening_key["active"]: return
+    listening_key["active"] = True
+    listening_key["type"] = k_type
+    
+    original_text = btn_widget.cget("text")
+    btn_widget.config(text="...")
+    
+    def hook(e):
+        global hotkey_start, hotkey_stop
+        if not listening_key["active"]: return
+        
+        if e.event_type == 'down':
+            key_name = e.name.lower()
+            
+            # Cakisma kontrolu
+            other_key = hotkey_stop if k_type == "start" else hotkey_start
+            other_action = "Stop" if k_type == "start" else "Start"
+            
+            if key_name == other_key:
+                log(get_text("log_hotkey_error", key_name.upper(), other_action))
+                return 
+
+            # Iptal kontrolu
+            current_key = hotkey_start if k_type == "start" else hotkey_stop
+            if key_name == current_key:
+                listening_key["active"] = False
+                try: btn_widget.config(text=e.name.upper())
+                except: pass
+                keyboard.unhook(listening_key["hook"])
+                listening_key["hook"] = None
+                return
+
+            try: keyboard.remove_hotkey(hotkey_start)
+            except: pass
+            try: keyboard.remove_hotkey(hotkey_stop)
+            except: pass
+
+            if k_type == "start": hotkey_start = key_name
+            else: hotkey_stop = key_name
+            
+            try: btn_widget.config(text=key_name.upper(), state="normal")
+            except: pass # Pencere kapanmissa hata vermesin
+            
+            save_config()
+            
+            try:
+                keyboard.add_hotkey(hotkey_start, start, suppress=True)
+                keyboard.add_hotkey(hotkey_stop, stop, suppress=True)
+                log(get_text("log_welcome", hotkey_start.upper(), hotkey_stop.upper()))
+            except Exception as ex: 
+                log(get_text("log_hotkey_reg_err", ex))
+            
+            listening_key["active"] = False
+            keyboard.unhook(listening_key["hook"])
+            listening_key["hook"] = None
+
+    listening_key["hook"] = keyboard.on_press(hook, suppress=False)
+
+def open_settings_window():
+    global settings_window_ref
+    
+    if listening_key["active"]: return 
+    
+    # Eger pencere zaten aciksa ve hala mevcutsa, onu one getir ve cik
+    if settings_window_ref is not None and settings_window_ref.winfo_exists():
+        settings_window_ref.lift()
+        settings_window_ref.focus_force()
+        return
+
+    sw = tk.Toplevel(root)
+    settings_window_ref = sw # Referansi kaydet
+    
+    sw.title(get_text("win_settings_title"))
+    
+    # --- ORTALAMA MANTIGI ---
+    window_width = 350
+    window_height = 300
+    screen_width = root.winfo_x() + (root.winfo_width() // 2)
+    screen_height = root.winfo_y() + (root.winfo_height() // 2)
+    x = screen_width - (window_width // 2)
+    y = screen_height - (window_height // 2)
+    sw.geometry(f"{window_width}x{window_height}+{x}+{y}")
+    
+    sw.resizable(False, False)
+    
+    # --- MODAL & TOPMOST MANTIGI ---
+    # Transient: Bu pencere 'root'a baglidir, her zaman 'root'un ustunde durur.
+    # Ancak 'root' simge durumuna kuculurse bu da kuculur.
+    sw.transient(root) 
+    
+    # Topmost: Eger ana program topmost ise, ayarlar da topmost olmali.
+    # Aksi takdirde, ana program topmost degilse, ayarlar da olmamali (sadece programin ustunde kalmali).
+    sw.attributes("-topmost", always_on_top) 
+    
+    sw.grab_set() # Ana pencereye tiklamayi engelle (Modal)
+    sw.focus_force() # Odagi al
+    
+    sw.configure(bg="#2b2b2b")
+    
+    # --- Always on Top ---
+    def toggle_always_on_top():
+        global always_on_top
+        always_on_top = bool(var_top.get())
+        root.attributes("-topmost", always_on_top)
+        
+        # Ayarlar penceresinin de durumunu guncelle (Eger aciksa)
+        if settings_window_ref is not None and settings_window_ref.winfo_exists():
+            settings_window_ref.attributes("-topmost", always_on_top)
+            
+        save_config()
+    
+    # --- Sound Enabled ---
+    def toggle_sound():
+        global sound_enabled
+        sound_enabled = bool(var_sound.get())
+        save_config()
+
+    frm_gen = ttk.LabelFrame(sw, text=get_text("grp_general"), padding=10)
+    frm_gen.pack(fill="x", padx=10, pady=10)
+    
+    # Checkbox: Always on Top
+    var_top = tk.BooleanVar(value=always_on_top)
+    chk_top = tk.Checkbutton(frm_gen, text=get_text("lbl_always_on_top"), variable=var_top, 
+                             command=toggle_always_on_top,
+                             bg="#2b2b2b", fg="white", selectcolor="#2b2b2b", activebackground="#2b2b2b", activeforeground="white")
+    chk_top.pack(anchor="w", pady=(0, 5))
+    
+    # Checkbox: Sound (YENI)
+    var_sound = tk.BooleanVar(value=sound_enabled)
+    chk_sound = tk.Checkbutton(frm_gen, text=get_text("lbl_sound_enabled"), variable=var_sound, 
+                             command=toggle_sound,
+                             bg="#2b2b2b", fg="white", selectcolor="#2b2b2b", activebackground="#2b2b2b", activeforeground="white")
+    chk_sound.pack(anchor="w")
+    
+    # --- Hotkeys ---
+    frm_keys = ttk.LabelFrame(sw, text=get_text("grp_hotkeys"), padding=10)
+    frm_keys.pack(fill="x", padx=10, pady=5)
+    
+    lbl_info = ttk.Label(frm_keys, text=get_text("lbl_keys_info"), font=("Arial", 8))
+    lbl_info.pack(pady=(0, 10))
+    
+    # Start Row
+    row_start = ttk.Frame(frm_keys)
+    row_start.pack(fill="x", pady=2)
+    ttk.Label(row_start, text=get_text("start"), width=10).pack(side="left")
+    btn_start_set = ttk.Button(row_start, text=hotkey_start.upper(), width=10, takefocus=False)
+    btn_start_set.config(command=lambda: listen_for_key("start", btn_start_set))
+    btn_start_set.pack(side="right")
+    
+    # Stop Row
+    row_stop = ttk.Frame(frm_keys)
+    row_stop.pack(fill="x", pady=2)
+    ttk.Label(row_stop, text=get_text("stop"), width=10).pack(side="left")
+    btn_stop_set = ttk.Button(row_stop, text=hotkey_stop.upper(), width=10, takefocus=False)
+    btn_stop_set.config(command=lambda: listen_for_key("stop", btn_stop_set))
+    btn_stop_set.pack(side="right")
+
 # ---------------- CONTROL PANEL -----------------
 status_frame = ttk.LabelFrame(root, text="Control Panel", padding=10)
 status_frame.pack(fill="x", padx=10, pady=5)
@@ -707,9 +897,18 @@ status_label = tk.Label(control_row, text="● STOPPED", font=("Arial", 14, "bol
                         fg="#ff4444", bg="#1a1a1a", padx=15, pady=6, relief="sunken")
 status_label.pack(side="left", padx=(0, 20))
 
+# --- COLLAPSIBLE FRAME FOR MINIMAL MODE ---
+# Gizlenecek ogeleri bu frame icine aliyoruz
+collapsible_controls_frame = ttk.Frame(control_row)
+collapsible_controls_frame.pack(side="left", fill="x", expand=True, padx=(0, 5))
+
+# --- GRUP 1: GENEL AYARLAR (Limit & Dil) ---
+grp_settings = ttk.Frame(collapsible_controls_frame)
+grp_settings.pack(side="left")
+
 # Max Tries
-lbl_max_tries = ttk.Label(control_row, text="Max Tries:", font=("Arial", 9))
-lbl_max_tries.pack(side="left", padx=5)
+lbl_max_tries = ttk.Label(grp_settings, text="Max Tries:", font=("Arial", 9))
+lbl_max_tries.pack(side="left", padx=(0, 5))
 limit_var = tk.StringVar(value=str(safety_limit))
 
 # --- DEBOUNCED LIMIT LOGGING ---
@@ -749,7 +948,7 @@ def on_limit_change(*args):
     limit_log_timer = root.after(800, log_limit_change)
 
 limit_var.trace_add("write", on_limit_change)
-entry_limit = tk.Entry(control_row, textvariable=limit_var, width=5, 
+entry_limit = tk.Entry(grp_settings, textvariable=limit_var, width=5, 
                        font=("Consolas", 11), justify="center", bg="white", fg="black")
 def on_limit_focus_out(event):
     if limit_var.get() == "":
@@ -760,9 +959,15 @@ entry_limit.bind("<FocusIn>", select_all, add="+")
 entry_limit.config(validate="key", validatecommand=(root.register(lambda P: P.isdigit() or P == ""), '%P'))
 entry_limit.pack(side="left")
 
-# Mode Selection
-lbl_mode = ttk.Label(control_row, text="| Mode:", font=("Arial", 9, "bold"))
-lbl_mode.pack(side="left", padx=(15, 5))
+# AYIRICI 1
+ttk.Separator(collapsible_controls_frame, orient="vertical").pack(side="left", fill="y", padx=12, pady=3)
+
+# --- GRUP 2: MOD SECIMI ---
+grp_mode = ttk.Frame(collapsible_controls_frame)
+grp_mode.pack(side="left")
+
+lbl_mode = ttk.Label(grp_mode, text="Mode:", font=("Arial", 9, "bold")) 
+lbl_mode.pack(side="left", padx=(0, 5))
 mode_var = tk.StringVar(value=search_mode)
 
 def update_ui_for_mode():
@@ -787,34 +992,73 @@ def update_ui_for_mode():
         frame_filters.pack_configure(fill="x", expand=False)
         frame_log.pack_configure(fill="both", expand=True)
 
-rb_attr = ttk.Radiobutton(control_row, text="Attribute", variable=mode_var, value="attribute", 
+rb_attr = ttk.Radiobutton(grp_mode, text="Attribute", variable=mode_var, value="attribute", 
                           command=update_ui_for_mode, style="Custom.TRadiobutton")
 rb_attr.pack(side="left", padx=2)
-rb_color = ttk.Radiobutton(control_row, text="Color", variable=mode_var, value="color", 
+rb_color = ttk.Radiobutton(grp_mode, text="Color", variable=mode_var, value="color", 
                            command=update_ui_for_mode, style="Custom.TRadiobutton")
 rb_color.pack(side="left", padx=2)
 
-# Hotkeys Frame
-hotkey_frame = ttk.Frame(control_row)
-hotkey_frame.pack(side="right")
+# --- MINIMAL MODE BUTTON ---
+def toggle_minimal_mode():
+    global is_minimal_mode
+    is_minimal_mode = not is_minimal_mode
+    
+    if is_minimal_mode:
+        # Minimal Moda Gec
+        collapsible_controls_frame.pack_forget() # Modlar vb gizle
+        lang_frame.pack_forget() # Dili gizle
+        # btn_settings.pack_forget() kaldirildi! (Ayarlar butonu artik gorunur)
+        frame_filters.pack_forget() # Filtreleri gizle
+        
+        # Pencereyi kucult
+        root.geometry("450x300")
+        
+        btn_minimal.config(text=get_text("btn_normal"))
+    else:
+        # Normal Moda Don
+        # Sirayla geri yukle
+        collapsible_controls_frame.pack(side="left", fill="x", expand=True, padx=(0, 5))
+        
+        # YERLESIM DUZELTME: Buton sirasi -> Minimal [Sag], Ayarlar [Onun Solu], Dil [En sol]
+        btn_minimal.pack_forget() 
+        btn_settings.pack_forget()
+        lang_frame.pack_forget()
+        
+        # Once Minimal ekle (En sag)
+        btn_minimal.pack(side="right", padx=5)
+        # Sonra Ayarlar ekle (Minimalin solu)
+        btn_settings.pack(side="right", padx=5)
+        # Sonra Dil ekle (Ayarlarin solu)
+        lang_frame.pack(side="right", padx=5)
+        
+        frame_filters.pack(fill="both", expand=True, padx=10, pady=5, before=frame_log)
+        
+        # Pencereyi eski haline getir
+        root.geometry("900x700")
+        
+        btn_minimal.config(text=get_text("btn_minimal"))
 
-# --- LANGUAGE SELECT ---
-lbl_lang = ttk.Label(hotkey_frame, text="Lang:")
-lbl_lang.pack(side="left", padx=(5, 2))
+# Butonu ana kontrol satirina (gizlenmeyecek yere) ekliyoruz
+# takefocus=False eklendi (Border olmasin)
+btn_minimal = ttk.Button(control_row, text="Minimal Mode", command=toggle_minimal_mode, width=12, takefocus=False)
+btn_minimal.pack(side="right", padx=5)
+
+# AYARLAR BUTONU
+# takefocus=False eklendi (Border olmasin)
+btn_settings = ttk.Button(control_row, text=get_text("btn_settings"), command=open_settings_window, width=12, takefocus=False)
+btn_settings.pack(side="right", padx=5)
+
+# --- LANGUAGE SELECT (TASINDI) ---
+lang_frame = ttk.Frame(control_row)
+lang_frame.pack(side="right", padx=5)
+
+lbl_lang = ttk.Label(lang_frame, text="Lang:")
+lbl_lang.pack(side="left", padx=(0, 2))
 
 lang_var = tk.StringVar(value=current_language)
-lang_combo = ttk.Combobox(hotkey_frame, textvariable=lang_var, state="readonly", values=["TR", "EN"], width=3)
-lang_combo.pack(side="left", padx=(0, 10))
-
-start_label = ttk.Label(hotkey_frame, text="Start:")
-start_label.pack(side="left", padx=(5, 2))
-start_key_btn = ttk.Button(hotkey_frame, text=hotkey_start.upper(), width=6, takefocus=False)
-start_key_btn.pack(side="left", padx=2)
-
-stop_label = ttk.Label(hotkey_frame, text="Stop:")
-stop_label.pack(side="left", padx=(10, 2))
-stop_key_btn = ttk.Button(hotkey_frame, text=hotkey_stop.upper(), width=6, takefocus=False)
-stop_key_btn.pack(side="left", padx=2)
+lang_combo = ttk.Combobox(lang_frame, textvariable=lang_var, state="readonly", values=["TR", "EN"], width=3)
+lang_combo.pack(side="left")
 
 # ---------------- MAIN CONTENT AREA -----------------
 frame_filters = ttk.LabelFrame(root, text="Attribute Filters & Library", padding=5)
@@ -836,8 +1080,6 @@ lbl_type.pack(side="left")
 category_var = tk.StringVar()
 category_combo = ttk.Combobox(lib_top_frame, textvariable=category_var, state="readonly", values=list(ITEM_DATABASE_MAP.keys()))
 category_combo.pack(side="left", fill="x", expand=True, padx=5)
-
-# Init logic moved to bottom
 
 # Library List & Logic
 lib_list_frame = ttk.Frame(library_frame)
@@ -1014,9 +1256,11 @@ filters_list.bind("<Double-Button-1>", toggle_filter_status)
 
 btn_frame = ttk.Frame(active_filter_frame)
 btn_frame.pack(fill="x")
-btn_add = ttk.Button(btn_frame, text="Add Filter", command=add_filter)
+# takefocus=False eklendi
+btn_add = ttk.Button(btn_frame, text="Add Filter", command=add_filter, takefocus=False)
 btn_add.pack(side="left", fill="x", expand=True, padx=(0,2))
-btn_del = ttk.Button(btn_frame, text="Delete Selected", command=del_filter)
+# takefocus=False eklendi
+btn_del = ttk.Button(btn_frame, text="Delete Selected", command=del_filter, takefocus=False)
 btn_del.pack(side="left", fill="x", expand=True, padx=(2,0))
 
 entry_value.bind("<Return>", add_filter)
@@ -1089,68 +1333,13 @@ def on_log_clear(event):
 log_box.bind("<Button-3>", on_log_clear)
 
 # ---------------- INITIALIZATION -----------------
-def listen_for_key(k_type):
-    if listening_key["active"]: return
-    listening_key["active"] = True
-    listening_key["type"] = k_type
-    target_btn = start_key_btn if k_type == "start" else stop_key_btn
-    target_btn.config(text="...")
-    
-    def hook(e):
-        global hotkey_start, hotkey_stop
-        if not listening_key["active"]: return
-        
-        if e.event_type == 'down':
-            key_name = e.name.lower()
-            
-            # 1. KONTROL: Diger tus ile cakisma var mi?
-            other_key = hotkey_stop if k_type == "start" else hotkey_start
-            other_action = "Stop" if k_type == "start" else "Start"
-            
-            if key_name == other_key:
-                log(get_text("log_hotkey_error", key_name.upper(), other_action))
-                return 
 
-            # 2. IPTAL: Kendisi ile ayni tusa basilirsa iptal et
-            current_key = hotkey_start if k_type == "start" else hotkey_stop
-            if key_name == current_key:
-                listening_key["active"] = False
-                target_btn.config(text=e.name.upper())
-                keyboard.unhook(listening_key["hook"])
-                listening_key["hook"] = None
-                return
-
-            try: keyboard.remove_hotkey(hotkey_start)
-            except: pass
-            try: keyboard.remove_hotkey(hotkey_stop)
-            except: pass
-
-            if k_type == "start": hotkey_start = key_name
-            else: hotkey_stop = key_name
-            
-            target_btn.config(text=key_name.upper(), state="normal")
-            save_config()
-            
-            try:
-                keyboard.add_hotkey(hotkey_start, start, suppress=True)
-                keyboard.add_hotkey(hotkey_stop, stop, suppress=True)
-                log(get_text("log_hotkeys_reg", hotkey_start.upper(), hotkey_stop.upper()))
-            except Exception as ex: 
-                log(get_text("log_hotkey_reg_err", ex))
-            
-            listening_key["active"] = False
-            keyboard.unhook(listening_key["hook"])
-            listening_key["hook"] = None
-
-    listening_key["hook"] = keyboard.on_press(hook, suppress=False)
-
-start_key_btn.config(command=lambda: listen_for_key("start"))
-stop_key_btn.config(command=lambda: listen_for_key("stop"))
-
+# Register hotkeys on startup (without GUI buttons first)
 try:
     keyboard.add_hotkey(hotkey_start, start, suppress=True)
     keyboard.add_hotkey(hotkey_stop, stop, suppress=True)
-    log(get_text("log_hotkeys_reg", hotkey_start.upper(), hotkey_stop.upper()))
+    # Eski teknik mesaj yerine karsilama mesaji:
+    log(get_text("log_welcome", hotkey_start.upper(), hotkey_stop.upper()))
 except Exception as e:
     log(get_text("log_hotkey_reg_err", e))
 
@@ -1162,8 +1351,8 @@ def update_ui_language():
     rb_attr.config(text=get_text("attribute"))
     rb_color.config(text=get_text("color"))
     
-    start_label.config(text=get_text("start"))
-    stop_label.config(text=get_text("stop"))
+    # Settings Button
+    btn_settings.config(text=get_text("btn_settings"))
     
     if search_mode == "attribute":
         frame_filters.config(text=get_text("attr_filters_library"))
@@ -1187,6 +1376,12 @@ def update_ui_language():
     lbl_g.config(text=get_text("green"))
     lbl_b.config(text=get_text("blue"))
     lbl_lang.config(text=get_text("lang"))
+    
+    # Minimal mod butonu dil guncellemesi
+    if is_minimal_mode:
+        btn_minimal.config(text=get_text("btn_normal"))
+    else:
+        btn_minimal.config(text=get_text("btn_minimal"))
     
     if running:
         status_label.config(text=get_text("status_running"))

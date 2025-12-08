@@ -7,7 +7,7 @@ POE AutoMate is an automated item rolling & checking tool for **Path of Exile**.
 It reads item data directly from the game, applies your filters (Modifiers or Socket Colors), and stops when a match is detected.
 
 <p align="center">
-  <img src="https://i.imgur.com/BdFnZkU.png" alt="POE AutoMate Interface EN">
+  <img src="https://i.imgur.com/N36HANx.png" alt="POE AutoMate Interface EN">
 </p>
 
 ------------------------------------------------------------------------
@@ -57,11 +57,16 @@ In your command prompt (cmd/terminal), run:
     * **Socket Colors:** Search for specific socket colors (e.g., 4 Red, 2 Green).
 2.  Configure your filters (see examples below).
     * *Tip: Set "Max Tries" to **0** for unlimited attempts.*
-3.  Hover your mouse over an item in PoE.
-4.  Press **Start Hotkey** (default `F2`).
-5.  Program loops (clicks -> reads -> checks).
-6.  When a match is found, it stops automatically with a sound alert.
-7.  Press **Stop Hotkey** anytime (`F3`).
+3.  **Settings:** Click the `⚙️ Settings` button to configure:
+    * **Always on Top:** Keep the window visible over the game.
+    * **Sound Effects:** Enable/Disable alert sounds.
+    * **Hotkeys:** Change Start/Stop keys.
+4.  **Minimal Mode:** Click "Minimal Mode" to shrink the UI for a compact view while farming.
+5.  Hover your mouse over an item in PoE.
+6.  Press **Start Hotkey** (default `F2`).
+7.  Program loops (clicks -> reads -> checks).
+8.  When a match is found, it stops automatically with a sound alert.
+9.  Press **Stop Hotkey** anytime (`F3`).
 
 ### 🔹 Mode 1: Modifiers & Library
 Matches the **numerical values** of modifiers. You can select pre-defined mods from the **Database/Library** list or add them manually.
@@ -92,12 +97,13 @@ Matches the count of socket colors.
 ## 🔧 Features
 
 -   **Dual Modes:** Switch between Modifiers scanning and Socket Color scanning.
+-   **Minimal Mode:** Shrink the interface to save screen space.
+-   **Always on Top:** Option to keep the tool above the game window.
 -   **Database Library:** Built-in library for common modifiers (Life, Resistances, etc.).
 -   **Multi-Language:** Interface supports both English (EN) and Turkish (TR).
--   **Audio Alerts:** Sound notifications when a match is found or an error occurs.
+-   **Audio Alerts:** Sound notifications when a match is found or an error occurs (Can be toggled).
 -   **Smart Filters:** Regex-based value checking or socket counting.
 -   **Safety First:** Stuck detection, empty read retry, and auto-stop on match.
--   **Configurable:** Custom hotkeys, safety limits (0=Unlimited), and auto-save settings.
 
 ------------------------------------------------------------------------
 
@@ -134,7 +140,7 @@ POE AutoMate, **Path of Exile** için otomatik item kontrol ve orb basma aracıd
 Item verisini oyun içinden okur, belirlediğiniz filtrelere (Modlar veya Soket Renkleri) göre kontrol eder ve eşleşme olduğunda otomatik durur.
 
 <p align="center">
-  <img src="https://i.imgur.com/MbxYrNg.png" alt="POE AutoMate Arayüz TR">
+  <img src="https://i.imgur.com/4h0pg4H.png" alt="POE AutoMate Arayüz TR">
 </p>
 
 ------------------------------------------------------------------------
@@ -184,11 +190,16 @@ Komut satırınızda (cmd/terminal) programı çalıştırın:
     * **Soket Renkleri:** Soket renklerini aramak için (örn. 4 Kırmızı, 2 Yeşil).
 2.  Filtrelerinizi ayarlayın (aşağıdaki örneklere bakın).
     * *İpucu: "Deneme Sınırı"nı (Max Tries) **0** yaparsanız sınırsız döner.*
-3.  Oyunda farenizi item üzerine getirin (Shift tuşuna basmanıza gerek yok, program basar).
-4.  **Başlat** tuşuna basın (`F2`).
-5.  Program otomatik tıklar, okur ve kontrol eder.
-6.  Eşleşme bulunduğunda sesli uyarı verir ve durur.
-7.  İsterseniz **Durdur** tuşu (`F3`) ile manuel durdurabilirsiniz.
+3.  **Ayarlar:** `⚙️ Ayarlar` butonuna tıklayarak şunları yapılandırabilirsiniz:
+    * **Pencere Sürekli Üstte:** Programı oyun penceresinin üzerinde tutar.
+    * **Ses Efektleri:** Uyarı seslerini açıp kapatabilirsiniz.
+    * **Kısayollar:** Başlat/Durdur tuşlarını değiştirebilirsiniz.
+4.  **Minimal Mod:** Ekran yer kaplamaması için "Minimal Mode" butonuna basarak arayüzü küçültebilirsiniz.
+5.  Oyunda farenizi item üzerine getirin.
+6.  **Başlat** tuşuna basın (`F2`).
+7.  Program otomatik tıklar, okur ve kontrol eder.
+8.  Eşleşme bulunduğunda sesli uyarı verir ve durur.
+9.  İsterseniz **Durdur** tuşu (`F3`) ile manuel durdurabilirsiniz.
 
 ### 🔹 Mod 1: Mod Filtreleri & Kütüphane
 Modların **sayısal değerlerini** kontrol eder. **Veritabanı / Kütüphane** listesinden hazır özellikleri seçip ekleyebilirsiniz.
@@ -219,12 +230,13 @@ Soket renk sayılarına bakar.
 ## 🔧 Özellikler
 
 -   **Çift Mod:** Mod tarama ve Renk/Soket tarama arasında geçiş.
+-   **Minimal Mod:** Ekran alanından tasarruf etmek için küçültülebilir arayüz.
+-   **Sürekli Üstte:** Pencereyi oyunun üzerinde tutma seçeneği (Always on Top).
 -   **Veritabanı Kütüphanesi:** Sık kullanılan özellikleri listeden seçebilme imkanı.
 -   **Çoklu Dil:** İngilizce (EN) ve Türkçe (TR) dil desteği.
--   **Sesli Uyarı:** İşlem bittiğinde veya hata olduğunda sesli bildirim.
+-   **Sesli Uyarı:** İşlem bittiğinde sesli bildirim (Ayarlardan kapatılabilir).
 -   **Akıllı Filtreler:** Regex tabanlı değer kontrolü veya soket sayma.
 -   **Güvenlik:** Takılma algılama, boş okumalarda tekrar deneme.
--   **Ayarlanabilir:** Tuş atamaları, güvenlik limitleri (0=Sınırsız) ve otomatik kayıt.
 
 ------------------------------------------------------------------------
 
