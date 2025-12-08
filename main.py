@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
+import tkinter.font as tkfont
 import json
 import threading
 import time
@@ -48,7 +49,7 @@ TRANSLATIONS = {
         "database_library": "Veritabanı / Kütüphane",
         "type": "Tip:",
         "search_lib": "Kütüphanede Ara:",
-        "active_filters": "Aktif Filtreler",
+        "active_filters": "Aktif Filtreler (Çift Tık: Pasif/Aktif)", 
         "value_min": "Değer (Min)",
         "modifier_name": "Mod İsmi",
         "add_filter": "Filtre Ekle",
@@ -91,7 +92,11 @@ TRANSLATIONS = {
         "log_substring_match": "Alt metin eşleşmesi '{}'",
         "log_thresh_match": "Eşik eşleşmesi: {} >= {} -> '{}' için",
         "log_hotkeys_reg": "Kısayollar kaydedildi: {} (Başlat) / {} (Durdur)",
-        "log_hotkey_reg_err": "Kısayol kayıt hatası: {}"
+        "log_hotkey_reg_err": "Kısayol kayıt hatası: {}",
+        "log_filter_toggled": "Filtre durumu değiştirildi: {} -> {}",
+        "passive_tag": "[PASİF]",
+        "status_active": "Aktif",
+        "status_passive": "Pasif"
     },
     "EN": {
         "status_stopped": "● STOPPED",
@@ -110,7 +115,7 @@ TRANSLATIONS = {
         "database_library": "Database / Library",
         "type": "Type:",
         "search_lib": "Search in Library:",
-        "active_filters": "Active Filters",
+        "active_filters": "Active Filters (Dbl Click: Toggle)", 
         "value_min": "Value (Min)",
         "modifier_name": "Modifier Name",
         "add_filter": "Add Filter",
@@ -153,7 +158,11 @@ TRANSLATIONS = {
         "log_substring_match": "Substring match '{}'",
         "log_thresh_match": "Threshold match: {} >= {} for '{}'",
         "log_hotkeys_reg": "Hotkeys registered: {} (Start) / {} (Stop)",
-        "log_hotkey_reg_err": "Hotkey registration error: {}"
+        "log_hotkey_reg_err": "Hotkey registration error: {}",
+        "log_filter_toggled": "Filter status toggled: {} -> {}",
+        "passive_tag": "[PASSIVE]",
+        "status_active": "Active",
+        "status_passive": "Passive"
     }
 }
 
@@ -207,6 +216,12 @@ def load_config():
             with open(CONFIG_FILE, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 filters[:] = data.get("filters", [])
+                
+                # Eski config dosyalari icin 'active' anahtarini varsayilan olarak True yap
+                for f_item in filters:
+                    if "active" not in f_item:
+                        f_item["active"] = True
+                        
                 safety_limit = data.get("safety_limit", 40)
                 hotkey_start = data.get("hotkey_start", "f2").lower()
                 hotkey_stop = data.get("hotkey_stop", "f3").lower()
@@ -432,6 +447,10 @@ def analyze_item(item_text):
             search_text = "\n".join(lines[start_index:])
             if search_text.strip():
                 for f in filters:
+                    # --- STATUS CHECK EKLENDI ---
+                    if not f.get("active", True): 
+                        continue # Eger aktif degilse bu filtreyi atla
+                    
                     ok, result = filter_matches_item(f, search_text)
                     if ok:
                         if isinstance(result, tuple):
@@ -868,7 +887,7 @@ def on_search_change(*args):
 search_var.trace_add("write", on_search_change)
 
 # RIGHT COLUMN: ACTIVE FILTERS
-active_filter_frame = ttk.LabelFrame(frame_attr_contents, text="Active Filters", padding=5)
+active_filter_frame = ttk.LabelFrame(frame_attr_contents, text="Active Filters (Dbl Click: Toggle)", padding=5)
 active_filter_frame.pack(side="right", fill="both", expand=True, padx=(5, 0))
 
 # Filter List
@@ -882,8 +901,24 @@ af_scrollbar.config(command=filters_list.yview)
 filters_list.pack(side="left", fill="both", expand=True)
 af_scrollbar.pack(side="right", fill="y")
 
-for f in filters:
-    filters_list.insert(tk.END, f"{f.get('value','')} → {f.get('name','')}")
+# --- REFRESH FILTERS UI (Helper) ---
+def refresh_filters_ui():
+    filters_list.delete(0, tk.END)
+    for i, f in enumerate(filters):
+        display_text = f"{f.get('value','')} → {f.get('name','')}"
+        
+        is_active = f.get("active", True)
+        if is_active:
+            filters_list.insert(tk.END, display_text)
+            filters_list.itemconfigure(i, fg="#00ff88") # Aktif: Yesil
+        else:
+            # Listbox satir bazli font desteklemedigi icin text degisikligi ve renk ile gosteriyoruz
+            p_tag = get_text("passive_tag")
+            filters_list.insert(tk.END, f"{p_tag} {display_text}")
+            filters_list.itemconfigure(i, fg="#777777") # Pasif: Gri
+
+# Initial load
+refresh_filters_ui()
 
 # Edit Controls
 edit_frame = ttk.Frame(active_filter_frame)
@@ -921,10 +956,14 @@ def add_filter(event=None):
     name = name_var.get().strip()
     value = value_var.get().strip()
     if not name or not value: return
-    f = {"name": name, "value": value}
+    
+    # Yeni filtre varsayilan olarak active=True
+    f = {"name": name, "value": value, "active": True}
     filters.append(f)
-    filters_list.insert(tk.END, f"{value} → {name}")
     save_config()
+    
+    refresh_filters_ui() # Listeyi yeniden ciz
+    
     name_var.set("") 
     value_var.set("")
     entry_value.focus()
@@ -934,8 +973,8 @@ def del_filter():
     if not sel: return
     idx = sel[0]
     filters.pop(idx)
-    filters_list.delete(idx)
     save_config()
+    refresh_filters_ui() # Listeyi yeniden ciz
 
 # Right click to edit
 def on_active_filter_right_click(event):
@@ -948,11 +987,30 @@ def on_active_filter_right_click(event):
     name_var.set(f.get("name", ""))
     value_var.set(f.get("value", ""))
     filters.pop(index)
-    filters_list.delete(index)
     save_config()
+    refresh_filters_ui()
     entry_value.focus()
 
 filters_list.bind("<Button-3>", on_active_filter_right_click)
+
+# --- DOUBLE CLICK TO TOGGLE STATUS ---
+def toggle_filter_status(event):
+    sel = filters_list.curselection()
+    if not sel: return
+    idx = sel[0]
+    
+    # Mevcut durumu tersine cevir
+    current_status = filters[idx].get("active", True)
+    new_status = not current_status
+    filters[idx]["active"] = new_status
+    
+    save_config()
+    refresh_filters_ui()
+    
+    status_msg = get_text("status_active") if new_status else get_text("status_passive")
+    log(get_text("log_filter_toggled", filters[idx].get("name"), status_msg))
+
+filters_list.bind("<Double-Button-1>", toggle_filter_status)
 
 btn_frame = ttk.Frame(active_filter_frame)
 btn_frame.pack(fill="x")
@@ -1138,6 +1196,9 @@ def update_ui_language():
              status_label.config(text=get_text("status_found"))
         else:
              status_label.config(text=get_text("status_stopped"))
+    
+    # Dil degisince listedeki [PASİF] yazilarinin guncellenmesi icin
+    refresh_filters_ui()
 
 def on_language_change(event):
     global current_language
@@ -1154,6 +1215,7 @@ lang_combo.bind("<<ComboboxSelected>>", on_language_change)
 # Initial Load
 update_ui_for_mode()
 update_ui_language() 
+refresh_filters_ui() # Ensure visuals are correct
 
 if list(ITEM_DATABASE_MAP.keys()):
     if last_category and last_category in ITEM_DATABASE_MAP:
