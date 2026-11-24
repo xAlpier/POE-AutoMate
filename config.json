@@ -1,0 +1,37 @@
+{
+  "filters": [
+    {
+      "name": "to Level of all Spell Skill Gems",
+      "value": "1",
+      "active": false
+    },
+    {
+      "name": "to Level of all Fire Spell Skill Gems",
+      "value": "1",
+      "active": true
+    },
+    {
+      "name": "+#% to Fire Damage over Time Multiplier",
+      "value": "37",
+      "active": false
+    },
+    {
+      "name": "to Damage over Time Multiplier",
+      "value": "20",
+      "active": true
+    }
+  ],
+  "safety_limit": 0,
+  "hotkey_start": "f2",
+  "hotkey_stop": "f3",
+  "search_mode": "color",
+  "color_targets": {
+    "R": 2,
+    "G": 1,
+    "B": 3
+  },
+  "last_category": "Flask",
+  "language": "TR",
+  "always_on_top": true,
+  "sound_enabled": true
+}
