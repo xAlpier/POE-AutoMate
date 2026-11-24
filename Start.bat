@@ -1,7 +1,19 @@
 @echo off
-:: "pythonw" komutu konsol penceresi olmadan Python'ı çalıştırır.
-:: "start" komutu ise işlemi bat dosyasından ayırır.
-start "" pythonw main.py
+setlocal
+cd /d "%~dp0"
 
-:: Bat dosyası görevini tamamlayıp hemen kapanır.
-exit
+where pythonw >nul 2>&1
+if %errorlevel%==0 (
+    start "" pythonw main.py %*
+    exit /b 0
+)
+
+where python >nul 2>&1
+if %errorlevel%==0 (
+    start "" python main.py %*
+    exit /b 0
+)
+
+echo [HATA] Python bulunamadi! Lutfen Python 3.9+ kurup PATH'e ekleyin.
+pause
+exit /b 1

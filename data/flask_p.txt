@@ -29,8 +29,6 @@
 50% of Recovery applied Instantly
 50% reduced Amount Recovered
 60% increased Mana Recovered
-66 % increased Amount Recovered
-66 % reduced Amount Recovered
 66% increased Amount Recovered
 66% reduced Amount Recovered
 Effect does not Queue

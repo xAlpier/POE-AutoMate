@@ -13,7 +13,6 @@
 #% more Monster Life
 #% more Rare Monsters
 #% reduced Effect of Curses on Monsters
-#% increased Monster Cast Speed
 +#% Monster Chaos Resistance
 +#% Monster Elemental Resistance
 +#% Monster Physical Damage Reduction
@@ -56,7 +55,6 @@ Debuffs on Monsters expire 100% faster
 Impales are removed to Reflect their Physical Damage multiplied
 Magic Monster Packs each have a Bloodline Mod
 Map Boss is accompanied by a Synthesis Boss
-Monster Damage Penetrates 15 % Elemental Resistances
 Monster Damage Penetrates 15% Elemental Resistances
 Monsters Blind on Hit
 Monsters Hinder on Hit with Spells

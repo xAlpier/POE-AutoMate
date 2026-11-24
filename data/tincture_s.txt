@@ -12,5 +12,3 @@ Gain # Mana per Enemy Hit with Melee Weapons
 Gain # Mana per Enemy Killed with Melee Weapons
 Melee Weapon Damage Penetrates #% Elemental Resistances
 Melee Weapon Hits have #% chance to ignore Enemy Physical Damage Reduction
-Melee Weapon Hits have #% chance to ignore Enemy Physical Damage Reduction
-#% increased Duration of Elemental Ailments from Melee Weapon Attacks

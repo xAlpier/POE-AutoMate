@@ -1,0 +1,16 @@
+{
+  "name": "PoE AutoMate",
+  "short_name": "PoE AutoMate",
+  "description": "Path of Exile item rolling, filter manager, and live mobile companion.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#11141a",
+  "theme_color": "#181d26",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

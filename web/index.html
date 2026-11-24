@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#131822">
+  <title>PoE AutoMate — Web &amp; Mobil Kontrol Paneli</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Top Sticky Header -->
+    <header class="topbar">
+      <div class="topbar-brand">
+        <img src="/favicon.svg" alt="" class="brand-icon" width="28" height="28">
+        <div>
+          <div class="brand-title">PoE AutoMate <span id="appVersion" class="badge-ver">v2.0</span></div>
+          <div class="conn-line">
+            <span id="connDot" class="dot dot-warn"></span>
+            <span id="connText">Bağlanıyor...</span>
+            <span class="sep">•</span>
+            <span id="poeBadge" class="poe-pill">PoE</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="topbar-status">
+        <div id="statusBadge" class="status-pill status-stopped">● DURDU</div>
+        <div class="stats-mini">
+          <span id="statAttempts">0 / 40</span>
+          <span id="statSpeed" class="muted">0.0/sn</span>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <button id="btnStart" class="btn btn-success" type="button">▶ Başlat</button>
+        <button id="btnStop" class="btn btn-danger" type="button">■ Durdur</button>
+        <button id="btnTheme" class="btn btn-ghost btn-icon" type="button" title="Tema Değiştir" aria-label="Tema">🌙</button>
+        <select id="langSelect" class="select-compact" aria-label="Dil">
+          <option value="TR">TR</option>
+          <option value="EN">EN</option>
+        </select>
+      </div>
+    </header>
+
+    <!-- Quick Bar: Mode + Max Tries -->
+    <section class="quickbar">
+      <div class="segmented" role="tablist" aria-label="Arama Modu">
+        <button id="modeAttrBtn" class="seg-btn active" type="button" data-mode="attribute">Modlar</button>
+        <button id="modeColorBtn" class="seg-btn" type="button" data-mode="color">Soket Renkleri</button>
+      </div>
+
+      <div class="quick-tries">
+        <label for="maxTriesInput" id="lblMaxTries">Deneme Sınırı:</label>
+        <input id="maxTriesInput" type="number" min="0" max="100000" step="1" inputmode="numeric" value="40">
+      </div>
+    </section>
+
+    <!-- Desktop Navigation Tabs -->
+    <nav class="desktop-tabs" aria-label="Bölümler">
+      <button class="tab-btn active" data-tab="workspace" type="button" id="dtabWorkspace">🎛️ Filtreler &amp; Kütüphane</button>
+      <button class="tab-btn" data-tab="logs" type="button" id="dtabLogs">📜 <span id="dtabLogsLabel">Sistem Günlüğü</span> <span id="logCountBadge" class="count-chip">0</span></button>
+      <button class="tab-btn" data-tab="tester" type="button" id="dtabTester">🧪 Eşya Test Aracı</button>
+      <button class="tab-btn" data-tab="settings" type="button" id="dtabSettings">⚙️ Ayarlar</button>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- PANEL: FILTERS & COLOR MODE -->
+      <section id="panelFilters" class="panel active-mobile-panel" data-panel="filters">
+        <!-- Attribute Filters View -->
+        <div id="attrModeBox" class="card">
+          <div class="card-header">
+            <h2 id="hdrActiveFilters">Aktif Filtreler</h2>
+            <div class="inline-controls">
+              <label class="ctrl-mini">
+                <span id="lblLogic">Eşleşme:</span>
+                <select id="logicSelect">
+                  <option value="OR">VEYA (Herhangi)</option>
+                  <option value="AND">VE (Hepsi)</option>
+                </select>
+              </label>
+              <label class="ctrl-mini">
+                <span id="lblScope">Kapsam:</span>
+                <select id="scopeSelect">
+                  <option value="explicit">Explicit</option>
+                  <option value="implicit">Implicit / Enchant</option>
+                  <option value="all">Tümü</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div id="filtersList" class="filter-list" aria-live="polite"></div>
+
+          <form id="addFilterForm" class="add-filter-form" autocomplete="off">
+            <div class="field-group field-val">
+              <label for="filterValueInput" id="lblFilterValue">Değer (Min / Opsiyonel)</label>
+              <input id="filterValueInput" type="text" inputmode="decimal" placeholder="örn: 75 veya 2, 15">
+            </div>
+            <div class="field-group field-name">
+              <label for="filterNameInput" id="lblFilterName">Mod İsmi</label>
+              <input id="filterNameInput" type="text" placeholder="+#% to Fire Resistance" required>
+            </div>
+            <div class="form-actions">
+              <button id="btnAddFilter" type="submit" class="btn btn-primary">+ Filtre Ekle</button>
+              <button id="btnClearFilters" type="button" class="btn btn-ghost">Tümünü Sil</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Socket Colors View -->
+        <div id="colorModeBox" class="card hidden">
+          <div class="card-header">
+            <h2 id="hdrColorFilters">Soket Renk Filtreleri</h2>
+            <span id="socketTotalBadge" class="count-chip">Toplam: 0</span>
+          </div>
+
+          <div class="socket-grid">
+            <div class="socket-card socket-r">
+              <label for="colorR" id="lblColorR">Kırmızı (R)</label>
+              <div class="stepper">
+                <button type="button" class="step-btn" data-color="R" data-delta="-1">−</button>
+                <input id="colorR" type="number" min="0" max="6" value="0" inputmode="numeric">
+                <button type="button" class="step-btn" data-color="R" data-delta="1">+</button>
+              </div>
+            </div>
+            <div class="socket-card socket-g">
+              <label for="colorG" id="lblColorG">Yeşil (G)</label>
+              <div class="stepper">
+                <button type="button" class="step-btn" data-color="G" data-delta="-1">−</button>
+                <input id="colorG" type="number" min="0" max="6" value="0" inputmode="numeric">
+                <button type="button" class="step-btn" data-color="G" data-delta="1">+</button>
+              </div>
+            </div>
+            <div class="socket-card socket-b">
+              <label for="colorB" id="lblColorB">Mavi (B)</label>
+              <div class="stepper">
+                <button type="button" class="step-btn" data-color="B" data-delta="-1">−</button>
+                <input id="colorB" type="number" min="0" max="6" value="0" inputmode="numeric">
+                <button type="button" class="step-btn" data-color="B" data-delta="1">+</button>
+              </div>
+            </div>
+            <div class="socket-card socket-w">
+              <label for="colorW" id="lblColorW">Beyaz (W)</label>
+              <div class="stepper">
+                <button type="button" class="step-btn" data-color="W" data-delta="-1">−</button>
+                <input id="colorW" type="number" min="0" max="6" value="0" inputmode="numeric">
+                <button type="button" class="step-btn" data-color="W" data-delta="1">+</button>
+              </div>
+            </div>
+          </div>
+
+          <label class="toggle-row">
+            <input id="whiteWildcardChk" type="checkbox" checked>
+            <span id="lblWhiteWildcard">Beyaz soketleri joker (herhangi bir renk) say</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- PANEL: LIBRARY -->
+      <section id="panelLibrary" class="panel" data-panel="library">
+        <div class="card">
+          <div class="card-header">
+            <h2 id="hdrLibrary">Veritabanı / Kütüphane</h2>
+            <span id="libCountBadge" class="count-chip">0 sonuç</span>
+          </div>
+
+          <div class="lib-controls">
+            <select id="categorySelect" aria-label="Kategori"></select>
+            <div class="search-wrap">
+              <input id="libSearchInput" type="search" placeholder="Mod ara (örn: fire res, life, crit)...">
+            </div>
+          </div>
+
+          <div id="libraryList" class="library-list"></div>
+        </div>
+      </section>
+
+      <!-- PANEL: SYSTEM LOG -->
+      <section id="panelLogs" class="panel hidden-desktop" data-panel="logs">
+        <div class="card card-full">
+          <div class="card-header">
+            <h2 id="hdrLogs">Sistem Günlüğü</h2>
+            <div class="inline-controls">
+              <label class="toggle-mini">
+                <input id="autoScrollChk" type="checkbox" checked>
+                <span>Oto-Kaydır</span>
+              </label>
+              <button id="btnClearLogs" class="btn btn-ghost btn-sm" type="button">Temizle</button>
+            </div>
+          </div>
+          <div id="logContainer" class="log-box" role="log" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- PANEL: LIVE ITEM TESTER -->
+      <section id="panelTester" class="panel hidden-desktop" data-panel="tester">
+        <div class="card card-full">
+          <div class="card-header">
+            <h2 id="hdrTester">Eşya Filtre Test Aracı (Canlı Simülatör)</h2>
+            <button id="btnSampleItem" class="btn btn-ghost btn-sm" type="button">Örnek Eşya Yükle</button>
+          </div>
+          <p id="descTester" class="helper-text">Oyundan Ctrl+C ile kopyaladığınız herhangi bir eşya metnini yapıştırıp mevcut filtrelerinizi güvenle test edin.</p>
+          <textarea id="testerInput" class="tester-textarea" rows="10" placeholder="Item Class: Utility Flasks&#10;Rarity: Magic&#10;..."></textarea>
+          <div class="tester-actions">
+            <button id="btnRunTest" class="btn btn-primary" type="button">🧪 Eşyayı Test Et</button>
+            <button id="btnClearTest" class="btn btn-ghost" type="button">Temizle</button>
+          </div>
+          <div id="testerResult" class="tester-result hidden"></div>
+        </div>
+      </section>
+
+      <!-- PANEL: SETTINGS -->
+      <section id="panelSettings" class="panel hidden-desktop" data-panel="settings">
+        <div class="card card-full">
+          <div class="card-header">
+            <h2 id="hdrSettings">Ayarlar</h2>
+          </div>
+
+          <div class="settings-grid">
+            <div class="setting-block">
+              <h3 id="grpGeneral">Genel Ayarlar</h3>
+              <label class="toggle-row">
+                <input id="setTopmost" type="checkbox">
+                <span id="lblSetTopmost">Pencere Sürekli Üstte</span>
+              </label>
+              <label class="toggle-row">
+                <input id="setSound" type="checkbox">
+                <span id="lblSetSound">Ses Efektleri</span>
+              </label>
+              <div class="setting-inline">
+                <label for="setTheme" id="lblSetTheme">Tema:</label>
+                <select id="setTheme">
+                  <option value="dark">Koyu</option>
+                  <option value="light">Açık</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="setting-block">
+              <h3 id="grpTiming">Performans ve Zamanlama</h3>
+              <div class="setting-inline">
+                <label for="setClickDelay" id="lblSetClickDelay">Tıklama Gecikmesi (sn):</label>
+                <input id="setClickDelay" type="number" min="0.05" max="2.0" step="0.01" inputmode="decimal">
+              </div>
+              <div class="setting-inline">
+                <label for="setClipboardDelay" id="lblSetClipDelay">Pano Okuma Gecikmesi (sn):</label>
+                <input id="setClipboardDelay" type="number" min="0.03" max="0.5" step="0.01" inputmode="decimal">
+              </div>
+            </div>
+
+            <div class="setting-block">
+              <h3 id="grpWebInfo">Web &amp; Mobil Bağlantı</h3>
+              <div class="url-row">
+                <span id="lblLocalUrl">Yerel Adres:</span>
+                <code id="txtLocalUrl">-</code>
+              </div>
+              <div class="url-row">
+                <span id="lblMobileUrl">Mobil Adres:</span>
+                <code id="txtMobileUrl">-</code>
+              </div>
+              <div class="url-row">
+                <span>Kısayollar:</span>
+                <code id="txtHotkeys">F2 / F3</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-nav" aria-label="Mobil Menü">
+      <button class="mnav-btn active" data-mtab="filters" type="button">
+        <span class="mnav-ico">🎯</span>
+        <span id="mnavFilters">Filtreler</span>
+      </button>
+      <button class="mnav-btn" data-mtab="library" type="button">
+        <span class="mnav-ico">📚</span>
+        <span id="mnavLibrary">Kütüphane</span>
+      </button>
+      <button class="mnav-btn" data-mtab="logs" type="button">
+        <span class="mnav-ico">📜</span>
+        <span id="mnavLogs">Günlük</span>
+      </button>
+      <button class="mnav-btn" data-mtab="tester" type="button">
+        <span class="mnav-ico">🧪</span>
+        <span id="mnavTester">Test Et</span>
+      </button>
+      <button class="mnav-btn" data-mtab="settings" type="button">
+        <span class="mnav-ico">⚙️</span>
+        <span id="mnavSettings">Ayarlar</span>
+      </button>
+    </nav>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js"></script>
+</body>
+</html>

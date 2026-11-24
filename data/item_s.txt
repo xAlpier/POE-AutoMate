@@ -299,7 +299,6 @@
 +#% to all Elemental Resistances
 +#% to maximum Chance to Dodge Attack Hits
 +#% to maximum Chance to Dodge Spell Hits
-+1 % Chance to Block Attack Damage per Endurance Charge
 +1 Mana gained on Kill
 +1 to Level of Socketed Dexterity Gems
 +1 to Level of Socketed Intelligence Gems
@@ -323,8 +322,6 @@
 +1% to maximum Lightning Resistance
 +1000 to Armour if you've Hit an Enemy Recently
 +1000 to Evasion Rating if Hit an Enemy Recently
-+2 % to maximum Chance to Block Attack Damage
-+2 % to maximum Chance to Block Spell Damage
 +2 Life gained for each Enemy hit by Attacks
 +2 Life gained for each Enemy hit by your Attacks
 +2 to Level of Socketed Aura Gems
@@ -356,7 +353,6 @@
 +4 Life gained for each Enemy hit by Attacks
 +4 Life gained for each Enemy hit by your Attacks
 +4% chance to Suppress Spell Damage
-+5 % Chance to Block Attack Damage while wielding a Staff
 +5 Life gained for each Enemy hit by Attacks
 +5 Life gained for each Enemy hit by your Attacks
 +5% Chance to Block Attack Damage while wielding a Staff
@@ -373,7 +369,6 @@
 0.4% of Cold Damage Leeched as Life
 0.4% of Fire Damage Leeched as Life
 0.4% of Lightning Damage Leeched as Life
-1 % increased Projectile Attack Damage per 200 Accuracy Rating
 1% increased Attack Speed per 25 Dexterity
 1% increased Critical Strike Chance per 10 Strength
 1% increased Movement Speed per Frenzy Charge
@@ -420,7 +415,6 @@
 20% increased Attack Speed if you've Killed Recently
 20% increased Cast Speed if you've Killed Recently
 20% increased Mana Regeneration Rate while stationary
-25 % chance to gain a Power Charge when you Block
 25% chance to Curse Enemies with Vulnerability on Hit, with 40% increased Effect
 25% chance to Freeze
 25% chance to Ignite
@@ -428,7 +422,6 @@
 25% chance to Shock
 25% chance to gain a Power Charge on Killing a Frozen Enemy
 25% chance to gain a Power Charge when you Block
-3 % increased Area of Effect per 50 Strength
 3% chance to Dodge Attack Hits
 3% chance to Dodge Spell Hits
 3% increased Area of Effect per 50 Strength
@@ -442,8 +435,6 @@
 4% additional Physical Damage Reduction
 4% chance to Dodge Attack Hits
 4% chance to Dodge Spell Hits
-5 % increased Accuracy Rating per Frenzy Charge
-5 % increased Area of Effect per Endurance Charge
 5% additional Physical Damage Reduction
 5% increased Accuracy Rating per Frenzy Charge
 5% increased Area of Effect per Endurance Charge
@@ -476,9 +467,7 @@ Attacks have 20% chance to Maim on Hit
 Attacks have 20% chance to cause Bleeding
 Attacks have 25% chance to cause Bleeding
 Attacks have 30% chance to cause Bleeding
-Auras from your Skills grant 2 % increased Damage to you and Allies
 Auras from your Skills grant 2% increased Damage to you and Allies
-Auras from your Skills grant 4 % increased Damage to you and Allies
 Auras from your Skills grant 4% increased Damage to you and Allies
 Avatar of Fire
 Avoid Interruption from Stuns while using Socketed Attack Skills
@@ -516,10 +505,8 @@ Drops Brittle Ground while moving, lasting 2 seconds
 Eldritch Battery
 Elemental Equilibrium
 Elemental Overload
-Enemies Killed with Attack or Spell Hits Explode, dealing 5 % of their Life as Fire Damage
 Enemies Killed with Attack or Spell Hits Explode, dealing 5% of their Life as Fire Damage
 Enemies Taunted by your Warcries take #% increased Damage
-Enemies have 20 % reduced Evasion if you have Hit them Recently
 Enemies have 20% reduced Evasion if you have Hit them Recently
 Freeze Enemies as though dealing #% more Damage
 Gain # Endurance Charge every second if you've been Hit Recently
@@ -629,7 +616,6 @@ Pain Attunement
 Perfect Agony
 Point Blank
 Poisons you inflict deal Damage #% faster
-Prevent +2 % of Suppressed Spell Damage
 Prevent +2% of Suppressed Spell Damage
 Pride has #% increased Mana Reservation Efficiency
 Pride has #% reduced Reservation

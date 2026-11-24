@@ -67,5 +67,4 @@ Players have #% increased Critical Strike Chance while area is not in Lockdown
 Players have #% increased Flask Charges gained
 Players have #% to Critical Strike Multiplier while area is not in Lockdown
 Players have +#% to Critical Strike Multiplier while area is not in Lockdown
-#% reduced Hiring Fee
 The Ring's Cut reduced by #%

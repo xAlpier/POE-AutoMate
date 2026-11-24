@@ -51,7 +51,7 @@
 +#% to Global Critical Strike Multiplier
 +#% to Lightning Resistance
 +#% to all Elemental Resistances
-2 % additional Physical Damage Reduction if you weren't Damaged by a Hit Recently
+2% additional Physical Damage Reduction if you weren't Damaged by a Hit Recently
 Adds # to # Chaos Damage to Attacks
 Adds # to # Chaos Damage to Spells
 Adds # to # Cold Damage to Attacks
@@ -63,7 +63,7 @@ Adds # to # Lightning Damage to Spells
 Adds # to # Physical Damage to Attacks
 Adds # to # Physical Damage to Spells
 Damage Penetrates #% Elemental Resistances if you haven't Killed Recently
-Damage Penetrates 2 % Elemental Resistances if you haven't Killed Recently
+Damage Penetrates 2% Elemental Resistances if you haven't Killed Recently
 Enemies Blinded by you have #% reduced Critical Strike Chance
 Enemies Hindered by you have #% reduced Life Regeneration rate
 Enemies Intimidated by you have #% increased duration of stuns against them

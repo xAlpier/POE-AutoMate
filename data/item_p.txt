@@ -216,15 +216,6 @@
 +3% Chance to Block
 -# to Total Mana Cost of Skills
 0.6% of Physical Attack Damage Leeched as Life
-1 % increased Damage per 1% Chance to Block Attack Damage
-1 % increased Damage per 15 Dexterity
-1 % increased Damage per 15 Intelligence
-1 % increased Damage per 15 Strength
-1 % increased Spell Damage per 10 Intelligence
-1 % increased Spell Damage per 10 Strength
-1 % increased Spell Damage per 16 Dexterity
-1 % increased Spell Damage per 16 Intelligence
-1 % increased Spell Damage per 16 Strength
 1 to # Lightning Damage per Power Charge
 1% increased Damage per 1% Chance to Block Attack Damage
 1% increased Damage per 15 Dexterity
@@ -403,10 +394,10 @@ Socketed Gems are supported by Level # Faster Projectiles
 Socketed Gems are supported by Level # Life Leech
 Socketed Skills deal #% more Attack Damage
 Socketed Skills deal #% more Spell Damage
-Socketed Skills deal 20 % more Attack Damage
-Socketed Skills deal 20 % more Spell Damage
-Socketed Skills deal 40 % more Attack Damage
-Socketed Skills deal 40 % more Spell Damage
+Socketed Skills deal 20% more Attack Damage
+Socketed Skills deal 20% more Spell Damage
+Socketed Skills deal 40% more Attack Damage
+Socketed Skills deal 40% more Spell Damage
 Socketed Triggered Skills deal Double Damage
 Strike Skills target 1 additional nearby Enemy
 Strike Skills target 2 additional nearby Enemies
